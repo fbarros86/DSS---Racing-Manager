@@ -9,11 +9,8 @@ public interface ICampeonato {
 	 * @param categoria
 	 * @param circuitos
 	 */
-	void Campeonato(String nome, String categoria, List<Circuito> circuitos);
 
 	Map<String, Equipa> getEquipas();
-
-	List<Circuito> getCircuitos();
 
 	List<Corrida> getCorridas();
 
