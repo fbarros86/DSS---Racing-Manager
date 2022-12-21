@@ -1,4 +1,5 @@
 import Jogo.SubCampeonato.SubCorrida.*;
+import java.util.*;
 
 public interface ICorrida {
 
@@ -37,5 +38,7 @@ public interface ICorrida {
 	Circuito getCircuito();
 
 	List<Carro> getClassificacao();
+
+	Collection<Carro> getClassificacao();
 
 }

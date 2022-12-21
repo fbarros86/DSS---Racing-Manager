@@ -79,77 +79,77 @@ public interface IJogo {
 
 	/**
 	 * 
-	 * @param id
 	 * @param marca
 	 * @param modelo
 	 * @param potenciaMotor
 	 * @param PAC
+	 * @param id
 	 */
-	void registarCarroC1NaoHibrido(int id, String marca, String modelo, float potenciaMotor, float PAC);
+	void registarCarroC1NaoHibrido(String marca, String modelo, float potenciaMotor, float PAC, int id);
 
 	/**
 	 * 
-	 * @param id
 	 * @param marca
 	 * @param modelo
 	 * @param potenciaMotor
 	 * @param potenciaMotorElec
 	 * @param PAC
+	 * @param id
 	 */
-	void registarCarroC1Hibrido(int id, String marca, String modelo, float potenciaMotor, float potenciaMotorElec, float PAC);
+	void registarCarroC1Hibrido(String marca, String modelo, float potenciaMotor, float potenciaMotorElec, float PAC, int id);
 
 	/**
 	 * 
-	 * @param id
 	 * @param marca
 	 * @param modelo
 	 * @param cilindrada
 	 * @param potenciaMotor
 	 * @param PAC
+	 * @param id
 	 */
-	void registarCarroC2NaoHibrido(int id, String marca, String modelo, float cilindrada, float potenciaMotor, float PAC);
+	void registarCarroC2NaoHibrido(String marca, String modelo, float cilindrada, float potenciaMotor, float PAC, int id);
 
 	/**
 	 * 
-	 * @param id
 	 * @param marca
 	 * @param modelo
 	 * @param cilindrada
 	 * @param potenciaMotor
 	 * @param potenciaMotorElec
 	 * @param PAC
+	 * @param id
 	 */
-	void registarCarroC2Hibrido(int id, String marca, String modelo, float cilindrada, float potenciaMotor, float potenciaMotorElec, float PAC);
+	void registarCarroC2Hibrido(String marca, String modelo, float cilindrada, float potenciaMotor, float potenciaMotorElec, float PAC, int id);
 
 	/**
 	 * 
-	 * @param id
 	 * @param marca
 	 * @param modelo
 	 * @param cilindrada
 	 * @param potenciaMotor
+	 * @param id
 	 */
-	void registarCarroGTNaoHibrido(int id, String marca, String modelo, float cilindrada, float potenciaMotor);
+	void registarCarroGTNaoHibrido(String marca, String modelo, float cilindrada, float potenciaMotor, int id);
 
 	/**
 	 * 
-	 * @param id
 	 * @param marca
 	 * @param modelo
 	 * @param cilindrada
 	 * @param potenciaMotor
 	 * @param potenciaMotorElec
+	 * @param id
 	 */
-	void registarCarroGTHibrido(int id, String marca, String modelo, float cilindrada, float potenciaMotor, float potenciaMotorElec);
+	void registarCarroGTHibrido(String marca, String modelo, float cilindrada, float potenciaMotor, float potenciaMotorElec, int id);
 
 	/**
 	 * 
-	 * @param id
 	 * @param marca
 	 * @param modelo
 	 * @param potenciaMotor
+	 * @param id
 	 */
-	void registarCarroCS(int id, String marca, String modelo, float potenciaMotor);
+	void registarCarroCS(String marca, String modelo, float potenciaMotor, int id);
 
 	/**
 	 * 
@@ -162,28 +162,5 @@ public interface IJogo {
 	 * @param idCampeonato
 	 */
 	List<Equipa> simulaCampeonato(string idCampeonato);
-
-	List<Utilizador> getRanking();
-
-	Map<Integer, Carro> getCarros();
-
-	Map<Integer, Piloto> getPilotos();
-
-	/**
-	 * 
-	 * @param nome
-	 * @param codJogador
-	 * @param codCampeonato
-	 * @param c
-	 * @param p1
-	 * @param p2
-	 */
-	void adicionaEquipa(String nome, String codJogador, String codCampeonato, Carro c, Piloto p1, Piloto p2);
-
-	/**
-	 * 
-	 * @param classificacaoCampeonato
-	 */
-	void calculaClassificacao(List<Equipa> classificacaoCampeonato);
 
 }

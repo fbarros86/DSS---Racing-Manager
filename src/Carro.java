@@ -1,2 +1,2 @@
-public class Carro {
+public class Carro implements ICarro {
 }

@@ -8,14 +8,13 @@ public class Equipa {
 	private int idUser;
 
 	/**
-	 * 
-	 * @param idUser
+	 *  @param idUser
 	 * @param nome
 	 * @param c
 	 * @param p1
 	 * @param p2
 	 */
-	public Equipa(int idUser, String nome, Carro c, Piloto p1, Piloto p2) {
+	public Equipa(String idUser, String nome, Carro c, Piloto p1, Piloto p2) {
 		// TODO - implement Equipa.Equipa
 		throw new UnsupportedOperationException();
 	}
