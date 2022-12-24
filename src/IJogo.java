@@ -7,11 +7,11 @@ public interface IJogo {
 
 	Map<Integer, Carro> getCarros();
 
-	Map<Integer, Piloto> getPilotos();
+	Map<String, Piloto> getPilotos();
 
-	Map<Integer, Campeonato> getCampeonatos();
+	Map<String, Campeonato> getCampeonatos();
 
-	Map<Integer, Circuito> getCircuitos();
+	Map<String, Circuito> getCircuitos();
 
 	/**
 	 * 
@@ -55,7 +55,7 @@ public interface IJogo {
 	 * @param equipas
 	 * @param corridas
 	 */
-	void adicionarCampeonato(String nome, String categoria, List<Equipa> equipas, List<Corrida> corridas);
+	void adicionarCampeonato(String nome, String categoria, Map<String,Equipa> equipas, List<Corrida> corridas);
 
 	/**
 	 * 

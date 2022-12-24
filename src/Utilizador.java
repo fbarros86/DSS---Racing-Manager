@@ -13,6 +13,10 @@ public class Utilizador implements IUtilizador{
         pontuacao = 0;
     }
 
+    public boolean validaPass(String codPass){
+        return this.codPass.equals(codPass);
+    }
+
     @Override
     public String getTipo() {
         return tipo;
