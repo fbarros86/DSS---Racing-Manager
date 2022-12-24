@@ -1,25 +1,15 @@
 
 public interface IUtilizador {
 
-	/**
-	 * 
-	 * @param codNome
-	 * @param codPass
-	 * @param tipo
-	 */
-	Utilizador Utilizador(String codNome, String codPass, String tipo);
-
-	String getCodPass();
-
 	String getTipo();
 
-	void getClassificacao();
+	int getClassificacao();
 
-	void getPontuacao();
+	int getPontuacao();
 
-	void setClassificacao();
+	void setClassificacao(int classificacaoNova);
 
-	void setPontuacao();
+	void setPontuacao(int pontuacaoNova);
 
 	/**
 	 * 
