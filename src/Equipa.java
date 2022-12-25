@@ -1,11 +1,12 @@
 
 public class Equipa {
 
-	private Carro carro1;
-	private Carro carro2;
+	private Carro carro;
+	private Piloto piloto1;
+	private Piloto piloto2;
 	private String nome;
 	private int pontuacao;
-	private int idUser;
+	private String idUser;
 
 	/**
 	 *  @param idUser
@@ -15,8 +16,12 @@ public class Equipa {
 	 * @param p2
 	 */
 	public Equipa(String idUser, String nome, Carro c, Piloto p1, Piloto p2) {
-		// TODO - implement Equipa.Equipa
-		throw new UnsupportedOperationException();
+		this.nome = nome;
+		this.idUser = idUser;
+		this.carro = c;
+		this.piloto2 = p1;
+		this.piloto2 = p2;
+		this.pontuacao = 0;
 	}
 
 	/**

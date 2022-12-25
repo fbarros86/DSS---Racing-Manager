@@ -75,11 +75,6 @@ public class Jogo implements IJogo {
 	}
 
 	@Override
-	public void adicionaEquipa(String nome, String codJogador, String codCampeonato, Carro c, Piloto p1, Piloto p2) {
-			
-	}
-
-	@Override
 	public void registarCarroC1NaoHibrido(int id, String marca, String modelo, float potenciaMotor, float PAC) {
 
 	}
