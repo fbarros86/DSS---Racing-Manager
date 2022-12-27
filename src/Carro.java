@@ -1,4 +1,10 @@
+import java.util.Objects;
+
 public class Carro implements ICarro{
+
+    final int AGRESIVO = -1;
+    final int NORMAL = 0;
+    final int CONSERVADOR = 1;
 
     //@TODO TA TUDO MALLLLLLLLLLLLL
 
@@ -8,14 +14,26 @@ public class Carro implements ICarro{
     private String marca;
     private String modelo;
     private int potenciaMC;
-    private int nAfinacoes;
     private String equipa;
-    private String modoMotor;
+    private int modoMotor;
     private String id;
     private int downforce;
     private Piloto piloto;
 
-    public Carro()
+    public Carro(float cilindrada,String pneus,int fiabilidade,String marca,String modelo,int potenciaMC,String equipa,int modoMotor,String id,int downforce,Piloto piloto){
+        this.cilindrada = cilindrada;
+       this.pneus = pneus;
+       this.fiabilidade = fiabilidade;
+       this.marca = marca;
+       this.modelo = modelo;
+       this.potenciaMC = potenciaMC;
+       this.equipa = equipa;
+       this.modoMotor = modoMotor;
+       this.id = id;
+       this.downforce = downforce;
+       this.piloto = piloto;
+    }
+
     @Override
     public void setPneus(String aPneu) {
         pneus = aPneu;
@@ -23,47 +41,37 @@ public class Carro implements ICarro{
 
     @Override
     public void setPiloto(Piloto aP) {
-
+        piloto = aP;
     }
 
     @Override
-    public void setNAfinacoes(int aN) {
-
-    }
-
-    @Override
-    public void setModoMotor(String aModo) {
-
+    public void setModoMotor(int aModo) {
+        modoMotor = aModo;
     }
 
     @Override
     public String getEquipa() {
-        return null;
+        return equipa;
     }
 
     @Override
     public void setEquipa(String aE) {
-
+        equipa = aE;
     }
 
     @Override
     public int getPotencia() {
-        return 0;
+        return potenciaMC;
     }
 
     @Override
     public Piloto getPiloto() {
-        return null;
+        return piloto;
     }
 
     @Override
     public int getFiabilidade() {
-        return 0;
-    }
-
-    @Override
-    public boolean verificarAfinação() {
-        return false;
+        return fiabilidade;
     }
 
     @Override
@@ -75,4 +83,5 @@ public class Carro implements ICarro{
     public String getID() {
         return null;
     }
+
 }
