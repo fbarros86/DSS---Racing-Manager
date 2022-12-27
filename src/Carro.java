@@ -1,6 +1,10 @@
 import java.util.Objects;
 
-public abstract class Carro implements ICarro{
+public class Carro implements ICarro{
+
+    final int AGRESIVO = -1;
+    final int NORMAL = 0;
+    final int CONSERVADOR = 1;
 
     //@TODO TA TUDO MALLLLLLLLLLLLL
 
@@ -10,14 +14,13 @@ public abstract class Carro implements ICarro{
     private String marca;
     private String modelo;
     private int potenciaMC;
-
     private String equipa;
-    private String modoMotor;
+    private int modoMotor;
     private String id;
     private int downforce;
     private Piloto piloto;
 
-    public Carro(float cilindrada,String pneus,int fiabilidade,String marca,String modelo,int potenciaMC,String equipa,String modoMotor,String id,int downforce,Piloto piloto){
+    public Carro(float cilindrada,String pneus,int fiabilidade,String marca,String modelo,int potenciaMC,String equipa,int modoMotor,String id,int downforce,Piloto piloto){
         this.cilindrada = cilindrada;
        this.pneus = pneus;
        this.fiabilidade = fiabilidade;
@@ -42,12 +45,7 @@ public abstract class Carro implements ICarro{
     }
 
     @Override
-    public void setNAfinacoes(int aN) {
-        nAfinacoes = aN;
-    }
-
-    @Override
-    public void setModoMotor(String aModo) {
+    public void setModoMotor(int aModo) {
         modoMotor = aModo;
     }
 
@@ -85,6 +83,5 @@ public abstract class Carro implements ICarro{
     public String getID() {
         return null;
     }
-
 
 }
