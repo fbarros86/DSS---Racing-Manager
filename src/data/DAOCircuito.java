@@ -14,18 +14,7 @@ public class DAOCircuito implements Map<String,Circuito>{
     private static DAOCircuito singleton = null;
 
     private DAOCircuito() {
-        try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
-             Statement stm = conn.createStatement()) {
-            String circuito ="CREATE TABLE IF NOT EXISTS circuitos (" +
-                    "Nome varchar(15) NOT NULL PRIMARY KEY," +
-                    "Distancia float(8) NOT NULL," +
-                    "Voltas int NOT NULL)";
-            stm.executeUpdate(circuito);
-        } catch (SQLException e) {
-            // Erro a criar tabela...
-            e.printStackTrace();
-            throw new NullPointerException(e.getMessage());
-        }
+        DAOCampeonato.getInstance();
     }
 
     /**

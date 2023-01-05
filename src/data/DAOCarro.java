@@ -14,21 +14,7 @@ public class DAOCarro implements Map<String,Carro>{
     private static DAOCarro singleton = null;
 
     private DAOCarro() {
-        try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
-             Statement stm = conn.createStatement()) {
-            String carro ="CREATE TABLE IF NOT EXISTS carros (" +
-                    "Id varchar(15) NOT NULL PRIMARY KEY," +
-                    "Cilindrada int NOT NULL," +
-                    "Fiabilidade int NOT NULL," +
-                    "Marca varchar(15) NOT NULL," +
-                    "Modelo varchar(15) NOT NULL," +
-                    "Tipo ENUM('C1','C2','GT','SC','C1H','C2H','GTH') NOT NULL)";
-            stm.executeUpdate(carro);
-        } catch (SQLException e) {
-            // Erro a criar tabela...
-            e.printStackTrace();
-            throw new NullPointerException(e.getMessage());
-        }
+        DAOCampeonato.getInstance();
     }
 
     /**

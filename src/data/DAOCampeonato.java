@@ -14,6 +14,7 @@ public class DAOCampeonato implements Map<String,Campeonato>{
     private static DAOCampeonato singleton = null;
 
     private DAOCampeonato() {
+
         try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
              Statement stm = conn.createStatement()) {
             String campeonato = "CREATE TABLE IF NOT EXISTS campeonatos (" +
@@ -27,20 +28,20 @@ public class DAOCampeonato implements Map<String,Campeonato>{
                     "Voltas int NOT NULL)";
             stm.executeUpdate(circuito);
             String segmento = "CREATE TABLE IF NOT EXISTS segmentos (" +
+                    "Id int NOT NULL PRIMARY KEY AUTO_INCREMENT,"+
                     "Indice int NOT NULL," +
                     "NomeCircuito varchar(15) NOT NULL," +
                     "Tipo varchar(15) NOT NULL," +
                     "Gdu int NOT NULL,"+
-                    "PRIMARY KEY CLUSTERED (Indice,NomeCircuito)," +
                     "FOREIGN KEY (NomeCircuito) references circuitos(Nome))";
             stm.executeUpdate(segmento);
             String corridas = "CREATE TABLE IF NOT EXISTS corridas (" +
+                    "Id int NOT NULL PRIMARY KEY AUTO_INCREMENT,"+
                     "Indice int NOT NULL," +
                     "NomeCampeonato varchar(15) NOT NULL, " +
-                    "Metereologia varchar(15) NOT NULL PRIMARY KEY," +
+                    "Metereologia varchar(15) NOT NULL," +
                     "Circuito varchar(15) NOT NULL,"+
                     "FOREIGN KEY (Circuito) REFERENCES circuitos(Nome),"+
-                    "PRIMARY KEY CLUSTERED (Indice,NomeCampeonato)," +
                     "FOREIGN KEY (NomeCampeonato) references campeonatos(Nome))";
             stm.executeUpdate(corridas);
             String utilizador ="CREATE TABLE IF NOT EXISTS utilizadores (" +
@@ -61,17 +62,17 @@ public class DAOCampeonato implements Map<String,Campeonato>{
             String piloto ="CREATE TABLE IF NOT EXISTS pilotos (" +
                     "Nome varchar(15) NOT NULL PRIMARY KEY," +
                     "Sva float(8) NOT NULL," +
-                    "Cts float(8) NOT NULL"+
-                    "Carro varchar(15) NULL"+
+                    "Cts float(8) NOT NULL,"+
+                    "Carro varchar(15) NULL,"+
                     "FOREIGN KEY (Carro) REFERENCES carros(Id))";
             stm.executeUpdate(piloto);
             String equipas = "CREATE TABLE IF NOT EXISTS equipas (" +
                     "Nome varchar(15) NOT NULL PRIMARY KEY," +
                     "Pontuacao int NOT NULL," +
-                    "Iduser varchar(15) NOT NULL"+
-                    "Campeonato varchar(15) NOT NULL"+
-                    "Carro1 varchar(15) NULL"+
-                    "Carro2 varchar(15) NULL"+
+                    "Iduser varchar(15) NOT NULL,"+
+                    "Campeonato varchar(15) NOT NULL,"+
+                    "Carro1 varchar(15) NULL,"+
+                    "Carro2 varchar(15) NULL,"+
                     "FOREIGN KEY (Iduser) REFERENCES utilizadores(Nome),"+
                     "FOREIGN KEY (Campeonato) REFERENCES campeonatos(Nome),"+
                     "FOREIGN KEY (Carro1) REFERENCES carros(Id),"+

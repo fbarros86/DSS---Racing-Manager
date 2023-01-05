@@ -14,18 +14,7 @@ public class DAOPiloto implements Map<String,Piloto>{
     private static DAOPiloto singleton = null;
 
     private DAOPiloto() {
-        try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
-             Statement stm = conn.createStatement()) {
-            String piloto ="CREATE TABLE IF NOT EXISTS pilotos (" +
-                    "Nome varchar(15) NOT NULL PRIMARY KEY," +
-                    "Sva float(8) NOT NULL," +
-                    "Cts float(8) NOT NULL)";
-            stm.executeUpdate(piloto);
-        } catch (SQLException e) {
-            // Erro a criar tabela...
-            e.printStackTrace();
-            throw new NullPointerException(e.getMessage());
-        }
+        DAOCampeonato.getInstance();
     }
 
     /**

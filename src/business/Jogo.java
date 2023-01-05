@@ -1,8 +1,7 @@
 package business;
 
 
-import data.DAOCampeonato;
-import data.DAOCircuito;
+import data.*;
 
 import java.util.*;
 
@@ -18,6 +17,12 @@ public class Jogo implements IJogo {
 
 	public Jogo(){
 		campeonatos = DAOCampeonato.getInstance();
+		circuitos = DAOCircuito.getInstance();
+		pilotos = DAOPiloto.getInstance();
+		carros = DAOCarro.getInstance();
+		utilizadores = DAOUtilizador.getInstance();
+		codigosAdmin = new ArrayList<>(); //ver melhor isto
+		rankingGlobal = new ArrayList<>(); //ver melhor isto
 	}
 
 	@Override

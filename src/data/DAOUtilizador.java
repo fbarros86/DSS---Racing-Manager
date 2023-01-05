@@ -14,20 +14,7 @@ public class DAOUtilizador implements Map<String,Utilizador>{
     private static DAOUtilizador singleton = null;
 
     private DAOUtilizador() {
-        try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
-             Statement stm = conn.createStatement()) {
-            String utilizador ="CREATE TABLE IF NOT EXISTS utilizadores (" +
-                    "Nome varchar(15) NOT NULL PRIMARY KEY," +
-                    "Pass varchar(15) NOT NULL," +
-                    "Tipo varchar(15) NOT NULL," +
-                    "Classificacao int NOT NULL," +
-                    "Pontuacao int NOT NULL)";
-            stm.executeUpdate(utilizador);
-        } catch (SQLException e) {
-            // Erro a criar tabela...
-            e.printStackTrace();
-            throw new NullPointerException(e.getMessage());
-        }
+        DAOCampeonato.getInstance();
     }
 
     /**

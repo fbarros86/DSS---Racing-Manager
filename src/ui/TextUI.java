@@ -7,8 +7,7 @@
 package ui;
 
 
-import business.IJogo;
-import business.Jogo;
+import business.*;
 
 import java.util.List;
 import java.util.Scanner;
