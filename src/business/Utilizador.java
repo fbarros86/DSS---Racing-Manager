@@ -17,6 +17,18 @@ public class Utilizador implements IUtilizador{
         pontuacao = 0;
     }
 
+    public Utilizador(String codNome, String codPass, String tipo, int classificacao, int pontuacao){
+        this.codNome = codNome;
+        this.codPass = codPass;
+        this.tipo = tipo;
+        this.pontuacao = pontuacao;
+        this.classificacao=classificacao;
+    }
+
+    public String getCodNome() {
+        return codNome;
+    }
+
     public boolean validaPass(String codPass){
         return this.codPass.equals(codPass);
     }
@@ -49,5 +61,21 @@ public class Utilizador implements IUtilizador{
     @Override
     public void addPontuacao(int pontos) {
            this.pontuacao += pontos;
+    }
+
+    public void setCodNome(String codNome) {
+        this.codNome = codNome;
+    }
+
+    public String getCodPass() {
+        return codPass;
+    }
+
+    public void setCodPass(String codPass) {
+        this.codPass = codPass;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

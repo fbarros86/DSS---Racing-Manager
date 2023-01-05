@@ -9,6 +9,11 @@ public class Segmento {
 	private String tipo;
 	private int GDU;
 
+	public Segmento(String tipo, int GDU){
+		this.tipo = tipo;
+		this.GDU = GDU;
+	}
+
 	/**
 	 * 
 	 * @param GDU
@@ -35,4 +40,11 @@ public class Segmento {
 		return this.tipo;
 	}
 
+	@Override
+	public String toString() {
+		return "Segmento{" +
+				"tipo='" + tipo + '\'' +
+				", GDU=" + GDU +
+				'}';
+	}
 }

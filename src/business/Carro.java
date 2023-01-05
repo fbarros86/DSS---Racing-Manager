@@ -33,6 +33,10 @@ public class  Carro implements ICarro{
 
     }
 
+    public String getId() {
+        return id;
+    }
+
     @Override
     public void setPneus(String aPneu) {
         pneus = aPneu;

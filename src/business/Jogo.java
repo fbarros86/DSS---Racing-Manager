@@ -50,6 +50,10 @@ public class Jogo implements IJogo {
 		return circuitos;
 	}
 
+	public Circuito getCircuito(String key) {
+		return circuitos.get(key);
+	}
+
 	@Override
 	public boolean validarCodigo(String codPremium) {
 		return codigosAdmin.contains(codPremium);
@@ -165,5 +169,9 @@ public class Jogo implements IJogo {
 	public List<Equipa> simulaJogo(String idCampeonato) {
 		Campeonato c = campeonatos.get(idCampeonato);
 		return c.simulaCampeonato(idCampeonato);
+	}
+
+	public boolean existeCircuito(String nome){
+		return circuitos.containsKey(nome);
 	}
 }

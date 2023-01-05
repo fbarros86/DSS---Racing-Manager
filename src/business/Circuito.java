@@ -19,6 +19,10 @@ public class Circuito {
         this.percurso = percurso;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public void setPercurso(List<Segmento> percurso) {
         this.percurso = percurso;
     }
@@ -54,5 +58,27 @@ public class Circuito {
             if(tipo.equals("Chicane")) dist+=0.2;
         }
         return dist;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public float getDist() {
+        return dist;
+    }
+
+    public int getNrVoltas() {
+        return nrVoltas;
+    }
+
+    @Override
+    public String toString() {
+        return "Circuito{" +
+                "nome='" + nome + '\'' +
+                ", dist=" + dist +
+                ", nrVoltas=" + nrVoltas +
+                ", percurso=" + percurso +
+                '}';
     }
 }

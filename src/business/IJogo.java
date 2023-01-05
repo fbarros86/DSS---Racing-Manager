@@ -16,6 +16,10 @@ public interface IJogo {
 
 	Map<String, Circuito> getCircuitos();
 
+	boolean existeCircuito(String nome);
+
+	Circuito getCircuito(String key);
+
 	/**
 	 * 
 	 * @param codPremium

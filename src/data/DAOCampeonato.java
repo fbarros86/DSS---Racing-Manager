@@ -57,14 +57,14 @@ public class DAOCampeonato implements Map<String,Campeonato>{
                     "Fiabilidade int NOT NULL," +
                     "Marca varchar(15) NOT NULL," +
                     "Modelo varchar(15) NOT NULL," +
-                    "Tipo ENUM('C1','C2','GT','SC','C1H','C2H','GTH') NOT NULL)";
+                    "Tipo ENUM('C1','C2','GT','SC','C1H','C2H','GTH') NOT NULL," +
+                    "Piloto varchar(15) NULL,"+
+                    "FOREIGN KEY (Piloto) REFERENCES pilotos(Nome))";
             stm.executeUpdate(carro);
             String piloto ="CREATE TABLE IF NOT EXISTS pilotos (" +
                     "Nome varchar(15) NOT NULL PRIMARY KEY," +
                     "Sva float(8) NOT NULL," +
-                    "Cts float(8) NOT NULL,"+
-                    "Carro varchar(15) NULL,"+
-                    "FOREIGN KEY (Carro) REFERENCES carros(Id))";
+                    "Cts float(8) NOT NULL)";
             stm.executeUpdate(piloto);
             String equipas = "CREATE TABLE IF NOT EXISTS equipas (" +
                     "Nome varchar(15) NOT NULL PRIMARY KEY," +
@@ -100,22 +100,47 @@ public class DAOCampeonato implements Map<String,Campeonato>{
 
     @Override
     public int size() {
-        return 0;
+
+        int i = 0;
+        try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
+             Statement stm = conn.createStatement();
+             ResultSet rs = stm.executeQuery("SELECT count(*) FROM campeonatos")) {
+            if(rs.next()) {
+                i = rs.getInt(1);
+            }
+        }
+        catch (Exception e) {
+            // Erro a criar tabela...
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+        return i;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return this.size() == 0;
     }
 
     @Override
     public boolean containsKey(Object key) {
-        return false;
+        boolean r;
+        try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
+             Statement stm = conn.createStatement();
+             ResultSet rs = stm.executeQuery("SELECT Nome FROM campeonatos WHERE Nome='"+key.toString()+"'")) {
+            r = rs.next();
+        } catch (SQLException e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+        return r;
     }
 
     @Override
     public boolean containsValue(Object value) {
-        return false;
+        Campeonato t = (Campeonato) value;
+        return this.containsKey(t.getNome());
     }
 
     @Override

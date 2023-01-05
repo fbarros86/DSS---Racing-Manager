@@ -31,22 +31,48 @@ public class DAOCarro implements Map<String,Carro>{
 
     @Override
     public int size() {
-        return 0;
+
+        int i = 0;
+        try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
+             Statement stm = conn.createStatement();
+             ResultSet rs = stm.executeQuery("SELECT count(*) FROM carros")) {
+            if(rs.next()) {
+                i = rs.getInt(1);
+            }
+        }
+        catch (Exception e) {
+            // Erro a criar tabela...
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+        return i;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return this.size() == 0;
     }
 
     @Override
     public boolean containsKey(Object key) {
-        return false;
+        boolean r;
+        try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
+             Statement stm = conn.createStatement();
+             ResultSet rs = stm.executeQuery("SELECT Id FROM carros WHERE Id='"+key.toString()+"'")) {
+            r = rs.next();
+        } catch (SQLException e) {
+            // Database error!
+            e.printStackTrace();
+            throw new NullPointerException(e.getMessage());
+        }
+        return r;
     }
 
     @Override
     public boolean containsValue(Object value) {
-        return false;
+
+        Carro t = (Carro) value;
+        return this.containsKey(t.getId());
     }
 
     @Override

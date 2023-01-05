@@ -19,6 +19,10 @@ public class Campeonato implements ICampeonato {
         this.corridas = corridas;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     @Override
     public Map<String, Equipa> getEquipas() {
         return this.equipas;

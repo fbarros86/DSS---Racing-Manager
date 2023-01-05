@@ -9,6 +9,7 @@ package ui;
 
 import business.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -31,21 +32,11 @@ public class TextUI {
     public TextUI() {
         // Criar o menu
         this.menu = new Menu(new String[]{
-                "Adicionar Aluno",
-                "Consultar Aluno",
-                "Listar Alunos",
-                "Adicionar Turma",
-                "Mudar Sala à Turma",
-                "Listar Turmas",
-                "Adicionar Aluno a Turma",
-                "Remover Aluno da Turma",
-                "Listar Alunos de Turma",
-                "Adicionar Sala",
-                "Consular Sala",
-                "Listar Salas",
-                "Listar Turmas de Sala"
+                "Adicionar Circuito",
+                "Ver Circuito"
         });
-        //this.menu.setHandler(1, this::trataAdicionarAluno);
+        this.menu.setHandler(1, this::trataAdicionarCircuito);
+        this.menu.setHandler(2, this::trataMostrarCircuito);
         this.jogo = new Jogo();
         scin = new Scanner(System.in);
     }
@@ -59,5 +50,50 @@ public class TextUI {
     }
 
     // Métodos auxiliares
+
+    public void trataAdicionarCircuito() {
+        try {
+            System.out.println("Nome do novo circuito: ");
+            String nome = scin.nextLine();
+            if (!this.jogo.existeCircuito(nome)) {
+                System.out.println("Distancia: ");
+                Float dist = scin.nextFloat();
+                System.out.println("Número de voltas: ");
+                int voltas = scin.nextInt();
+                System.out.println("Número de segmentos: ");
+                List<Segmento> segmentos = new ArrayList<>();
+                int nsegmentos = scin.nextInt();
+                for (int i = 0; i < nsegmentos; i++) {
+                    System.out.println("Tipo de segmento: ");
+                    String tipo = scin.nextLine();
+                    System.out.println("Dificuldade: ");
+                    int dificuldade = scin.nextInt();
+                    Segmento s = new Segmento(tipo, dificuldade);
+                    segmentos.add(s);
+                }
+                jogo.adicionarCircuito(nome, dist, voltas, segmentos);
+                System.out.println("Circuito adicionado");
+            } else {
+                System.out.println("Esse nome de circuito já existe!");
+            }
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void trataMostrarCircuito() {
+        try {
+            System.out.println("Nome do circuito: ");
+            String nome = scin.nextLine();
+            if (jogo.existeCircuito(nome)) {
+                Circuito c = jogo.getCircuito(nome);
+                System.out.println(c.toString());
+            } else {
+                System.out.println("Esse nome de circuito não existe!");
+            }
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 }
