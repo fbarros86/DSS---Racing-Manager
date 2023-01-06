@@ -10,7 +10,7 @@ public class  Carro implements ICarro{
 
     //@TODO TA TUDO MALLLLLLLLLLLLL
 
-    float cilindrada;
+    private int cilindrada;
     private String pneus;
     private int fiabilidade;
     private String marca;
@@ -31,6 +31,23 @@ public class  Carro implements ICarro{
         this.potenciaMC = potenciaMC;
         this.downforce = downforce;
 
+    }
+
+
+    public Carro(String id, int cilindrada, int fiabilidade, String marca, String modelo, String penus, int potenciaMC,
+                 String equipa, int modoMotor, float downforce, int afinacoes, Piloto piloto){
+        this.id=id;
+        this.cilindrada=cilindrada;
+        this.fiabilidade= fiabilidade;
+        this.marca= marca;
+        this.modelo= modelo;
+        this.pneus= penus;
+        this.potenciaMC = potenciaMC;
+        this.equipa=equipa;
+        this.modoMotor=modoMotor;
+        this.downforce= downforce;
+        this.nAfinacoes = afinacoes;
+        this.piloto= piloto;
     }
 
     public String getId() {
@@ -58,12 +75,12 @@ public class  Carro implements ICarro{
     }
 
     @Override
-    public void setCilindrada(float c) {
+    public void setCilindrada(int c) {
         cilindrada=c;
     }
 
     @Override
-    public float getCilindrada() {
+    public int getCilindrada() {
         return cilindrada;
     }
 

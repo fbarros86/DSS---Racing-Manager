@@ -6,4 +6,9 @@ public class C1 extends Carro {
         super(marca, modelo,potenciaMC, downforce);
     }
 
+    public C1(String id, int cilindrada, int fiabilidade, String marca, String modelo, String pneus, int potenciaMC,
+              String equipa, int modoMotor, float downforce, int afinacoes, Piloto piloto) {
+        super(id, cilindrada, fiabilidade, marca, modelo, pneus, potenciaMC, equipa, modoMotor, downforce, afinacoes, piloto);
+    }
+
 }

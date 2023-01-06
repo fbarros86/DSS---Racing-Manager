@@ -11,10 +11,10 @@ public interface ICarro {
 
     float getDownforce();
 
-    void setCilindrada(float c);
+    void setCilindrada(int c);
 
 
-    float getCilindrada();
+    int getCilindrada();
 
     public void setPiloto(Piloto aP);
 
