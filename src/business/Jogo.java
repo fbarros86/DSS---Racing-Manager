@@ -168,7 +168,7 @@ public class Jogo implements IJogo {
 	@Override
 	public List<Equipa> simulaJogo(String idCampeonato) {
 		Campeonato c = campeonatos.get(idCampeonato);
-		return c.simulaCampeonato(idCampeonato);
+		return c.simulaCampeonato();
 	}
 
 	public boolean existeCircuito(String nome){
