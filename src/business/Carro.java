@@ -14,7 +14,7 @@ public class  Carro implements ICarro {
     private String pneus;
     private String marca;
     private String modelo;
-    private String tipo;
+    private String categoria;
     private String equipa;
     private int cilindrada;
     private int fiabilidade;
@@ -34,13 +34,14 @@ public class  Carro implements ICarro {
         this.potenciaMC = copy.potenciaMC;
         this.downforce = copy.downforce;
     }
-    public Carro(String marca, String modelo, int cilindrada, int potenciaMC, float downforce){
+    public Carro(String marca, String modelo, int cilindrada, int potenciaMC, float downforce, String categoria){
             this.id = UUID.randomUUID().toString();
             this.marca = marca;
             this.modelo = modelo;
             this.potenciaMC = potenciaMC;
             this.downforce = downforce;
             this.cilindrada = cilindrada;
+            this.categoria = categoria;
         }
 
 

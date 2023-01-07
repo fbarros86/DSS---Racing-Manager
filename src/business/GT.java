@@ -3,9 +3,10 @@ package business;
 
 public class GT extends Carro {
 
+    private int fiabilidade;
 
-    public GT(String marca, String modelo, int cilindrada, int potenciaMC, float downforce) {
-        super(marca, modelo, cilindrada, potenciaMC, downforce);
+    public GT(String marca, String modelo, int cilindrada, int potenciaMC, float downforce, String categoria) {
+        super(marca, modelo, cilindrada, potenciaMC, downforce, categoria);
     }
 
     public GT(String id, int cilindrada, int fiabilidade, String marca, String modelo, String pneus, int potenciaMC,
@@ -15,5 +16,6 @@ public class GT extends Carro {
 
 
     public void diminuirFiabilidade() {
+        this.fiabilidade = (int) (fiabilidade-1);
     }
 }

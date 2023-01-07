@@ -14,6 +14,7 @@ public class Jogo implements IJogo {
 	private List<Utilizador> rankingGlobal;
 	private List<String> codigosAdmin;
 
+	/*
 	public Jogo(){
 		campeonatos = DAOCampeonato.getInstance();
 		circuitos = DAOCircuito.getInstance();
@@ -22,8 +23,8 @@ public class Jogo implements IJogo {
 		utilizadores = DAOUtilizador.getInstance();
 		codigosAdmin = new ArrayList<>();
 		rankingGlobal = new ArrayList<>();
-	}
-/*
+	}*/
+
 	public Jogo(){
 		campeonatos = new HashMap<>();
 		circuitos = new HashMap<>();
@@ -32,7 +33,7 @@ public class Jogo implements IJogo {
 		utilizadores = new HashMap<>();
 		codigosAdmin = new ArrayList<>();
 		rankingGlobal = new ArrayList<>();
-	}*/
+	}
 
 
 	@Override
@@ -114,38 +115,38 @@ public class Jogo implements IJogo {
 
 
 	@Override
-	public void registarCarroC1NaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC) {
-		Carro c = new C1(marca,modelo, cilindrada, potenciaMotor,PAC);
+	public void registarCarroC1NaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC, String categoria) {
+		Carro c = new C1(marca,modelo, cilindrada, potenciaMotor,PAC, categoria);
 		String id = c.getID();
 		carros.put(id,c);
 	}
 
 	@Override
-	public void registarCarroC1Hibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC) {
-		Carro c = new C1H(marca,modelo, cilindrada, potenciaMotor,potenciaMotorElec,PAC);
+	public void registarCarroC1Hibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC, String categoria) {
+		Carro c = new C1H(marca,modelo, cilindrada, potenciaMotor,potenciaMotorElec,PAC, categoria);
 		String id = c.getID();
 		carros.put(id,c);
 
 	}
 
 	@Override
-	public void registarCarroC2NaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC) {
-		Carro c = new C2(marca,modelo, cilindrada, potenciaMotor,PAC);
+	public void registarCarroC2NaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC, String categoria) {
+		Carro c = new C2(marca,modelo, cilindrada, potenciaMotor,PAC, categoria);
 		String id = c.getID();
 		carros.put(id,c);
 	}
 
 
 	@Override
-	public void registarCarroC2Hibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC) {
-		Carro c = new C2H(marca,modelo, cilindrada, potenciaMotor, potenciaMotorElec,PAC);
+	public void registarCarroC2Hibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC, String categoria) {
+		Carro c = new C2H(marca,modelo, cilindrada, potenciaMotor, potenciaMotorElec,PAC,categoria);
 		String id = c.getID();
 		carros.put(id,c);
 	}
 
 	@Override
-	public void registarCarroGTNaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC) {
-		Carro c = new GT(marca,modelo, cilindrada, potenciaMotor,PAC);
+	public void registarCarroGTNaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC, String categoria) {
+		Carro c = new GT(marca,modelo, cilindrada, potenciaMotor,PAC, categoria);
 		String id = c.getID();
 		carros.put(id,c);
 	}
@@ -153,15 +154,15 @@ public class Jogo implements IJogo {
 
 
 	@Override
-	public void registarCarroGTHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC) {
-		Carro c = new GTH(marca,modelo, cilindrada, potenciaMotor, potenciaMotorElec,PAC);
+	public void registarCarroGTHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC, String categoria) {
+		Carro c = new GTH(marca,modelo, cilindrada, potenciaMotor, potenciaMotorElec,PAC,categoria);
 		String id = c.getID();
 		carros.put(id,c);
 	}
 
 	@Override
-	public void registarCarroSC(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC) {
-		Carro c = new SC(marca,modelo, cilindrada, potenciaMotor,PAC);
+	public void registarCarroSC(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC, String categoria) {
+		Carro c = new SC(marca,modelo, cilindrada, potenciaMotor,PAC, categoria);
 		String id = c.getID();
 		carros.put(id,c);
 	}

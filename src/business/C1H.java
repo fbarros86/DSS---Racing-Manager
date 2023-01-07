@@ -2,8 +2,8 @@ package business;
 public class C1H extends C1 {
     private int potenciaME;
 
-    public C1H( String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC) {
-        super(marca, modelo, cilindrada, potenciaMotor, PAC);
+    public C1H( String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC, String categoria) {
+        super(marca, modelo, cilindrada, potenciaMotor, PAC,categoria);
         this.potenciaME = potenciaMotorElec;
     }
 

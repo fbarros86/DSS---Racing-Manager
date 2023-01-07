@@ -328,25 +328,25 @@ public class TextUI {
 
             if (!flag) System.out.println("Esse carro já existe!");
             else if( categoria.equals("C1") && !hibrido){
-                jogo.registarCarroC1NaoHibrido(marca,modelo,6000,potenciaMotor,downforce);
+                jogo.registarCarroC1NaoHibrido(marca,modelo,6000,potenciaMotor,downforce, categoria);
             }
             else if( categoria.equals("C1") && hibrido){
-                jogo.registarCarroC1Hibrido(marca,modelo,6000,potenciaMotor, potenciaElec ,downforce);
+                jogo.registarCarroC1Hibrido(marca,modelo,6000,potenciaMotor, potenciaElec ,downforce, categoria);
             }
             else if( categoria.equals("C2") && !hibrido){
-                jogo.registarCarroC2NaoHibrido(marca,modelo,cilindrada, potenciaMotor,downforce);
+                jogo.registarCarroC2NaoHibrido(marca,modelo,cilindrada, potenciaMotor,downforce, categoria);
             }
             else if( categoria.equals("C2") && hibrido){
-                jogo.registarCarroC2Hibrido(marca,modelo, cilindrada, potenciaMotor, potenciaElec,downforce);
+                jogo.registarCarroC2Hibrido(marca,modelo, cilindrada, potenciaMotor, potenciaElec,downforce, categoria);
             }
             else if( categoria.equals("GT") && !hibrido){
-                jogo.registarCarroGTNaoHibrido(marca,modelo,cilindrada,potenciaMotor,downforce);
+                jogo.registarCarroGTNaoHibrido(marca,modelo,cilindrada,potenciaMotor,downforce,categoria);
             }
             else if( categoria.equals("GT") && hibrido){
-                jogo.registarCarroGTHibrido(marca,modelo,cilindrada, potenciaMotor, potenciaElec, downforce);
+                jogo.registarCarroGTHibrido(marca,modelo,cilindrada, potenciaMotor, potenciaElec, downforce,categoria);
             }
             else if( categoria.equals("SC")){
-                jogo.registarCarroC1NaoHibrido(marca,modelo,2500,potenciaMotor,downforce);
+                jogo.registarCarroC1NaoHibrido(marca,modelo,2500,potenciaMotor,downforce,categoria);
             }
 
 
