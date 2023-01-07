@@ -98,7 +98,7 @@ public interface IJogo {
 	 * @param PAC
 	 */
 
-	void registarCarroC1NaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC);
+	void registarCarroC1NaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC, String categoria);
 
 	/**
 	 *
@@ -109,7 +109,7 @@ public interface IJogo {
 	 * @param PAC
 	 */
 
-	void registarCarroC1Hibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC);
+	void registarCarroC1Hibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC, String categoria);
 
 	/**
 	 * 
@@ -121,7 +121,7 @@ public interface IJogo {
 	 * @param PAC
 	 */
 
-	void registarCarroC2NaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC);
+	void registarCarroC2NaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC, String categoria);
 
 	/**
 	 *
@@ -133,10 +133,10 @@ public interface IJogo {
 	 * @param PAC
 	 */
 
-	void registarCarroC2Hibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC);
+	void registarCarroC2Hibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC, String categoria);
 
 
-	void registarCarroGTNaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC);
+	void registarCarroGTNaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC, String categoria);
 
 	/**
 	 *
@@ -148,7 +148,7 @@ public interface IJogo {
 	 */
 
 
-    void registarCarroGTHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC);
+    void registarCarroGTHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC, String categoria);
 
     /**
 	 *
@@ -158,7 +158,7 @@ public interface IJogo {
 	 * @param PAC
 	 */
 
-	void registarCarroSC(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC);
+	void registarCarroSC(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC, String categoria);
 
 	/**
 	 * 

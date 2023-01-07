@@ -3,6 +3,7 @@ package business;
 import ui.TextUI;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class Campeonato implements ICampeonato {
@@ -166,7 +167,7 @@ public class Campeonato implements ICampeonato {
             }
         }
 
-        List<Equipa> ret = (List<Equipa>) this.equipas.values();
+        List<Equipa> ret = this.equipas.values().stream().collect(Collectors.toList());
         sortTeams(ret);
         return ret;
     }

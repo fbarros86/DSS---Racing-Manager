@@ -83,11 +83,7 @@ public class DAOCarro implements Map<String,Carro>{
              Statement stm = conn.createStatement();
              ResultSet rs = stm.executeQuery("SELECT * FROM carros WHERE Id='"+key+"'")) {
             if (rs.next()) {  // A chave existe na tabela
-                //
                 //reconstruir circuito
-
-                DAOPiloto p = DAOPiloto.getInstance();
-                Piloto piloto  = p.get(rs.getString("Piloto"));
                 String tipo  = rs.getString("Tipo");
                 switch (rs.getString("Tipo")){
                     case "C1":{
@@ -96,13 +92,9 @@ public class DAOCarro implements Map<String,Carro>{
                                 rs.getInt("Fiabilidade"),
                                 rs.getString("Marca"),
                                 rs.getString("Modelo"),
-                                rs.getString("Pneus"),
                                 rs.getInt("PotenciaMC"),
-                                rs.getString("Equipa"),
-                                rs.getInt("ModoMotor"),
                                 rs.getFloat("Downforce"),
-                                rs.getInt("Afinacoes"),
-                               piloto);
+                                rs.getString("Tipo"));
                         break;}
                     case "C1H":{
                         t = new C1H(rs.getString("Id"),
@@ -110,14 +102,10 @@ public class DAOCarro implements Map<String,Carro>{
                                 rs.getInt("Fiabilidade"),
                                 rs.getString("Marca"),
                                 rs.getString("Modelo"),
-                                rs.getString("Pneus"),
                                 rs.getInt("PotenciaMC"),
-                                rs.getString("Equipa"),
-                                rs.getInt("ModoMotor"),
                                 rs.getFloat("Downforce"),
-                                rs.getInt("Afinacoes"),
                                 rs.getInt("PotenciaEletrica"),
-                                piloto);
+                                rs.getString("Tipo"));
                         break;}
                     case "C2":{
                         t = new C2(rs.getString("Id"),
@@ -125,13 +113,9 @@ public class DAOCarro implements Map<String,Carro>{
                                 rs.getInt("Fiabilidade"),
                                 rs.getString("Marca"),
                                 rs.getString("Modelo"),
-                                rs.getString("Pneus"),
                                 rs.getInt("PotenciaMC"),
-                                rs.getString("Equipa"),
-                                rs.getInt("ModoMotor"),
                                 rs.getFloat("Downforce"),
-                                rs.getInt("Afinacoes"),
-                                piloto);
+                                rs.getString("Tipo"));
                         break;}
                     case "C2H":{
                         t = new C2H(rs.getString("Id"),
@@ -139,14 +123,10 @@ public class DAOCarro implements Map<String,Carro>{
                                 rs.getInt("Fiabilidade"),
                                 rs.getString("Marca"),
                                 rs.getString("Modelo"),
-                                rs.getString("Pneus"),
                                 rs.getInt("PotenciaMC"),
-                                rs.getString("Equipa"),
-                                rs.getInt("ModoMotor"),
                                 rs.getFloat("Downforce"),
-                                rs.getInt("Afinacoes"),
                                 rs.getInt("PotenciaEletrica"),
-                                piloto);
+                                rs.getString("Tipo"));
                         break;}
                     case "SC":{
                         t = new SC(rs.getString("Id"),
@@ -154,13 +134,9 @@ public class DAOCarro implements Map<String,Carro>{
                                 rs.getInt("Fiabilidade"),
                                 rs.getString("Marca"),
                                 rs.getString("Modelo"),
-                                rs.getString("Pneus"),
                                 rs.getInt("PotenciaMC"),
-                                rs.getString("Equipa"),
-                                rs.getInt("ModoMotor"),
                                 rs.getFloat("Downforce"),
-                                rs.getInt("Afinacoes"),
-                                piloto);
+                                rs.getString("Tipo"));
                         break;}
                     case "GT":{
                         t = new GT(rs.getString("Id"),
@@ -168,13 +144,9 @@ public class DAOCarro implements Map<String,Carro>{
                                 rs.getInt("Fiabilidade"),
                                 rs.getString("Marca"),
                                 rs.getString("Modelo"),
-                                rs.getString("Pneus"),
                                 rs.getInt("PotenciaMC"),
-                                rs.getString("Equipa"),
-                                rs.getInt("ModoMotor"),
                                 rs.getFloat("Downforce"),
-                                rs.getInt("Afinacoes"),
-                                piloto);
+                                rs.getString("Tipo"));
                         break;}
                     case "GTH":{
                         t = new GTH(rs.getString("Id"),
@@ -182,14 +154,10 @@ public class DAOCarro implements Map<String,Carro>{
                                 rs.getInt("Fiabilidade"),
                                 rs.getString("Marca"),
                                 rs.getString("Modelo"),
-                                rs.getString("Pneus"),
                                 rs.getInt("PotenciaMC"),
-                                rs.getString("Equipa"),
-                                rs.getInt("ModoMotor"),
                                 rs.getFloat("Downforce"),
-                                rs.getInt("Afinacoes"),
                                 rs.getInt("PotenciaEletrica"),
-                                piloto);
+                                rs.getString("Tipo"));
                         break;}
 
 
@@ -206,9 +174,6 @@ public class DAOCarro implements Map<String,Carro>{
     @Override
     public Carro put(String key, Carro value) {
         Carro res;
-        Piloto p = value.getPiloto();
-        String nomePiloto = "NULL";
-        if (p!=null)  nomePiloto  = "'" + p.getNome() + "'";
         try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
              Statement stm = conn.createStatement()) {
             // Actualizar a circuito
@@ -239,34 +204,19 @@ public class DAOCarro implements Map<String,Carro>{
                             value.getCilindrada()+", "+
                             value.getFiabilidade()+", '"+
                             value.getMarca()+"', '"+
-                            value.getModelo()+"', '"+
-                            value.getPneus()+"', "+
-                            value.getPotenciaMC()+",' "+
-                            value.getEquipa()+"', "+
-                            value.getModoMotor()+", "+
+                            value.getModelo()+"', "+
+                            value.getPotenciaMC()+", "+
                             value.getDownforce()+", "+
-                            value.getnAfinacoes()+", "+
                             potenciaEletrica+",'"+
-                            tipo+"', "+
-                            nomePiloto +
-
-                            ",NULL,NULL) " +
+                            tipo+"') " +
                             "ON DUPLICATE KEY UPDATE Cilindrada=Values(Cilindrada), " +
                             "Fiabilidade=Values(Fiabilidade)," +
                             "Marca=Values(Marca)," +
                             "Modelo=Values(Modelo)," +
-                            "Pneus=Values(Pneus)," +
                             "PotenciaMC=Values(PotenciaMC)," +
-                            "Equipa=Values(Equipa)," +
-                            "ModoMotor=Values(ModoMotor)," +
                             "Downforce=Values(Downforce)," +
-                            "Afinacoes=Values(Afinacoes)," +
                             "PotenciaEletrica=Values(PotenciaEletrica)," +
-                            "Tipo=Values(Tipo)," +
-                            "Piloto=Values(Piloto)");
-            if (p!=null){
-                DAOPiloto pi = DAOPiloto.getInstance();
-                pi.put(nomePiloto,p);}
+                            "Tipo=Values(Tipo)");
             res = get(key);
 
 

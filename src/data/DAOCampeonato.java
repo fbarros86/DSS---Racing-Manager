@@ -19,7 +19,6 @@ public class DAOCampeonato implements Map<String,Campeonato>{
              Statement stm = conn.createStatement()) {
             String campeonato = "CREATE TABLE IF NOT EXISTS campeonatos (" +
                     "Nome varchar(15) NOT NULL PRIMARY KEY," +
-                    "CorridaAtual int NOT NULL," +
                     "Categoria varchar(15) NOT NULL)";
             stm.executeUpdate(campeonato);
             String circuito ="CREATE TABLE IF NOT EXISTS circuitos (" +
@@ -39,9 +38,6 @@ public class DAOCampeonato implements Map<String,Campeonato>{
                     "Id int NOT NULL PRIMARY KEY AUTO_INCREMENT,"+
                     "Indice int NOT NULL," +
                     "NomeCampeonato varchar(15) NOT NULL, " +
-                    "Metereologia varchar(15) NOT NULL," +
-                    "VoltasOcorridas int NOT NULL," +
-                    "PilotosInativos int NOT NULL," +
                     "Circuito varchar(15) NOT NULL,"+
                     "FOREIGN KEY (Circuito) REFERENCES circuitos(Nome),"+
                     "FOREIGN KEY (NomeCampeonato) references campeonatos(Nome))";
@@ -65,34 +61,13 @@ public class DAOCampeonato implements Map<String,Campeonato>{
                     "Fiabilidade int NOT NULL," +
                     "Marca varchar(15) NOT NULL," +
                     "Modelo varchar(15) NOT NULL," +
-                    "Pneus varchar(15) NULL," +
                     "PotenciaMC int NOT NULL," +
-                    "Equipa varchar(15) NULL," +
-                    "ModoMotor int NULL," +
                     "Downforce float NULL," +
-                    "Afinacoes int NOT NULL," +
                     "PotenciaEletrica int NULL," +
-                    "Tipo varchar(15) NOT NULL," +
-                    "Piloto varchar(15) NULL,"+
-                    "Indice int NULL," +
-                    "CorridaId int NULL," +
-                    "FOREIGN KEY (Piloto) REFERENCES pilotos(Nome)," +
-                    "FOREIGN KEY (CorridaId) REFERENCES corridas(Id))";
+                    "Tipo varchar(15) NOT NULL)";
 
             stm.executeUpdate(carro);
 
-            String equipas = "CREATE TABLE IF NOT EXISTS equipas (" +
-                    "Nome varchar(15) NOT NULL PRIMARY KEY," +
-                    "Pontuacao int NOT NULL," +
-                    "Iduser varchar(15) NOT NULL,"+
-                    "Campeonato varchar(15) NOT NULL,"+
-                    "Carro1 varchar(50) NULL,"+
-                    "Carro2 varchar(50) NULL,"+
-                    "FOREIGN KEY (Iduser) REFERENCES utilizadores(Nome),"+
-                    "FOREIGN KEY (Campeonato) REFERENCES campeonatos(Nome),"+
-                    "FOREIGN KEY (Carro1) REFERENCES carros(Id),"+
-                    "FOREIGN KEY (Carro2) REFERENCES carros(Id))";
-            stm.executeUpdate(equipas);
 
         } catch (SQLException e) {
             // Erro a criar tabela...
@@ -158,18 +133,6 @@ public class DAOCampeonato implements Map<String,Campeonato>{
         return this.containsKey(t.getNome());
     }
 
-    private List<Carro> getCarros(String key, Statement stm) throws SQLException{
-        List<Carro> carros = new ArrayList<>();
-        try (ResultSet rsa = stm.executeQuery("SELECT * FROM carros WHERE CorridaId='"+key+"'")) {
-            while (rsa.next()) {
-                DAOCarro c = DAOCarro.getInstance();
-                Carro carro =c.get(rsa.getString("Id"));
-                carros.add(rsa.getInt("Indice"), carro);
-            }
-        }
-        return carros;
-
-    }
 
     private List<Corrida> getCorridasCampeonato(String key, Statement stm)throws SQLException{
         List<Corrida> corridas = new ArrayList<>();
@@ -177,26 +140,13 @@ public class DAOCampeonato implements Map<String,Campeonato>{
             while (rsa.next()) {
                 DAOCircuito c = DAOCircuito.getInstance();
                 Circuito circuito =c.get(rsa.getString("Circuito"));
-                List <Carro> carros  = getCarros(rsa.getString("Id"),stm);
-                Corrida corrida = new Corrida(rsa.getString("Metereologia"),
-                        rsa.getInt("VoltasOcorridas"),
-                        rsa.getInt("PilotosInativos"),
-                        circuito,new ArrayList<Carro>());
+                Corrida corrida = new Corrida(circuito);
                 corridas.add(rsa.getInt("Indice"), corrida);
             }
         }
         return corridas;
     }
 
-    private Map<String,Equipa> getEquipasCampeonato(String key, Statement stm) throws SQLException{
-        Map<String,Equipa> equipas = new HashMap<>();
-        try (ResultSet rsa = stm.executeQuery("SELECT * FROM equipas WHERE Campeonato='"+key+"'")) {
-            while (rsa.next()) {
-
-            }
-        }
-        return equipas;
-    }
 
     @Override
     public Campeonato get(Object key) {
@@ -209,13 +159,9 @@ public class DAOCampeonato implements Map<String,Campeonato>{
                 // Reconstruir as corridas
                 List<Corrida> corridas = getCorridasCampeonato(key.toString(), stm);
 
-                //Reconstruir as equipas
-                Map<String,Equipa> equipas = getEquipasCampeonato(key.toString(),stm);
-
                 c = new Campeonato(rs.getString("Nome"),
-                        rs.getInt("CorridaAtual"),
                         rs.getString("Categoria"),
-                        equipas,corridas);
+                        corridas);
             }
         } catch (SQLException e) {
             // Database error!
@@ -226,41 +172,17 @@ public class DAOCampeonato implements Map<String,Campeonato>{
     }
 
     private void putCorrida(String key,Corrida c, int index, Statement stm) throws SQLException{
-        List <Carro> carros = c.getClassificacao();
         Circuito circuito  = c.getCircuito();
-        stm.executeUpdate("INSERT INTO corridas (Indice,NomeCampeonato,Metereologia,VoltasOcorridas,PilotosInativos,Circuito) " +
+        stm.executeUpdate("INSERT INTO corridas (Indice,NomeCampeonato,Circuito) " +
                 "VALUES ("+ index+ ", '"+
                 key+"', '"+
-                c.getMeteorologia()+"', "+
-                c.getVoltasOcorridas()+", "+
-                c.getNPilotosInativos()+", '"+
                 circuito.getNome()+
                 "') " +
                 "ON DUPLICATE KEY UPDATE Indice=Values(Indice), " +
                 " NomeCampeonato=Values(NomeCampeonato), " +
-                " Metereologia=Values(Metereologia), " +
-                " VoltasOcorridas=Values(VoltasOcorridas), " +
-                " PilotosInativos=Values(PilotosInativos), " +
                 " Circuito=Values(Circuito)");
-        DAOCircuito circ = DAOCircuito.getInstance();
-        circ.put(circuito.getNome(),circuito);
-        DAOCarro carro = DAOCarro.getInstance();
-
     }
 
-    private void putEquipa(String key,Equipa e, Statement stm){
-
-    }
-
-
-    private void apagaEquipas(String key, Statement stm) throws SQLException{
-        ResultSet rsa = stm.executeQuery("SELECT * FROM equipas WHERE Campeonato='"+key+"'");
-        while (rsa.next()) {
-            stm.executeUpdate("UPDATE carros SET Equipa=NULL WHERE Id = "+rsa.getString("Carro1"));
-            stm.executeUpdate("UPDATE carros SET Equipa=NULL WHERE Id = "+rsa.getString("Carro2"));
-        }
-        stm.executeUpdate("DELETE FROM equipas WHERE Campeonato='"+key+"'");
-    }
 
     @Override
     public Campeonato put(String key, Campeonato value) {
@@ -273,24 +195,17 @@ public class DAOCampeonato implements Map<String,Campeonato>{
             // Actualizar a campeonato
             stm.executeUpdate(
                     "INSERT INTO campeonatos " +
-                            "VALUES ('"+ value.getNome()+ "', "+
-                            value.getCorridaAtual()+", '"+
+                            "VALUES ('"+ value.getNome()+"', '"+
                             value.getCategoria()+"') " +
-                            "ON DUPLICATE KEY UPDATE CorridaAtual=Values(CorridaAtual), " +
+                            "ON DUPLICATE KEY UPDATE " +
                             "Categoria=Values(Categoria)");
 
             //apagar corridas
             stm.executeUpdate("DELETE FROM corridas WHERE NomeCampeonato='"+key+"'");
-            //apagar equipas
-            apagaEquipas(key,stm);
 
             //atualizar corridas
             for (int i=0;i<corridas.size();i++)
                 putCorrida(key,corridas.get(i),i,stm);
-
-            //atualizar equipas
-            for (Equipa equipa: equipas.values())
-                putEquipa(key,equipa,stm);
 
             res = get(key);
 
@@ -311,7 +226,6 @@ public class DAOCampeonato implements Map<String,Campeonato>{
             // apagar a Corridas
             stm.executeUpdate("DELETE FROM corridas WHERE NomeCampeonato='"+key+"'");
             //apagar equipas
-            apagaEquipas(key.toString(),stm);
             // apagar Campeonato
             stm.executeUpdate("DELETE FROM campeonatos WHERE Nome='"+key+"'");
         } catch (Exception e) {
@@ -331,10 +245,8 @@ public class DAOCampeonato implements Map<String,Campeonato>{
     public void clear() {
         try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
              Statement stm = conn.createStatement()) {
-            stm.executeUpdate("TRUNCATE equipas");
             stm.executeUpdate("TRUNCATE corridas");
             stm.executeUpdate("TRUNCATE campeonatos");
-            stm.executeUpdate("UPDATE carros SET Equipa=NULL ");
         } catch (SQLException e) {
             // Database error!
             e.printStackTrace();

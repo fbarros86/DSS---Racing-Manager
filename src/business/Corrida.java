@@ -81,8 +81,10 @@ public class Corrida {
         int ncarros = carros.size();
         Carro c1 = carros.get(0);
         int posC1 = 0;
+        List<Carro> newCarros = new ArrayList<>();
+        newCarros.add(c1);
         for(int i=1; i < ncarros; i++){
-            Carro c2 = carros.get(1);
+            Carro c2 = carros.get(i);
             //carro1
             int potencia1 = c1.getPotencia();
             float cilindrada1 = c1.getCilindrada();
@@ -127,13 +129,16 @@ public class Corrida {
 
             boolean randomResult = aconteceuEvento(prob);
             if(randomResult){
-                carros.remove(i);
-                carros.add(posC1,c2);
+                newCarros.add(posC1,c2);
             }
-            else posC1=i;
+            else {
+                newCarros.add(c2);
+                posC1=i;
+            }
 
             c1=c2;
         }
+        carros = newCarros;
     }
 
     public void calcAvaria(){
