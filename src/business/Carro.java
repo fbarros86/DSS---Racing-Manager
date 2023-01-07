@@ -36,7 +36,7 @@ public class  Carro implements ICarro{
     }
 
     public Carro(Carro copy){
-        this.id = copy.id;
+        this.id = UUID.randomUUID().toString();
         this.marca = copy.marca;
         this.modelo = copy.modelo;
         this.potenciaMC = copy.potenciaMC;

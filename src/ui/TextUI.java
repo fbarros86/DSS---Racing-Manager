@@ -244,19 +244,21 @@ public class TextUI {
             System.out.println("Escolhas os circuitos que deseja. Escreva o nome do circuito 1 em cada linha");
             System.out.println("Para sair pressione Enter sem nada escrito");
             System.out.println(jogo.printNomeCircuitos(circuitos));
+            List<Circuito> circuitosCampeonato = new ArrayList<>();
             String circuito;
             do {
                 circuito = scin.nextLine();
                 if(jogo.existeCircuito(circuito)){
-                    circuitos.add(jogo.getCircuito(circuito));
+                    Circuito c = jogo.getCircuito(circuito);
+                    circuitosCampeonato.add(c);
                 }else{
                     if(!circuito.isBlank()) {
                         System.out.println("Circuito inexistente");
                         System.out.println("Tente o proximo");
                     }
                 }
-            }while(!circuito.isBlank());
-            List<Corrida> corridas = circuitos.stream().map(circ -> new Corrida(circ)).toList();
+            }while(!circuito.isBlank() || circuitosCampeonato.isEmpty());
+            List<Corrida> corridas = circuitosCampeonato.stream().map(circ -> new Corrida(circ)).toList();
             jogo.adicionarCampeonato(nome,categoria,corridas);
         }else System.out.println("Campeonato ja existente");
     }
