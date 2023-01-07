@@ -103,21 +103,26 @@ public class Campeonato implements ICampeonato {
 
     // Parte do utilizador escolher
     @Override
-    public List<Equipa> simulaCampeonato(String idCampeonato) {
-
-        float downforce=1; //utilizador escolhe
-        for (Corrida c: corridas){
-            for(Equipa e : getClassificacao()){
+    public List<Equipa> simulaCampeonato() {
+        int downforce = 1;
+        for (Corrida c: this.corridas){
+            for(Equipa e : this.equipas.values()){
                 Carro c1 = e.getCarro();
                 Carro c2 = e.getCarro();
                 if (c1.verificarAfinação()) c1.setAfinação(downforce);
                 if (c2.verificarAfinação()) c2.setAfinação(downforce);
-
-                //mudar pneus
-
-                //falta muita cena, n faz sentido o que temos
-
-
+            }
+            List<Carro> classificacaoFinal = c.simulaCorrida();
+            int i = 1;
+            for(Carro car: classificacaoFinal){
+                int pont = switch (i) {
+                    case 1 -> 25;
+                    case 2 -> 18;
+                    case 3 -> 15;
+                    default -> 12 - (i - 4);
+                };
+                this.equipas.get(car.getEquipa()).addpontuacao(pont);
+                i++;
             }
         }
         return (List<Equipa>) equipas;

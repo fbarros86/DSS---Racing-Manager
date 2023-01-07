@@ -117,28 +117,31 @@ public class Jogo implements IJogo {
 	}
 
 	@Override
-	public void registarCarroC2NaoHibrido(String marca, String modelo, float cilindrada, int potenciaMotor, float PAC) {
+	public void registarCarroC2NaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC) {
 		Carro c = new C2(marca,modelo, cilindrada, potenciaMotor,PAC);
 		String id = c.getID();
 		carros.put(id,c);
 	}
 
+
 	@Override
-	public void registarCarroC2Hibrido(String marca, String modelo, float cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC) {
+	public void registarCarroC2Hibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC) {
 		Carro c = new C2H(marca,modelo, cilindrada, potenciaMotor, potenciaMotorElec,PAC);
 		String id = c.getID();
 		carros.put(id,c);
 	}
 
 	@Override
-	public void registarCarroGTNaoHibrido(String marca, String modelo, float cilindrada, int potenciaMotor, float PAC) {
+	public void registarCarroGTNaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC) {
 		Carro c = new GT(marca,modelo, cilindrada, potenciaMotor,PAC);
 		String id = c.getID();
 		carros.put(id,c);
 	}
 
+
+
 	@Override
-	public void registarCarroGTHibrido(String marca, String modelo, float cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC) {
+	public void registarCarroGTHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC) {
 		Carro c = new GTH(marca,modelo, cilindrada, potenciaMotor, potenciaMotorElec,PAC);
 		String id = c.getID();
 		carros.put(id,c);
@@ -168,7 +171,7 @@ public class Jogo implements IJogo {
 	@Override
 	public List<Equipa> simulaJogo(String idCampeonato) {
 		Campeonato c = campeonatos.get(idCampeonato);
-		return c.simulaCampeonato(idCampeonato);
+		return c.simulaCampeonato();
 	}
 
 	public boolean existeCircuito(String nome){
