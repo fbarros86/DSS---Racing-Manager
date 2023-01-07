@@ -3,8 +3,9 @@ package business;
 
 public class C2 extends Carro {
 
+
     public C2(String marca, String modelo, int cilindrada, int potenciaMC, float downforce) {
-        super(marca, modelo, potenciaMC, downforce,cilindrada);
+        super(marca, modelo, cilindrada, potenciaMC, downforce);
     }
 
     public C2(String id, int cilindrada, int fiabilidade, String marca, String modelo, String pneus, int potenciaMC,

@@ -98,7 +98,7 @@ public interface IJogo {
 	 * @param PAC
 	 */
 
-	void registarCarroC1NaoHibrido(String marca, String modelo, int potenciaMotor, float PAC);
+	void registarCarroC1NaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC);
 
 	/**
 	 *
@@ -109,7 +109,7 @@ public interface IJogo {
 	 * @param PAC
 	 */
 
-	void registarCarroC1Hibrido(String marca, String modelo, int potenciaMotor, int potenciaMotorElec, float PAC);
+	void registarCarroC1Hibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC);
 
 	/**
 	 * 
@@ -158,7 +158,7 @@ public interface IJogo {
 	 * @param PAC
 	 */
 
-	void registarCarroSC(String marca, String modelo, int potenciaMotor, float PAC);
+	void registarCarroSC(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC);
 
 	/**
 	 * 
