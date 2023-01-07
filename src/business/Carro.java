@@ -27,6 +27,13 @@ public class  Carro implements ICarro {
 
 
 
+    public Carro(Carro copy){
+        this.id = UUID.randomUUID().toString();
+        this.marca = copy.marca;
+        this.modelo = copy.modelo;
+        this.potenciaMC = copy.potenciaMC;
+        this.downforce = copy.downforce;
+    }
     public Carro(String marca, String modelo, int cilindrada, int potenciaMC, float downforce){
             this.id = UUID.randomUUID().toString();
             this.marca = marca;
@@ -36,13 +43,6 @@ public class  Carro implements ICarro {
             this.cilindrada = cilindrada;
         }
 
-    public Carro(Carro copy) {
-            this.id = copy.id;
-            this.marca = copy.marca;
-            this.modelo = copy.modelo;
-            this.potenciaMC = copy.potenciaMC;
-            this.downforce = copy.downforce;
-        }
 
 
 

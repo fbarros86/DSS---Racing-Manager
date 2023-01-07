@@ -183,4 +183,8 @@ public interface IJogo {
 
 	public boolean codigoValido(String cod);
 
+	public String printNomeCampeonato();
+
+	public boolean existeCarro(String idCarro);
+
 }
