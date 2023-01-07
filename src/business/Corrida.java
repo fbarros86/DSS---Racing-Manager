@@ -292,7 +292,7 @@ public class Corrida {
     public String imprimeStanding(){
         StringBuilder sb = new StringBuilder();
         int i=1;
-        sb.append("volta").append(voltasOcorridas).append("\n");
+        sb.append("volta ").append(voltasOcorridas).append(":\n");
         for(Carro car: carros){
             sb.append(i).append(" ").append(car.standing());
             i++;

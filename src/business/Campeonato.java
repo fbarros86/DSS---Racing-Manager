@@ -144,11 +144,11 @@ public class Campeonato implements ICampeonato {
                 ui.trataInicio(user,c1,c);
                 ui.trataInicio(user,c2,c);
                 if (c1.verificarAfinacao()){
-                    int downforceC1 = ui.trataAfinacoes();
+                    float downforceC1 = ui.trataAfinacoes();
                     if(downforceC1 != -1) c1.setAfinacao(downforceC1);
                 }
                 if (c2.verificarAfinacao()){
-                    int downforceC2 = ui.trataAfinacoes();
+                    float downforceC2 = ui.trataAfinacoes();
                     if(downforceC2 != -1) c2.setAfinacao(downforceC2);
                 }
             }
