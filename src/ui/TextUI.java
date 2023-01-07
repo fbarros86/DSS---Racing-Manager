@@ -214,13 +214,13 @@ public class TextUI {
         }
     }
 
-    public int trataAfinacoes(){
+    public float trataAfinacoes(){
         System.out.println("Deseja fazer afinações?[True/False]");
         boolean afin = scin.nextBoolean();
-        int ret = -1;
+        float ret = -1;
         if(afin){
             System.out.println("Indique o valor do downforce [0..1]");
-            ret = scin.nextInt();
+            ret = scin.nextFloat();
         }
         return ret;
     }
@@ -293,7 +293,7 @@ public class TextUI {
             System.out.println("Insira a potência do motor: ");
             int potenciaMotor = scin.nextInt();
             System.out.println("Insira o downforce (0-1): ");
-            int downforce = scin.nextInt();
+            float downforce = scin.nextFloat();
 
             List<Carro> carros = new ArrayList<>(jogo.getCarros().values());
 
@@ -515,7 +515,7 @@ public class TextUI {
 
     public void trataStanding(String standing){
         System.out.println(standing);
-        scin.next();
+        scin.nextLine();
     }
 
     public void trataInicio(String user, Carro c){
