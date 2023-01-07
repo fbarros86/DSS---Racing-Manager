@@ -23,4 +23,10 @@ public class GTH extends GT {
     public int getPotencia() {
         return this.potenciaME;
     }
+
+    public String toOptionalString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.toOptionalString()).append("Potencia do motor eletrico: ").append(potenciaME);
+        return sb.toString();
+    }
 }

@@ -23,6 +23,10 @@ public class Equipa {
 		return this.idUser;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
 	public void setIdUser(String id) {
 		// TODO - implement Equipa.addpontuacao
 		this.idUser=id;

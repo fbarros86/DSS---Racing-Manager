@@ -211,6 +211,14 @@ public class  Carro implements ICarro {
             this.nAfinacoes = nAfinacoes;
         }
 
+        public String toOptionalString(){
+            StringBuilder sb = new StringBuilder();
+            sb.append("Carro (").append(id).append("): \n")
+                    .append("Marca: ").append(marca).append("\nModelo: ").append(modelo).append("\nCilindrada: ")
+                    .append("Potencia motor classico: ").append(potenciaMC).append("\n");
+            return sb.toString();
+        }
+
         @Override
         public String toString () {
             return "Carro{" +

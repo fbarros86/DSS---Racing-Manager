@@ -55,6 +55,10 @@ public class Campeonato implements ICampeonato {
         return this.corridaAtual;
     }
 
+    public void setCarrosCorridas(List<Carro> carros){
+        for (Corrida corrida : corridas) corrida.addCarros(carros);
+    }
+
     // ns oq fazer com isto
     @Override
     public List<Equipa> getClassificacao() {;
@@ -111,12 +115,8 @@ public class Campeonato implements ICampeonato {
 
     // idUSER??
     @Override
-    public void adicionaEquipa(String idUser, String nome, Carro c, Piloto p1, Piloto p2, int ncorridas) {
-        Carro c2 = new Carro(c);
-        c.setPiloto(p1);
-        c2.setPiloto(p2);
-        Equipa equipaNova = new Equipa(idUser, nome, c, c2);
-        equipas.put(nome, equipaNova);
+    public void adicionaEquipa(Equipa equipa) {
+        equipas.put(equipa.getNome(), equipa);
 
     }
 

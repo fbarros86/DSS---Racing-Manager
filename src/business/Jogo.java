@@ -14,7 +14,6 @@ public class Jogo implements IJogo {
 	private List<Utilizador> rankingGlobal;
 	private List<String> codigosAdmin;
 
-	/*
 	public Jogo(){
 		campeonatos = DAOCampeonato.getInstance();
 		circuitos = DAOCircuito.getInstance();
@@ -24,8 +23,7 @@ public class Jogo implements IJogo {
 		codigosAdmin = new ArrayList<>();
 		rankingGlobal = new ArrayList<>();
 	}
-	*/
-
+/*
 	public Jogo(){
 		campeonatos = new HashMap<>();
 		circuitos = new HashMap<>();
@@ -34,7 +32,7 @@ public class Jogo implements IJogo {
 		utilizadores = new HashMap<>();
 		codigosAdmin = new ArrayList<>();
 		rankingGlobal = new ArrayList<>();
-	}
+	}*/
 
 
 	@Override
@@ -108,8 +106,10 @@ public class Jogo implements IJogo {
 	@Override
 	public void adicionaEquipa(String nome, String codJogador, String codCampeonato, Carro c, Piloto p1, Piloto p2) {
 		Campeonato campeonato = campeonatos.get(codCampeonato);
-		int ncorridas = campeonato.getNCorridas();
-		campeonato.adicionaEquipa(nome,codJogador,c,p1,p2,ncorridas);
+		Carro c2 = new Carro(c);
+		c.setPiloto(p1);
+		c2.setPiloto(p2);
+		campeonato.adicionaEquipa(new Equipa(codJogador,nome,c,c2));
 	}
 
 
@@ -243,4 +243,9 @@ public class Jogo implements IJogo {
 		return carros.containsKey(idCarro);
 	}
 
+	public String printCarros(){
+		StringBuilder sb = new StringBuilder();
+		carros.values().stream().map(car -> sb.append(car.toOptionalString()));
+		return sb.toString();
+	}
 }

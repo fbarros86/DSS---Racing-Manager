@@ -60,7 +60,7 @@ public class DAOCampeonato implements Map<String,Campeonato>{
             stm.executeUpdate(piloto);
 
             String carro ="CREATE TABLE IF NOT EXISTS carros (" +
-                    "Id varchar(15) NOT NULL PRIMARY KEY," +
+                    "Id varchar(50) NOT NULL PRIMARY KEY," +
                     "Cilindrada int NOT NULL," +
                     "Fiabilidade int NOT NULL," +
                     "Marca varchar(15) NOT NULL," +
@@ -86,8 +86,8 @@ public class DAOCampeonato implements Map<String,Campeonato>{
                     "Pontuacao int NOT NULL," +
                     "Iduser varchar(15) NOT NULL,"+
                     "Campeonato varchar(15) NOT NULL,"+
-                    "Carro1 varchar(15) NULL,"+
-                    "Carro2 varchar(15) NULL,"+
+                    "Carro1 varchar(50) NULL,"+
+                    "Carro2 varchar(50) NULL,"+
                     "FOREIGN KEY (Iduser) REFERENCES utilizadores(Nome),"+
                     "FOREIGN KEY (Campeonato) REFERENCES campeonatos(Nome),"+
                     "FOREIGN KEY (Carro1) REFERENCES carros(Id),"+
@@ -204,7 +204,7 @@ public class DAOCampeonato implements Map<String,Campeonato>{
 
         try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
              Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT * FROM circuitos WHERE Nome='"+key+"'")) {
+             ResultSet rs = stm.executeQuery("SELECT * FROM campeonatos WHERE Nome='"+key+"'")) {
             if (rs.next()) {  // A chave existe na tabela
                 // Reconstruir as corridas
                 List<Corrida> corridas = getCorridasCampeonato(key.toString(), stm);

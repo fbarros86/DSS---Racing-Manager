@@ -88,7 +88,7 @@ public interface IJogo {
 	 * @param p1
 	 * @param p2
 	 */
-	void adicionaEquipa(String nome, String codJogador, String codCampeonato, Carro c, Piloto p1, Piloto p2);
+	public void adicionaEquipa(String nome, String codJogador, String codCampeonato, Carro c, Piloto p1, Piloto p2);
 
 	/**
 	 *
@@ -186,5 +186,7 @@ public interface IJogo {
 	public String printNomeCampeonato();
 
 	public boolean existeCarro(String idCarro);
+
+	public String printCarros();
 
 }

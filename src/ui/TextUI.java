@@ -10,10 +10,7 @@ package ui;
 import business.*;
 
 import java.nio.file.attribute.GroupPrincipal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TextUI {
@@ -84,7 +81,7 @@ public class TextUI {
         System.out.println("Username:");
         String user, pass, tipo;
         do{
-            user = scin.nextLine();
+            user = scin.next();
             if(user.isBlank()){
                 System.out.println("usuario invalido!!!");
             }
@@ -94,7 +91,7 @@ public class TextUI {
         }else{
             System.out.println("Password:");
             do{
-                pass = scin.nextLine();
+                pass = scin.next();
                 if(pass.isBlank()){
                     System.out.println("password invalido!!!");
                 }
@@ -103,7 +100,7 @@ public class TextUI {
             if(scin.nextBoolean()){
                 tipo = "administrador";
                 System.out.println("Indique seu codigo de administrado:");
-                String codigo = scin.nextLine();
+                String codigo = scin.next();
                 if(jogo.codigoValido(codigo)){
                  jogo.adicionarUser(user,pass,tipo);
                 }
@@ -127,11 +124,11 @@ public class TextUI {
     public void trataAdicionarCircuito() {
         try {
             System.out.println("Nome do novo circuito: ");
-            String nome = scin.nextLine();
+            String nome = scin.next();
             if (!this.jogo.existeCircuito(nome)) {
                 System.out.println("Indique o número de curvas: ");
                 int curvas = scin.nextInt();
-                System.out.println("Indique o número de chicanes ");
+                System.out.println("Indique o número de chicanes: ");
                 int chicanes = scin.nextInt();
                 int retas = curvas+chicanes+1;
                 float distmin = (float) (curvas*0.2 + chicanes*0.2 + retas*0.5);
@@ -187,7 +184,7 @@ public class TextUI {
         try {
             System.out.println(jogo.printNomeCircuitos());
             System.out.println("Nome do circuito: ");
-            String nome = scin.nextLine();
+            String nome = scin.next();
             if (jogo.existeCircuito(nome)) {
                 Circuito c = jogo.getCircuito(nome);
                 System.out.println(c.toString());
@@ -212,10 +209,10 @@ public class TextUI {
 
     public void trataAdicionarPiloto(){
         System.out.println("Indique nome do novo piloto: ");
-        String nome = scin.nextLine();
+        String nome = scin.next();
         while (nome.isBlank()) {
             if (nome.isBlank()) System.out.println("Nome invalido insira outro nome por favor");
-            nome = scin.nextLine();
+            nome = scin.next();
         }
         if(!jogo.existePiloto(nome)) {
             System.out.println("Indique a Segurança (bom com valor 0) vs Agressividade (bom com valor 1) (SVA) [0..1]: ");
@@ -238,8 +235,8 @@ public class TextUI {
         try {
             System.out.println(jogo.printNomePilotos());
             System.out.println("Nome do piloto: ");
-            String nome = scin.nextLine();
-            while (nome.isEmpty()) nome = scin.nextLine();
+            String nome = scin.next();
+            while (nome.isEmpty()) nome = scin.next();
             if (jogo.existePiloto(nome)) {
                 Piloto p = jogo.getPiloto(nome);
                 System.out.println(p.toString());
@@ -372,10 +369,10 @@ public class TextUI {
 
     public void trataAdicionarCampeonato(){
         System.out.println("Indique nome do novo campeonato");
-        String nome = scin.nextLine();
+        String nome = scin.next();
         while (nome.isBlank()) {
             if (nome.isBlank()) System.out.println("Nome invalido insira outro nome por favor");
-            nome = scin.nextLine();
+            nome = scin.next();
         }
         if (!jogo.existeCampeonato(nome)) {
             String[] categorias = new String[]{
@@ -385,10 +382,11 @@ public class TextUI {
                     "SC"
             };
             System.out.println("Indique a categoria do campeonato [C1/C2/GT/SC]");
-            String categoria = scin.nextLine();
+            String categoria = scin.next();
             while(!Arrays.asList(categorias).contains(categoria)){
                 System.out.println("Categoria invalida");
-                categoria = scin.nextLine();
+                categoria = scin.next();
+
             }
             List<Circuito> circuitos = jogo.getCircuitos().values().stream().toList();
             System.out.println("Escolhas os circuitos que deseja. Escreva o nome do circuito 1 em cada linha");
@@ -420,13 +418,15 @@ public class TextUI {
         do{
             campNome = scin.nextLine();
         }while(campNome.isBlank() || !jogo.existeCampeonato(campNome));
+        Campeonato campeonatoJogar = jogo.getCampeonatos().get(campNome);
         System.out.println("Quantos jogadores deseja adicionar? [1..5]");
         int numPlayer;
         do {
              numPlayer = scin.nextInt();
         }while (numPlayer<0 || numPlayer>5);
+        List<Carro> carros = new ArrayList<>();
         for(int i=0; i<numPlayer;i++){
-            String user, nome, idCarro;
+            String user, nome, idCarro, piloto1, piloto2;
             if(i == 0){
                 user = userAtual.getCodNome();
             }else{
@@ -446,9 +446,28 @@ public class TextUI {
             do {
                 idCarro = scin.next();
             }while (!jogo.existeCarro(idCarro));
-
-
+            Carro c1 = jogo.getCarros().get(idCarro);
+            Carro c2 = new Carro(c1);
+            System.out.println("Escolha seus pilotos: ");
+            System.out.println(jogo.printNomePilotos());
+            System.out.println("Piloto 1:");
+            do {
+                piloto1 = scin.next();
+            }while (!jogo.existePiloto(piloto1));
+            Piloto p1 = jogo.getPiloto(piloto1);
+            System.out.println("Piloto 2:");
+            do {
+                piloto2 = scin.next();
+            }while (!jogo.existePiloto(piloto2));
+            Piloto p2 = jogo.getPiloto(piloto2);
+            c1.setPiloto(p1);
+            c2.setPiloto(p2);
+            carros.add(c1);
+            carros.add(c2);
+            campeonatoJogar.adicionaEquipa(new Equipa(user,nome,c1,c2));
         }
+        campeonatoJogar.setCarrosCorridas(carros);
+        campeonatoJogar.simulaCampeonato();
     }
 
 }

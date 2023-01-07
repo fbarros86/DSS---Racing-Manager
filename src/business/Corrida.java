@@ -64,6 +64,10 @@ public class Corrida {
         carros.add(c);
     }
 
+    public void addCarros(List<Carro> carros){
+        this.carros = carros;
+    }
+
     // ver melhor de é assim o instanceof
     public void diminuiFiabilidade(){
         for(Carro c : carros){

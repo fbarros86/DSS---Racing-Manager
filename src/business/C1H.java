@@ -20,4 +20,10 @@ public class C1H extends C1 {
     public int getPotencia() {
         return potenciaME;
     }
+
+    public String toOptionalString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.toOptionalString()).append("Potencia do motor eletrico: ").append(potenciaME);
+        return sb.toString();
+    }
 }
