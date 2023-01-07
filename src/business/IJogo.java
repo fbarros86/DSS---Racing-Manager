@@ -59,7 +59,6 @@ public interface IJogo {
 	 * 
 	 * @param nome
 	 * @param categoria
-	 * @param equipas
 	 * @param corridas
 	 */
 	void adicionarCampeonato(String nome, String categoria, List<Corrida> corridas);
