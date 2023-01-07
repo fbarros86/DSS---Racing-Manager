@@ -93,7 +93,8 @@ public class DAOCarro implements Map<String,Carro>{
                                 rs.getString("Marca"),
                                 rs.getString("Modelo"),
                                 rs.getInt("PotenciaMC"),
-                                rs.getFloat("Downforce"));
+                                rs.getFloat("Downforce"),
+                                rs.getString("Tipo"));
                         break;}
                     case "C1H":{
                         t = new C1H(rs.getString("Id"),
@@ -103,7 +104,8 @@ public class DAOCarro implements Map<String,Carro>{
                                 rs.getString("Modelo"),
                                 rs.getInt("PotenciaMC"),
                                 rs.getFloat("Downforce"),
-                                rs.getInt("PotenciaEletrica"));
+                                rs.getInt("PotenciaEletrica"),
+                                rs.getString("Tipo"));
                         break;}
                     case "C2":{
                         t = new C2(rs.getString("Id"),
@@ -112,7 +114,8 @@ public class DAOCarro implements Map<String,Carro>{
                                 rs.getString("Marca"),
                                 rs.getString("Modelo"),
                                 rs.getInt("PotenciaMC"),
-                                rs.getFloat("Downforce"));
+                                rs.getFloat("Downforce"),
+                                rs.getString("Tipo"));
                         break;}
                     case "C2H":{
                         t = new C2H(rs.getString("Id"),
@@ -122,7 +125,8 @@ public class DAOCarro implements Map<String,Carro>{
                                 rs.getString("Modelo"),
                                 rs.getInt("PotenciaMC"),
                                 rs.getFloat("Downforce"),
-                                rs.getInt("PotenciaEletrica"));
+                                rs.getInt("PotenciaEletrica"),
+                                rs.getString("Tipo"));
                         break;}
                     case "SC":{
                         t = new SC(rs.getString("Id"),
@@ -131,7 +135,8 @@ public class DAOCarro implements Map<String,Carro>{
                                 rs.getString("Marca"),
                                 rs.getString("Modelo"),
                                 rs.getInt("PotenciaMC"),
-                                rs.getFloat("Downforce"));
+                                rs.getFloat("Downforce"),
+                                rs.getString("Tipo"));
                         break;}
                     case "GT":{
                         t = new GT(rs.getString("Id"),
@@ -140,7 +145,8 @@ public class DAOCarro implements Map<String,Carro>{
                                 rs.getString("Marca"),
                                 rs.getString("Modelo"),
                                 rs.getInt("PotenciaMC"),
-                                rs.getFloat("Downforce"));
+                                rs.getFloat("Downforce"),
+                                rs.getString("Tipo"));
                         break;}
                     case "GTH":{
                         t = new GTH(rs.getString("Id"),
@@ -150,7 +156,8 @@ public class DAOCarro implements Map<String,Carro>{
                                 rs.getString("Modelo"),
                                 rs.getInt("PotenciaMC"),
                                 rs.getFloat("Downforce"),
-                                rs.getInt("PotenciaEletrica"));
+                                rs.getInt("PotenciaEletrica"),
+                                rs.getString("Tipo"));
                         break;}
 
 

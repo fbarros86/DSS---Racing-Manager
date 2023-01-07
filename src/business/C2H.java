@@ -5,14 +5,14 @@ public class C2H extends C2 {
     private int potenciaME;
     private int cilindrada;
 
-    public C2H(String marca, String modelo, int cilindrada, int potenciaMC, int potenciaME, float downforce) {
-        super(marca, modelo,potenciaMC, potenciaME, downforce);
+    public C2H(String marca, String modelo, int cilindrada, int potenciaMC, int potenciaME, float downforce, String categoria) {
+        super(marca, modelo,potenciaMC, potenciaME, downforce, categoria);
         this.cilindrada = cilindrada;
     }
 
     public C2H(String id, int cilindrada, int fiabilidade, String marca, String modelo , int potenciaMC,
-               float downforce, int potenciaEletrica) {
-        super(id, cilindrada, fiabilidade, marca, modelo, potenciaMC,downforce);
+               float downforce, int potenciaEletrica,String categoria) {
+        super(id, cilindrada, fiabilidade, marca, modelo, potenciaMC,downforce,categoria);
         this.potenciaME = potenciaEletrica;
     }
     public C2H(String id, int cilindrada, int fiabilidade, String marca, String modelo, String pneus, int potenciaMC,

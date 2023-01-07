@@ -346,25 +346,25 @@ public class TextUI {
 
             if (!flag) System.out.println("Esse carro já existe!");
             else if( categoria.equals("C1") && !hibrido){
-                jogo.registarCarroC1NaoHibrido(marca,modelo,6000,potenciaMotor,downforce);
+                jogo.registarCarroC1NaoHibrido(marca,modelo,6000,potenciaMotor,downforce, categoria);
             }
             else if( categoria.equals("C1") && hibrido){
-                jogo.registarCarroC1Hibrido(marca,modelo,6000,potenciaMotor, potenciaElec ,downforce);
+                jogo.registarCarroC1Hibrido(marca,modelo,6000,potenciaMotor, potenciaElec ,downforce, categoria);
             }
             else if( categoria.equals("C2") && !hibrido){
-                jogo.registarCarroC2NaoHibrido(marca,modelo,cilindrada, potenciaMotor,downforce);
+                jogo.registarCarroC2NaoHibrido(marca,modelo,cilindrada, potenciaMotor,downforce, categoria);
             }
             else if( categoria.equals("C2") && hibrido){
-                jogo.registarCarroC2Hibrido(marca,modelo, cilindrada, potenciaMotor, potenciaElec,downforce);
+                jogo.registarCarroC2Hibrido(marca,modelo, cilindrada, potenciaMotor, potenciaElec,downforce, categoria);
             }
             else if( categoria.equals("GT") && !hibrido){
-                jogo.registarCarroGTNaoHibrido(marca,modelo,cilindrada,potenciaMotor,downforce);
+                jogo.registarCarroGTNaoHibrido(marca,modelo,cilindrada,potenciaMotor,downforce,categoria);
             }
             else if( categoria.equals("GT") && hibrido){
-                jogo.registarCarroGTHibrido(marca,modelo,cilindrada, potenciaMotor, potenciaElec, downforce);
+                jogo.registarCarroGTHibrido(marca,modelo,cilindrada, potenciaMotor, potenciaElec, downforce,categoria);
             }
             else if( categoria.equals("SC")){
-                jogo.registarCarroC1NaoHibrido(marca,modelo,2500,potenciaMotor,downforce);
+                jogo.registarCarroC1NaoHibrido(marca,modelo,2500,potenciaMotor,downforce,categoria);
             }
 
 
@@ -450,21 +450,21 @@ public class TextUI {
                     user = userAtual.getCodNome();
                 } else {
                     System.out.println("Se possuir conta de jogador adicione o seu ID caso contrario pressione Enter");
-                    user = scin.nextLine();
+                    user = scin.next();
                     if (user.isBlank()) {
                         user = "Guest" + numGuest;
                         numGuest++;
                     }
                 }
-                System.out.println(user + "escolha o nome de sua equipa:");
+                System.out.println(user + " escolha o nome de sua equipa:");
                 do {
                     nome = scin.nextLine();
                 } while (nome.isBlank());
                 System.out.println("Escolha um carro: (Escreva o ID)");
-                System.out.println(jogo.printCarros());
+                System.out.println(jogo.printCarros(campeonatoJogar.getCategoria()));
                 do {
                     idCarro = scin.next();
-                } while (!jogo.existeCarro(idCarro));
+                } while (!jogo.existeCarro(idCarro,campeonatoJogar.getCategoria()));
                 Carro c1 = jogo.getCarros().get(idCarro);
                 Carro c2 = new Carro(c1);
                 System.out.println("Escolha seus pilotos: ");
@@ -481,6 +481,10 @@ public class TextUI {
                 Piloto p2 = jogo.getPiloto(piloto2);
                 c1.setPiloto(p1);
                 c2.setPiloto(p2);
+                c1.setEquipa(nome);
+                c2.setEquipa(nome);
+                c1.setNAfinacoes(campeonatoJogar.getNCorridas()*2/3);
+                c2.setNAfinacoes(campeonatoJogar.getNCorridas()*2/3);
                 carros.add(c1);
                 carros.add(c2);
                 campeonatoJogar.adicionaEquipa(new Equipa(user, nome, c1, c2));
@@ -507,6 +511,17 @@ public class TextUI {
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void trataInicio(String user, Carro c){
+            System.out.println(c.toString());
+            System.out.println(user+" Indique o inteiro correspondente ao modo do motor que deseja: [-1(Agressivo)/0(Normal)/1(Conservador)]");
+            int modoMotor = scin.nextInt();
+            while( modoMotor != -1 && modoMotor != 0 && modoMotor != 1) modoMotor = scin.nextInt();
+            System.out.println("Indique o tipo de pneu que deseja utilizar [Chuva/Duro/Macio]");
+            String pneus = scin.next();
+            while (!pneus.equals("Chuva") && !pneus.equals("Duro") && !pneus.equals("Macio")) pneus = scin.next();
+
     }
 
 }

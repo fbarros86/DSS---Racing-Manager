@@ -4,15 +4,15 @@ public class GTH extends GT {
     private int potenciaME;
     private int cilindrada;
 
-    public GTH(String marca, String modelo, int cilindrada, int potenciaMC, int potenciaME, float downforce) {
-        super(marca, modelo,potenciaMC, potenciaME, downforce);
+    public GTH(String marca, String modelo, int cilindrada, int potenciaMC, int potenciaME, float downforce, String categoria) {
+        super(marca, modelo,potenciaMC, potenciaME, downforce, categoria);
         this.cilindrada = cilindrada;
         this.potenciaME= potenciaME;
     }
 
     public GTH(String id, int cilindrada, int fiabilidade, String marca, String modelo , int potenciaMC,
-               float downforce, int potenciaEletrica) {
-        super(id, cilindrada, fiabilidade, marca, modelo, potenciaMC,downforce);
+               float downforce, int potenciaEletrica, String categoria) {
+        super(id, cilindrada, fiabilidade, marca, modelo, potenciaMC,downforce,categoria);
         this.potenciaME = potenciaEletrica;
     }
 

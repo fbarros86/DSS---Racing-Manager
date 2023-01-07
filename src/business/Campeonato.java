@@ -129,6 +129,9 @@ public class Campeonato implements ICampeonato {
             for(Equipa e : this.equipas.values()){
                 Carro c1 = e.getCarro1();
                 Carro c2 = e.getCarro2();
+                String user = e.getidUser();
+                ui.trataInicio(user,c1);
+                ui.trataInicio(user,c2);
                 if (c1.verificarAfinacao()){
                     int downforceC1 = ui.trataAfinacoes();
                     if(downforceC1 != -1) c1.setAfinacao(downforceC1);
