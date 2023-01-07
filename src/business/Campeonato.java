@@ -112,8 +112,7 @@ public class Campeonato implements ICampeonato {
     // idUSER??
     @Override
     public void adicionaEquipa(String idUser, String nome, Carro c, Piloto p1, Piloto p2, int ncorridas) {
-        //Equipa equipaNova = new Equipa(idUser, nome, c, p1, p2);
-        Equipa equipaNova = new Equipa(idUser, nome, c,c);
+        Equipa equipaNova = new Equipa(idUser, nome, c, p1, p2);
         equipas.put(nome, equipaNova);
 
     }
