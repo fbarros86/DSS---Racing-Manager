@@ -81,14 +81,15 @@ public class DAOCarro implements Map<String,Carro>{
         Carro t = null;
         try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
              Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT * FROM carros WHERE Nome='"+key+"'")) {
+             ResultSet rs = stm.executeQuery("SELECT * FROM carros WHERE Id='"+key+"'")) {
             if (rs.next()) {  // A chave existe na tabela
                 //
                 //reconstruir circuito
 
                 DAOPiloto p = DAOPiloto.getInstance();
                 Piloto piloto  = p.get(rs.getString("Piloto"));
-                switch (rs.getString("TipoSegmento")){
+                String tipo  = rs.getString("Tipo");
+                switch (rs.getString("Tipo")){
                     case "C1":{
                         t = new C1(rs.getString("Id"),
                                 rs.getInt("Cilindrada"),
@@ -206,7 +207,8 @@ public class DAOCarro implements Map<String,Carro>{
     public Carro put(String key, Carro value) {
         Carro res;
         Piloto p = value.getPiloto();
-        String nomePiloto  = p.getNome();
+        String nomePiloto = "NULL";
+        if (p!=null)  nomePiloto  = "'" + p.getNome() + "'";
         try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
              Statement stm = conn.createStatement()) {
             // Actualizar a circuito
@@ -244,11 +246,11 @@ public class DAOCarro implements Map<String,Carro>{
                             value.getModoMotor()+", "+
                             value.getDownforce()+", "+
                             value.getnAfinacoes()+", "+
-                            potenciaEletrica+",' "+
-                            tipo+"', '"+
+                            potenciaEletrica+",'"+
+                            tipo+"', "+
                             nomePiloto +
 
-                            "',NULL,NULL) " +
+                            ",NULL,NULL) " +
                             "ON DUPLICATE KEY UPDATE Cilindrada=Values(Cilindrada), " +
                             "Fiabilidade=Values(Fiabilidade)," +
                             "Marca=Values(Marca)," +
@@ -262,8 +264,9 @@ public class DAOCarro implements Map<String,Carro>{
                             "PotenciaEletrica=Values(PotenciaEletrica)," +
                             "Tipo=Values(Tipo)," +
                             "Piloto=Values(Piloto)");
-            DAOPiloto pi = DAOPiloto.getInstance();
-            pi.put(nomePiloto,p);
+            if (p!=null){
+                DAOPiloto pi = DAOPiloto.getInstance();
+                pi.put(nomePiloto,p);}
             res = get(key);
 
 
@@ -314,7 +317,7 @@ public class DAOCarro implements Map<String,Carro>{
         Set<String> res= new HashSet<>();;
         try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
              Statement stm = conn.createStatement()){
-            ResultSet rs = stm.executeQuery("SELECT Nome FROM carros");
+            ResultSet rs = stm.executeQuery("SELECT Id FROM carros");
             while (rs.next()) {
                 String idc = rs.getString("Id");
                 res.add(idc);
@@ -333,10 +336,10 @@ public class DAOCarro implements Map<String,Carro>{
         Collection<Carro> res = new HashSet<>();
         try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
              Statement stm = conn.createStatement();
-             ResultSet rs = stm.executeQuery("SELECT Nome FROM carros")) {
+             ResultSet rs = stm.executeQuery("SELECT Id FROM carros")) {
             while (rs.next()) {
                 String idc = rs.getString("Id");
-                Carro c = this.get(idc);
+                Carro c = get(idc);
                 res.add(c);
             }
         } catch (Exception e) {
@@ -352,7 +355,7 @@ public class DAOCarro implements Map<String,Carro>{
         Map<String,Carro> res = new HashMap<>();
         try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
              Statement stm = conn.createStatement()){
-            ResultSet rs = stm.executeQuery("SELECT Nome FROM carros");
+            ResultSet rs = stm.executeQuery("SELECT Id FROM carros");
             while (rs.next()) {
                 String idc = rs.getString("Id");
                 Carro c = get(idc);

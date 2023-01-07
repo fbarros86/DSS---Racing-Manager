@@ -14,7 +14,6 @@ public class Jogo implements IJogo {
 	private List<Utilizador> rankingGlobal;
 	private List<String> codigosAdmin;
 
-	/*
 	public Jogo(){
 		campeonatos = DAOCampeonato.getInstance();
 		circuitos = DAOCircuito.getInstance();
@@ -24,8 +23,7 @@ public class Jogo implements IJogo {
 		codigosAdmin = new ArrayList<>();
 		rankingGlobal = new ArrayList<>();
 	}
-	*/
-
+/*
 	public Jogo(){
 		campeonatos = new HashMap<>();
 		circuitos = new HashMap<>();
@@ -34,7 +32,7 @@ public class Jogo implements IJogo {
 		utilizadores = new HashMap<>();
 		codigosAdmin = new ArrayList<>();
 		rankingGlobal = new ArrayList<>();
-	}
+	}*/
 
 
 	@Override
