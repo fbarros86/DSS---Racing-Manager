@@ -12,10 +12,26 @@ public class Campeonato implements ICampeonato {
     Map<String, Equipa> equipas;
     List<Corrida> corridas;
 
+    public Campeonato(String nome, String categoria, List<Corrida> corridas) {
+        this.nome = nome;
+        this.categoria = categoria;
+        this.corridaAtual = 0;
+        this.equipas = new HashMap<>();
+        this.corridas = corridas;
+    }
+
     public Campeonato(String nome, String categoria, Map<String, Equipa> equipas, List<Corrida> corridas) {
         this.nome = nome;
         this.categoria = categoria;
         this.corridaAtual = 0;
+        this.equipas = equipas;
+        this.corridas = corridas;
+    }
+
+    public Campeonato(String nome, int corridaAtual, String categoria, Map<String, Equipa> equipas, List<Corrida> corridas) {
+        this.nome = nome;
+        this.categoria = categoria;
+        this.corridaAtual = corridaAtual;
         this.equipas = equipas;
         this.corridas = corridas;
     }
@@ -96,7 +112,10 @@ public class Campeonato implements ICampeonato {
     // idUSER??
     @Override
     public void adicionaEquipa(String idUser, String nome, Carro c, Piloto p1, Piloto p2, int ncorridas) {
-        Equipa equipaNova = new Equipa(idUser, nome, c, p1, p2);
+        Carro c2 = new Carro(c);
+        c.setPiloto(p1);
+        c2.setPiloto(p2);
+        Equipa equipaNova = new Equipa(idUser, nome, c, c2);
         equipas.put(nome, equipaNova);
 
     }
@@ -108,8 +127,8 @@ public class Campeonato implements ICampeonato {
         TextUI ui = new TextUI();
         for (Corrida c: this.corridas){
             for(Equipa e : this.equipas.values()){
-                Carro c1 = e.getCarro();
-                Carro c2 = e.getCarro();
+                Carro c1 = e.getCarro1();
+                Carro c2 = e.getCarro2();
                 if (c1.verificarAfinacao()){
                     int downforceC1 = ui.trataAfinacoes();
                     if(downforceC1 != -1) c1.setAfinacao(downforceC1);
@@ -133,10 +152,34 @@ public class Campeonato implements ICampeonato {
                 i++;
             }
         }
+
         List<Equipa> ret = (List<Equipa>) this.equipas.values();
         sortTeams(ret);
         return ret;
     }
 
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCorridaAtual(int corridaAtual) {
+        this.corridaAtual = corridaAtual;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public void setEquipas(Map<String, Equipa> equipas) {
+        this.equipas = equipas;
+    }
+
+    public void setCorridas(List<Corrida> corridas) {
+        this.corridas = corridas;
+    }
 }

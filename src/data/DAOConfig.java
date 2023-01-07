@@ -8,10 +8,10 @@ package data;
  */
 
 public class DAOConfig {
-    static final String USERNAME = "root";
-    static final String PASSWORD = "root";
+    static final String USERNAME = "user";
+    static final String PASSWORD = "user";
     private static final String DATABASE = "racing";          // Actualizar
     private static final String DRIVER = "jdbc:mariadb";        // Usar para MariaDB
-    static final String URL = DRIVER+"://localhost:3307/"+DATABASE;
+    static final String URL = DRIVER+"://localhost:3306/"+DATABASE;
 }
 

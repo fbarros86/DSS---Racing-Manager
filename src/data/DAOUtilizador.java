@@ -99,22 +99,22 @@ public class DAOUtilizador implements Map<String,Utilizador>{
     @Override
     public Utilizador put(String key, Utilizador value) {
 
-        Utilizador res = null;
+        Utilizador res;
         try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
              Statement stm = conn.createStatement()) {
 
             // Actualizar a circuito
             stm.executeUpdate(
-                    "INSERT INTO circuitos " +
-                            "VALUES ('"+ value.getCodNome()+ "', "+
-                            value.getCodPass()+", "+
-                            value.getTipo()+", "+
+                    "INSERT INTO utilizadores " +
+                            "VALUES ('"+ value.getCodNome()+ "',' "+
+                            value.getCodPass()+"', '"+
+                            value.getTipo()+"', "+
                             value.getClassificacao()+", "+
                             value.getPontuacao()+") " +
                             "ON DUPLICATE KEY UPDATE Pass=Values(Pass), " +
                             "Tipo=Values(Tipo), " +
                             "Classificacao=Values(Classificacao), " +
-                            "Pontuacao=Values(Pontuacao))");
+                            "Pontuacao=Values(Pontuacao)");
 
             res = get(key);
         } catch (SQLException e) {

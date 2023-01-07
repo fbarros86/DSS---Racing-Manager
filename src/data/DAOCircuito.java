@@ -114,7 +114,7 @@ public class DAOCircuito implements Map<String,Circuito>{
 
     @Override
     public Circuito put(String key, Circuito value) {
-        Circuito res = null;
+        Circuito res;
         List<Segmento> s = value.getPercurso();
         try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
              Statement stm = conn.createStatement()) {
@@ -132,11 +132,12 @@ public class DAOCircuito implements Map<String,Circuito>{
             //Eliminar segmentos cujo nome do circuito corresponde
             stm.executeUpdate("DELETE FROM segmentos WHERE NomeCircuito='"+key+"'");
             //Adicionar segmentos
+
             for (int i=0; i<s.size();i++){
                 Segmento seg = s.get(i);
-                stm.executeUpdate("INSERT INTO segmentos " +
-                        "VALUES ("+ i+ ", '"+
-                        value.getNome()+"', '"+
+                stm.executeUpdate("INSERT INTO segmentos (Indice,NomeCircuito,Tipo,Gdu) " +
+                        "VALUES ("+ i+ ",'"+
+                        value.getNome()+"','"+
                         seg.getTipo()+"', "+
                         seg.getGDU()+") ");
             }
