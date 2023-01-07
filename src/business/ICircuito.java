@@ -27,12 +27,5 @@ public interface ICircuito {
 	 */
 	void atribuirGDU(int key, int GDU);
 
-	/**
-	 * 
-	 * @param nrCurvas
-	 */
-	int calculaRetas(int nrCurvas);
-
-	float calculaDistanciaMin();
 
 }

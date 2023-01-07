@@ -235,12 +235,12 @@ public class DAOCampeonato implements Map<String,Campeonato>{
 
 
     private void apagaEquipas(String key, Statement stm) throws SQLException{
-        ResultSet rsa = stm.executeQuery("SELECT * FROM equipas WHERE NomeCampeonato='"+key+"'");
+        ResultSet rsa = stm.executeQuery("SELECT * FROM equipas WHERE Campeonato='"+key+"'");
         while (rsa.next()) {
             stm.executeUpdate("UPDATE carros SET Equipa=NULL WHERE Id = "+rsa.getString("Carro1"));
             stm.executeUpdate("UPDATE carros SET Equipa=NULL WHERE Id = "+rsa.getString("Carro2"));
         }
-        stm.executeUpdate("DELETE FROM equipas WHERE NomeCampeonato='"+key+"'");
+        stm.executeUpdate("DELETE FROM equipas WHERE Campeonato='"+key+"'");
     }
 
     @Override

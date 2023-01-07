@@ -3,7 +3,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 
-public class  Carro implements ICarro{
+public class  Carro implements ICarro {
 
     //@TODO TA TUDO MALLLLLLLLLLLLL
     private String id;
@@ -22,187 +22,207 @@ public class  Carro implements ICarro{
     private Piloto piloto;
 
 
-    public Carro(String marca, String modelo, int potenciaMC,float downforce, int cilindrada){
-        this.id = UUID.randomUUID().toString();
-        this.marca = marca;
-        this.modelo = modelo;
-        this.potenciaMC = potenciaMC;
-        this.downforce = downforce;
-        this.cilindrada = cilindrada;
-    }
 
     public Carro(Carro copy){
-        this.id = copy.id;
+        this.id = UUID.randomUUID().toString();
         this.marca = copy.marca;
         this.modelo = copy.modelo;
         this.potenciaMC = copy.potenciaMC;
         this.downforce = copy.downforce;
     }
+    public Carro(String marca, String modelo, int cilindrada, int potenciaMC, float downforce){
+            this.id = UUID.randomUUID().toString();
+            this.marca = marca;
+            this.modelo = modelo;
+            this.potenciaMC = potenciaMC;
+            this.downforce = downforce;
+            this.cilindrada = cilindrada;
+        }
 
 
 
-    public Carro(String id, int cilindrada, int fiabilidade, String marca, String modelo, String penus, int potenciaMC,
-                 String equipa, int modoMotor, float downforce, int afinacoes, Piloto piloto){
-        this.id=id;
-        this.cilindrada=cilindrada;
-        this.fiabilidade= fiabilidade;
-        this.marca= marca;
-        this.modelo= modelo;
-        this.pneus= penus;
-        this.potenciaMC = potenciaMC;
-        this.equipa=equipa;
-        this.modoMotor=modoMotor;
-        this.downforce= downforce;
-        this.nAfinacoes = afinacoes;
-        this.piloto= piloto;
-    }
 
-    public String getId() {
-        return id;
-    }
+    public Carro(String id, int cilindrada, int fiabilidade, String marca, String modelo, String penus,int potenciaMC,
+        String equipa, int modoMotor, float downforce, int afinacoes, Piloto piloto){
+            this.id = id;
+            this.cilindrada = cilindrada;
+            this.fiabilidade = fiabilidade;
+            this.marca = marca;
+            this.modelo = modelo;
+            this.pneus = penus;
+            this.potenciaMC = potenciaMC;
+            this.equipa = equipa;
+            this.modoMotor = modoMotor;
+            this.downforce = downforce;
+            this.nAfinacoes = afinacoes;
+            this.piloto = piloto;
+        }
 
-    @Override
-    public void setPneus(String aPneu) {
-        pneus = aPneu;
-    }
+        public String getId () {
+            return id;
+        }
 
-    @Override
-    public String getPneus() {
-        return pneus;
-    }
+        @Override
+        public void setPneus (String aPneu){
+            pneus = aPneu;
+        }
 
-    @Override
-    public void setDownforce(float d) {
-        downforce = d;
-    }
+        @Override
+        public String getPneus () {
+            return pneus;
+        }
 
-    @Override
-    public float getDownforce() {
-        return downforce;
-    }
+        @Override
+        public void setDownforce ( float d){
+            downforce = d;
+        }
 
-    @Override
-    public void setCilindrada(int c) {
-        cilindrada=c;
-    }
+        @Override
+        public float getDownforce () {
+            return downforce;
+        }
 
-    @Override
-    public int getCilindrada() {
-        return cilindrada;
-    }
+        @Override
+        public void setCilindrada ( int c){
+            cilindrada = c;
+        }
 
-    @Override
-    public void setPiloto(Piloto aP) {
+        @Override
+        public int getCilindrada () {
+            return cilindrada;
+        }
 
-        piloto = aP;
+        @Override
+        public void setPiloto (Piloto aP){
 
-    }
+            piloto = aP;
 
-    @Override
-    public void setNAfinacoes(int aN) {
-        nAfinacoes=aN;
-    }
+        }
 
-
-    @Override
-    public void setModoMotor(int aModo) {
-        modoMotor = aModo;
-    }
-
-    @Override
-    public int gettModoMotor() {
-        return modoMotor;
-    }
+        @Override
+        public void setNAfinacoes ( int aN){
+            nAfinacoes = aN;
+        }
 
 
-    @Override
-    public String getEquipa() {
-        return equipa;
-    }
+        @Override
+        public void setModoMotor ( int aModo){
+            modoMotor = aModo;
+        }
 
-    @Override
-    public void setEquipa(String e) {
-        equipa = e;
-    }
+        @Override
+        public int gettModoMotor () {
+            return modoMotor;
+        }
 
-    @Override
-    public int getPotencia() {
-        return potenciaMC;
-    }
 
-    @Override
-    public Piloto getPiloto() {
-        return piloto;
-    }
+        @Override
+        public String getEquipa () {
+            return equipa;
+        }
 
-    @Override
-    public int getFiabilidade() {
-        return fiabilidade;
-    }
+        @Override
+        public void setEquipa (String e){
+            equipa = e;
+        }
 
-    @Override
-    public String getID() {
-        return id;
-    }
+        @Override
+        public int getPotencia () {
+            return potenciaMC;
+        }
 
-    @Override
-    public boolean verificarAfinacao(){
-        if ( this instanceof C1 || this instanceof C2) return nAfinacoes > 0;
-        else return false;
-    }
+        @Override
+        public Piloto getPiloto () {
+            return piloto;
+        }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(cilindrada, marca, modelo, potenciaMC);
-    }
+        @Override
+        public int getFiabilidade () {
+            return fiabilidade;
+        }
 
-    @Override
-    public void setAfinacao(float aDownforce) {
-        nAfinacoes--;
-        this.downforce = aDownforce;
-    }
+        @Override
+        public String getID () {
+            return id;
+        }
 
-    public void setFiabilidade(int fiabilidade) {
-        this.fiabilidade = fiabilidade;
-    }
+        @Override
+        public boolean verificarAfinacao () {
+            if (this instanceof C1 || this instanceof C2) return nAfinacoes > 0;
+            else return false;
+        }
 
-    public String getMarca() {
-        return marca;
-    }
+        @Override
+        public int hashCode () {
+            return Objects.hash(cilindrada, marca, modelo, potenciaMC);
+        }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
+        @Override
+        public void setAfinacao ( float aDownforce){
+            nAfinacoes--;
+            this.downforce = aDownforce;
+        }
 
-    public String getModelo() {
-        return modelo;
-    }
+        public void setFiabilidade ( int fiabilidade){
+            this.fiabilidade = fiabilidade;
+        }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
+        public String getMarca () {
+            return marca;
+        }
 
-    public int getPotenciaMC() {
-        return potenciaMC;
-    }
+        public void setMarca (String marca){
+            this.marca = marca;
+        }
 
-    public void setPotenciaMC(int potenciaMC) {
-        this.potenciaMC = potenciaMC;
-    }
+        public String getModelo () {
+            return modelo;
+        }
 
-    public int getModoMotor() {
-        return modoMotor;
-    }
+        public void setModelo (String modelo){
+            this.modelo = modelo;
+        }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+        public int getPotenciaMC () {
+            return potenciaMC;
+        }
 
-    public int getnAfinacoes() {
-        return nAfinacoes;
-    }
+        public void setPotenciaMC ( int potenciaMC){
+            this.potenciaMC = potenciaMC;
+        }
 
-    public void setnAfinacoes(int nAfinacoes) {
-        this.nAfinacoes = nAfinacoes;
-    }
+        public int getModoMotor () {
+            return modoMotor;
+        }
+
+        public void setId (String id){
+            this.id = id;
+        }
+
+        public int getnAfinacoes () {
+            return nAfinacoes;
+        }
+
+        public void setnAfinacoes ( int nAfinacoes){
+            this.nAfinacoes = nAfinacoes;
+        }
+
+        @Override
+        public String toString () {
+            return "Carro{" +
+                    ", modoMotor=" + modoMotor +
+                    ", cilindrada=" + cilindrada +
+                    ", pneus='" + pneus + '\'' +
+                    ", fiabilidade=" + fiabilidade +
+                    ", marca='" + marca + '\'' +
+                    ", modelo='" + modelo + '\'' +
+                    ", potenciaMC=" + potenciaMC +
+                    ", equipa='" + equipa + '\'' +
+                    ", modoMotor=" + modoMotor +
+                    ", id='" + id + '\'' +
+                    ", downforce=" + downforce +
+                    ", piloto=" + piloto +
+                    ", nAfinacoes=" + nAfinacoes +
+                    '}';
+        }
 }
