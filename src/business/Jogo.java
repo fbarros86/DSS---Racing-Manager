@@ -32,7 +32,8 @@ public class Jogo implements IJogo {
 		utilizadores = new HashMap<>();
 		codigosAdmin = new ArrayList<>();
 		rankingGlobal = new ArrayList<>();
-	}*/
+	}
+	*/
 
 
 	@Override
