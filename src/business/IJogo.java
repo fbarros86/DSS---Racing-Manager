@@ -1,6 +1,7 @@
 package business;
 
 
+import java.security.PublicKey;
 import java.util.List;
 import java.util.Map;
 
@@ -48,12 +49,11 @@ public interface IJogo {
 	void adicionarUser(String codNome, String codPass, String tipo);
 
 	/**
-	 * 
-	 * @param nome
+	 *  @param nome
 	 * @param cts
 	 * @param sva
 	 */
-	void adicionarPiloto(String nome, int cts, int sva);
+	void adicionarPiloto(String nome, float cts, float sva);
 
 	/**
 	 * 
@@ -63,6 +63,12 @@ public interface IJogo {
 	 * @param corridas
 	 */
 	void adicionarCampeonato(String nome, String categoria, Map<String,Equipa> equipas, List<Corrida> corridas);
+
+	public boolean existePiloto(String nome);
+
+	public Piloto getPiloto(String nome);
+
+	public String printNomePilotos();
 
 	/**
 	 * 
@@ -166,4 +172,6 @@ public interface IJogo {
 	 */
 
 	List<Equipa> simulaJogo(String idCampeonato);
+
+	public String printNomeCircuitos();
 }

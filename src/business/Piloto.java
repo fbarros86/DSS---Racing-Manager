@@ -43,6 +43,15 @@ public class Piloto {
     }
 
     @Override
+    public String toString() {
+        return "Piloto{" +
+                "nome='" + nome + '\'' +
+                ", sva=" + sva +
+                ", cts=" + cts +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(nome);
     }

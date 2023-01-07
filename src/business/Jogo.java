@@ -1,8 +1,6 @@
 package business;
 
 
-import data.*;
-
 import java.util.*;
 
 public class Jogo implements IJogo {
@@ -15,12 +13,23 @@ public class Jogo implements IJogo {
 	private List<Utilizador> rankingGlobal;
 	private List<String> codigosAdmin;
 
+	/*
 	public Jogo(){
 		campeonatos = DAOCampeonato.getInstance();
 		circuitos = DAOCircuito.getInstance();
 		pilotos = DAOPiloto.getInstance();
 		carros = DAOCarro.getInstance();
 		utilizadores = DAOUtilizador.getInstance();
+		codigosAdmin = new ArrayList<>();
+		rankingGlobal = new ArrayList<>();
+	}
+*/
+	public Jogo(){
+		campeonatos = new HashMap<>();
+		circuitos = new HashMap<>();
+		pilotos = new HashMap<>();
+		carros = new HashMap<>();
+		utilizadores = new HashMap<>();
 		codigosAdmin = new ArrayList<>();
 		rankingGlobal = new ArrayList<>();
 	}
@@ -76,7 +85,7 @@ public class Jogo implements IJogo {
 	}
 
 	@Override
-	public void adicionarPiloto(String nome, int cts, int sva) {
+	public void adicionarPiloto(String nome, float cts, float sva) {
 			Piloto driver = new Piloto(nome,sva,cts);
 			pilotos.put(nome,driver);
 	}
@@ -177,4 +186,28 @@ public class Jogo implements IJogo {
 	public boolean existeCircuito(String nome){
 		return circuitos.containsKey(nome);
 	}
+
+	public String printNomeCircuitos(){
+		StringBuilder sb = new StringBuilder();
+		for(Circuito circuito: this.circuitos.values()){
+			sb.append(circuito.getNome()).append("\n");
+		}
+		return sb.toString();
+	}
+	public Piloto getPiloto(String nome){
+		return this.pilotos.get(nome);
+	}
+	public boolean existePiloto(String nome){
+		return this.pilotos.containsKey(nome);
+	}
+
+
+	public String printNomePilotos(){
+		StringBuilder sb = new StringBuilder();
+		for(Piloto piloto: this.pilotos.values()){
+			sb.append(piloto.getNome()).append("\n");
+		}
+		return sb.toString();
+	}
+
 }

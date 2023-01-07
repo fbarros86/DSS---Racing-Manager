@@ -1,2 +1,6 @@
 
-
+*.xml
+*.iml
+*.class
+*.class
+*.zip

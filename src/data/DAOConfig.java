@@ -12,6 +12,6 @@ public class DAOConfig {
     static final String PASSWORD = "user";
     private static final String DATABASE = "racing";          // Actualizar
     private static final String DRIVER = "jdbc:mariadb";        // Usar para MariaDB
-    static final String URL = DRIVER+"://localhost:3306/"+DATABASE;
+    static final String URL = DRIVER+"://localhost:3307/"+DATABASE;
 }
 
