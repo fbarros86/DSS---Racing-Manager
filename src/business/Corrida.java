@@ -292,10 +292,13 @@ public class Corrida {
 
     public List<Carro> simulaCorrida(){
         List<Segmento> p = circuito.getPercurso();
-        for (Segmento s : p){
-            calcUltrapassagem(s.getGDU());
-            calcAvaria();
-            calcDespiste();
+        for(voltasOcorridas = 0; voltasOcorridas < circuito.getNrVoltas(); voltasOcorridas++){
+            for (Segmento s : p) {
+                calcUltrapassagem(s.getGDU());
+                calcAvaria();
+                calcDespiste();
+            }
+            diminuiFiabilidade();
         }
         return this.carros;
     }

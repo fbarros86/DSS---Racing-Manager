@@ -5,7 +5,7 @@ public class GT extends Carro {
 
 
     public GT(String marca, String modelo, int cilindrada, int potenciaMC, float downforce) {
-        super(marca, modelo, cilindrada, potenciaMC, downforce);
+        super(marca, modelo, cilindrada, potenciaMC, downforce, (int) 100-cilindrada/1000,"GT");
     }
 
     public GT(String id, int cilindrada, int fiabilidade, String marca, String modelo, String pneus, int potenciaMC,

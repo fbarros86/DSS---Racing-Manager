@@ -5,7 +5,7 @@ public class SC extends Carro {
 
 
     public SC(String marca, String modelo, int cilindrada, int potenciaMC,float downforce) {
-        super(marca, modelo, cilindrada, potenciaMC, downforce);
+        super(marca, modelo, cilindrada, potenciaMC, downforce,);
     }
 
 

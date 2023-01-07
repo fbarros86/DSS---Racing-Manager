@@ -1,7 +1,6 @@
 package business;
 
 
-import java.security.PublicKey;
 import java.util.List;
 import java.util.Map;
 
@@ -186,8 +185,8 @@ public interface IJogo {
 
 	public String printNomeCampeonato();
 
-	public boolean existeCarro(String idCarro);
+	public boolean existeCarro(String idCarro, String categoria);
 
-	public String printCarros();
+	public String printCarros(String categoria);
 
 }

@@ -245,13 +245,14 @@ public class Jogo implements IJogo {
 		return codigosAdmin.contains(cod);
 	}
 
-	public boolean existeCarro(String idCarro){
-		return carros.containsKey(idCarro);
+	public boolean existeCarro(String idCarro, String categoria){
+		if(carros.containsKey(idCarro)) return carros.get(idCarro).getTipo().equals(categoria);
+		return false;
 	}
 
-	public String printCarros(){
+	public String printCarros(String categoria){
 		StringBuilder sb = new StringBuilder();
-		for(Carro car : carros.values())sb.append(car.toOptionalString()).append("\n");
+		for(Carro car : carros.values().)sb.append(car.toOptionalString()).append("\n");
 		return sb.toString();
 	}
 }
