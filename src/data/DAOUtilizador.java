@@ -106,7 +106,7 @@ public class DAOUtilizador implements Map<String,Utilizador>{
             // Actualizar a circuito
             stm.executeUpdate(
                     "INSERT INTO utilizadores " +
-                            "VALUES ('"+ value.getCodNome()+ "',' "+
+                            "VALUES ('"+ value.getCodNome()+ "','"+
                             value.getCodPass()+"', '"+
                             value.getTipo()+"', "+
                             value.getClassificacao()+", "+
