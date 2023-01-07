@@ -27,6 +27,8 @@ public interface IJogo {
 	 */
 	boolean validarCodigo(String codPremium);
 
+	Utilizador getUser(String codUser);
+
 	/**
 	 * 
 	 * @param codNome

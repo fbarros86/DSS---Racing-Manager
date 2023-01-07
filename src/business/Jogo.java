@@ -35,6 +35,9 @@ public class Jogo implements IJogo {
 	}
 	*/
 
+	public Utilizador getUser(String codUser){
+		return utilizadores.get(codUser);
+	}
 
 	@Override
 	public List<Utilizador> getRanking() {

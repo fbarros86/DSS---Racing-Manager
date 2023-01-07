@@ -299,4 +299,11 @@ public class Corrida {
         }
         return this.carros;
     }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Corrida: ").append("\nMetereologia").append(metereologia).append("\nCircuito: ").append(circuito);
+        return sb.toString();
+    }
+
 }

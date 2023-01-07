@@ -182,4 +182,19 @@ public class Campeonato implements ICampeonato {
     public void setCorridas(List<Corrida> corridas) {
         this.corridas = corridas;
     }
+
+    public String listaCorridas(){
+        StringBuilder sb = new StringBuilder();
+        corridas.stream().map(corrida -> sb.append(corrida.toString()));
+        return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Campeonato (").append(nome).append(")\n")
+                .append("Categoria: ").append(categoria).append("\n ")
+                .append("Corrida: ").append(listaCorridas());
+        return sb.toString();
+    }
 }
