@@ -31,6 +31,7 @@ public class TextUI {
      * Cria os menus e a camada de negócio.
      */
     public TextUI() {
+
         this.menu = new Menu("Login pra ja",new String[]{
                 "Admin",
                 "Jogador",
