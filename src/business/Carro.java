@@ -131,4 +131,47 @@ public class  Carro implements ICarro{
         this.downforce = aDownforce;
     }
 
+    public void setFiabilidade(int fiabilidade) {
+        this.fiabilidade = fiabilidade;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public int getPotenciaMC() {
+        return potenciaMC;
+    }
+
+    public void setPotenciaMC(int potenciaMC) {
+        this.potenciaMC = potenciaMC;
+    }
+
+    public int getModoMotor() {
+        return modoMotor;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getnAfinacoes() {
+        return nAfinacoes;
+    }
+
+    public void setnAfinacoes(int nAfinacoes) {
+        this.nAfinacoes = nAfinacoes;
+    }
 }

@@ -57,7 +57,14 @@ public class DAOCampeonato implements Map<String,Campeonato>{
                     "Fiabilidade int NOT NULL," +
                     "Marca varchar(15) NOT NULL," +
                     "Modelo varchar(15) NOT NULL," +
-                    "Tipo ENUM('C1','C2','GT','SC','C1H','C2H','GTH') NOT NULL," +
+                    "Pneus varchar(15) NULL," +
+                    "PotenciaMC int NOT NULL," +
+                    "Equipa varchar(15) NULL," +
+                    "ModoMotor int NULL," +
+                    "Downforce float NULL," +
+                    "Afinacoes int NOT NULL," +
+                    "PotenciaEletrica int NULL," +
+                    "Tipo varchar(15) NOT NULL," +
                     "Piloto varchar(15) NULL,"+
                     "FOREIGN KEY (Piloto) REFERENCES pilotos(Nome))";
             stm.executeUpdate(carro);
