@@ -70,8 +70,9 @@ public class Jogo implements IJogo {
 	}
 
 	@Override
-	public boolean validaUser(String codNome) {
-		return utilizadores.containsKey(codNome);
+	public boolean validaUser(String codNome, String pass) {
+		if(utilizadores.containsKey(codNome)) return utilizadores.get(codNome).validaPass(pass);
+		else return false;
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public interface IJogo {
 	 * 
 	 * @param codNome
 	 */
-	boolean validaUser(String codNome);
+	boolean validaUser(String codNome, String pass);
 
 	/**
 	 * 

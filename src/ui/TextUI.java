@@ -31,7 +31,8 @@ public class TextUI {
      * Cria os menus e a camada de negócio.
      */
     public TextUI() {
-        this.menu = new Menu("Login pra ja",new String[]{
+
+        this.menu = new Menu("Login",new String[]{
                 "Admin",
                 "Jogador",
                 "Criar Usuario"
@@ -43,38 +44,50 @@ public class TextUI {
         scin = new Scanner(System.in);
     }
 
+    public boolean validaUser(){
+        System.out.println("Usuario: ");
+        String user = scin.next();
+        System.out.println("Password: ");
+        String pass = scin.next();
+        return jogo.validaUser(user,pass);
+    }
+
     public void menuJogador(){
-        Menu jogadorMenu = new Menu(new String[]{
-                "Simular Campeonato",
-        }, true);
-        jogadorMenu.setHandler(1,this::trataSimulaCampeonato);
+        if(validaUser()){
+            Menu jogadorMenu = new Menu(new String[]{
+                    "Simular Campeonato",
+            }, true);
+            jogadorMenu.setHandler(1,this::trataSimulaCampeonato);
+        }
     }
 
     public void menuAdmin(){
-        // Criar o menu
-        Menu adminMenu = new Menu(new String[]{
-                "Adicionar Circuito",
-                "Adicionar Carro",
-                "Adicionar Piloto",
-                "Adicionar Campeonato",
-                "Ver Circuito",
-                "Ver Piloto",
-                "Ver Campeonato",
-                "Ver Carros",
+        if(validaUser()) {
+            // Criar o menu
+            Menu adminMenu = new Menu(new String[]{
+                    "Adicionar Circuito",
+                    "Adicionar Carro",
+                    "Adicionar Piloto",
+                    "Adicionar Campeonato",
+                    "Ver Circuito",
+                    "Ver Piloto",
+                    "Ver Campeonato",
+                    "Ver Carros",
 
-        }, true);
-        adminMenu.setHandler(1, this::trataAdicionarCircuito);
-        adminMenu.setHandler(2, this::trataAdicionarCarro);
-        adminMenu.setHandler(3, this::trataAdicionarPiloto);
-        adminMenu.setHandler(4, this::trataAdicionarCampeonato);
-        adminMenu.setHandler(5, this::trataMostrarCircuito);
-        adminMenu.setHandler(6, this::trataMostrarPiloto);
-        //adminMenu.setHandler(7, this::trataMostrarCampeonato);
-        adminMenu.setHandler(8, this::trataMostrarCarro);
-        this.jogo = new Jogo();
-        scin = new Scanner(System.in);
+            }, true);
+            adminMenu.setHandler(1, this::trataAdicionarCircuito);
+            adminMenu.setHandler(2, this::trataAdicionarCarro);
+            adminMenu.setHandler(3, this::trataAdicionarPiloto);
+            adminMenu.setHandler(4, this::trataAdicionarCampeonato);
+            adminMenu.setHandler(5, this::trataMostrarCircuito);
+            adminMenu.setHandler(6, this::trataMostrarPiloto);
+            adminMenu.setHandler(7, this::trataMostrarCampeonato);
+            adminMenu.setHandler(8, this::trataMostrarCarro);
+            this.jogo = new Jogo();
+            scin = new Scanner(System.in);
 
-        adminMenu.run();
+            adminMenu.run();
+        }
     }
 
     public void criaUser(){
@@ -468,6 +481,23 @@ public class TextUI {
         }
         campeonatoJogar.setCarrosCorridas(carros);
         campeonatoJogar.simulaCampeonato();
+    }
+
+    public void trataMostrarCampeonato(){
+        try {
+            System.out.println(jogo.printNomeCampeonato());
+            System.out.println("Nome do Campeonato: ");
+            String nome = scin.next();
+            while (nome.isEmpty()) nome = scin.next();
+            if (jogo.existeCampeonato(nome)) {
+                Campeonato campeonato = jogo.getCampeonatos().get(nome);
+                System.out.println(campeonato.toString());
+            } else {
+                System.out.println("Esse nome de Campeonato não existe!");
+            }
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
