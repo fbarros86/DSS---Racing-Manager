@@ -3,7 +3,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 
-public abstract class  Carro implements ICarro{
+public class  Carro implements ICarro{
 
     final int AGRESIVO = -1;
     final int NORMAL = 0;
@@ -207,6 +207,4 @@ public abstract class  Carro implements ICarro{
     public void setnAfinacoes(int nAfinacoes) {
         this.nAfinacoes = nAfinacoes;
     }
-
-    public abstract boolean equals(Object o);
 }

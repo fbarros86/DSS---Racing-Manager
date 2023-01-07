@@ -112,7 +112,10 @@ public class Campeonato implements ICampeonato {
     // idUSER??
     @Override
     public void adicionaEquipa(String idUser, String nome, Carro c, Piloto p1, Piloto p2, int ncorridas) {
-        Equipa equipaNova = new Equipa(idUser, nome, c, p1, p2);
+        Carro c2 = new Carro(c);
+        c.setPiloto(p1);
+        c2.setPiloto(p2);
+        Equipa equipaNova = new Equipa(idUser, nome, c, c2);
         equipas.put(nome, equipaNova);
 
     }
@@ -124,8 +127,8 @@ public class Campeonato implements ICampeonato {
         TextUI ui = new TextUI();
         for (Corrida c: this.corridas){
             for(Equipa e : this.equipas.values()){
-                Carro c1 = e.getCarro();
-                Carro c2 = e.getCarro();
+                Carro c1 = e.getCarro1();
+                Carro c2 = e.getCarro2();
                 if (c1.verificarAfinacao()){
                     int downforceC1 = ui.trataAfinacoes();
                     if(downforceC1 != -1) c1.setAfinacao(downforceC1);

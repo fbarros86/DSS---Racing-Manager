@@ -13,9 +13,6 @@ public class Equipa {
 	/**
 	 *  @param idUser
 	 * @param nome
-	 * @param c
-	 * @param p1
-	 * @param p2
 	 */
 	public Equipa(String idUser, String nome, Carro c1, Carro c2 ) {
 		this.nome = nome;
@@ -44,9 +41,13 @@ public class Equipa {
 		this.pontuacao+=pontos;
 	}
 
-	public Carro getCarro() {
+	public  Carro getCarro2(){
+		return  this.carro2;
+	}
+
+	public Carro getCarro1() {
 		// TODO - implement Equipa.getCarro1
-		return this.carro;
+		return this.carro1;
 	}
 
 
