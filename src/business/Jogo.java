@@ -237,7 +237,7 @@ public class Jogo implements IJogo {
 
 	public String printNomeCampeonato(){
 		StringBuilder sb = new StringBuilder();
-		campeonatos.keySet().stream().map(nome -> sb.append(nome));
+		for(String nome : campeonatos.keySet())sb.append(nome).append("\n");
 		return sb.toString();
 	}
 
@@ -251,7 +251,7 @@ public class Jogo implements IJogo {
 
 	public String printCarros(){
 		StringBuilder sb = new StringBuilder();
-		carros.values().stream().map(car -> sb.append(car.toOptionalString()));
+		for(Carro car : carros.values())sb.append(car.toOptionalString()).append("\n");
 		return sb.toString();
 	}
 }
