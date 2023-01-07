@@ -32,6 +32,7 @@ public class  Carro implements ICarro {
         this.modelo = copy.modelo;
         this.potenciaMC = copy.potenciaMC;
         this.downforce = copy.downforce;
+        this.cilindrada = copy.cilindrada;
     }
 
 

@@ -521,6 +521,8 @@ public class TextUI {
             System.out.println("Indique o tipo de pneu que deseja utilizar [Chuva/Duro/Macio]");
             String pneus = scin.next();
             while (!pneus.equals("Chuva") && !pneus.equals("Duro") && !pneus.equals("Macio")) pneus = scin.next();
+            c.setPneus(pneus);
+            c.setModoMotor(modoMotor);
 
     }
 
