@@ -1,6 +1,7 @@
 package business;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -20,7 +21,19 @@ public class Corrida {
         this.voltasOcorridas = voltasOcorridas;
     }
 
+    public Corrida(Circuito c){
+        this.carros = new ArrayList<>();
+        this.circuito = c;
+        this.voltasOcorridas = 0;
+        this.nPilotosInativos = 0;
+        this.metereologia = escolheMeteorologia();
+    }
 
+    public String escolheMeteorologia(){
+        Random rand = new Random();
+        if(rand.nextBoolean()) return "Chuva";
+        else return "Seco";
+    }
 
     public int getVoltasOcorridas(){
         return this.voltasOcorridas;

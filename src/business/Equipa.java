@@ -4,9 +4,8 @@ package business;
 
 public class Equipa {
 
-	private Carro carro;
-	private Piloto piloto1;
-	private Piloto piloto2;
+	private Carro carro1;
+	private Carro carro2;
 	private String nome;
 	private int pontuacao;
 	private String idUser;
@@ -18,12 +17,11 @@ public class Equipa {
 	 * @param p1
 	 * @param p2
 	 */
-	public Equipa(String idUser, String nome, Carro c, Piloto p1, Piloto p2) {
+	public Equipa(String idUser, String nome, Carro c1, Carro c2 ) {
 		this.nome = nome;
 		this.idUser = idUser;
-		this.carro = c;
-		this.piloto2 = p1;
-		this.piloto2 = p2;
+		this.carro1 = c1;
+		this.carro2 = c2;
 		this.pontuacao = 0;
 	}
 

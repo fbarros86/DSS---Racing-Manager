@@ -12,6 +12,14 @@ public class Campeonato implements ICampeonato {
     Map<String, Equipa> equipas;
     List<Corrida> corridas;
 
+    public Campeonato(String nome, String categoria, List<Corrida> corridas) {
+        this.nome = nome;
+        this.categoria = categoria;
+        this.corridaAtual = 0;
+        this.equipas = new HashMap<>();
+        this.corridas = corridas;
+    }
+
     public Campeonato(String nome, String categoria, Map<String, Equipa> equipas, List<Corrida> corridas) {
         this.nome = nome;
         this.categoria = categoria;

@@ -9,6 +9,7 @@ package ui;
 
 import business.*;
 
+import java.nio.file.attribute.GroupPrincipal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +32,6 @@ public class TextUI {
      * Cria os menus e a camada de negócio.
      */
     public TextUI() {
-
         this.menu = new Menu("Login pra ja",new String[]{
                 "Admin",
                 "Jogador",
@@ -39,6 +39,7 @@ public class TextUI {
         });
         this.menu.setHandler(1, this::menuAdmin);
         this.menu.setHandler(2, this::menuJogador);
+        this.menu.setHandler(3, this::criaUser);
         this.jogo = new Jogo();
         scin = new Scanner(System.in);
     }
@@ -47,7 +48,6 @@ public class TextUI {
         Menu jogadorMenu = new Menu(new String[]{
                 "Jogar Campeonato",
         }, true);
-        jogadorMenu.setHandler(1, this::trataJogarCampeonato);
     }
 
     public void menuAdmin(){
@@ -56,14 +56,50 @@ public class TextUI {
                 "Adicionar Circuito",
                 // "Adicionar Carro",
                 "Adicionar Piloto",
+                "Adicionar Campeonato",
                 "Ver Pilotos",
                 "Ver Circuito",
         }, true);
         adminMenu.setHandler(1, this::trataAdicionarCircuito);
         adminMenu.setHandler(2, this::trataAdicionarPiloto);
-        adminMenu.setHandler(3, this::trataMostrarPiloto);
-        adminMenu.setHandler(4, this::trataMostrarCircuito);
+        adminMenu.setHandler(3, this::trataAdicionarCampeonato);
+        adminMenu.setHandler(4, this::trataMostrarPiloto);
+        adminMenu.setHandler(5, this::trataMostrarCircuito);
         adminMenu.run();
+    }
+
+    public void criaUser(){
+        System.out.println("Username:");
+        String user, pass, tipo;
+        do{
+            user = scin.nextLine();
+            if(user.isBlank()){
+                System.out.println("usuario invalido!!!");
+            }
+        }while (user.isBlank());
+        if(jogo.existeUser(user)) {
+            System.out.println("Usuario ja existente");
+        }else{
+            System.out.println("Password:");
+            do{
+                pass = scin.nextLine();
+                if(pass.isBlank()){
+                    System.out.println("password invalido!!!");
+                }
+            }while (pass.isBlank());
+            System.out.println("Possui codigo de administrador? [True/False]");
+            if(scin.nextBoolean()){
+                tipo = "administrador";
+                System.out.println("Indique seu codigo de administrado:");
+                String codigo = scin.nextLine();
+                if(jogo.codigoValido(codigo)){
+                 jogo.adicionarUser(user,pass,tipo);
+                }
+            }else{
+                tipo = "jogador";
+                jogo.adicionarUser(user,pass,tipo);
+            }
+    }
     }
 
     /**
@@ -184,7 +220,14 @@ public class TextUI {
 
     }
 
-    public void trataJogarCampeonato(){
+    public void trataAdicionarCampeonato(){
+        System.out.println("Indique nome do novo campeonato");
+        String nome = scin.nextLine();
+        while (nome.isBlank()) {
+            if (nome.isBlank()) System.out.println("Nome invalido insira outro nome por favor");
+            nome = scin.nextLine();
+        }
+        if (!jogo.existeCampeonato(nome)) {
             String[] categorias = new String[]{
                     "C1",
                     "C2",
@@ -197,7 +240,25 @@ public class TextUI {
                 System.out.println("Categoria invalida");
                 categoria = scin.nextLine();
             }
-            System.out.println(jogo.prin);
+            List<Circuito> circuitos = jogo.getCircuitos().values().stream().toList();
+            System.out.println("Escolhas os circuitos que deseja. Escreva o nome do circuito 1 em cada linha");
+            System.out.println("Para sair pressione Enter sem nada escrito");
+            System.out.println(jogo.printNomeCircuitos(circuitos));
+            String circuito;
+            do {
+                circuito = scin.nextLine();
+                if(jogo.existeCircuito(circuito)){
+                    circuitos.add(jogo.getCircuito(circuito));
+                }else{
+                    if(!circuito.isBlank()) {
+                        System.out.println("Circuito inexistente");
+                        System.out.println("Tente o proximo");
+                    }
+                }
+            }while(!circuito.isBlank());
+            List<Corrida> corridas = circuitos.stream().map(circ -> new Corrida(circ)).toList();
+            jogo.adicionarCampeonato(nome,categoria,corridas);
+        }else System.out.println("Campeonato ja existente");
     }
 
 }
