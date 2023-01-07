@@ -105,8 +105,7 @@ public class DAOPiloto implements Map<String,Piloto>{
                             value.getCts()+", "+
                             value.getSva()+") "+
                             "ON DUPLICATE KEY UPDATE Cts=Values(Cts), " +
-                            "Sva=Values(Sva)) ");
-
+                            "Sva=Values(Sva) ");
             res = get(key);
         } catch (SQLException e) {
             // Database error!

@@ -10,10 +10,6 @@ public class Equipa {
 	private int pontuacao;
 	private String idUser;
 
-	/**
-	 *  @param idUser
-	 * @param nome
-	 */
 	public Equipa(String idUser, String nome, Carro c1, Carro c2 ) {
 		this.nome = nome;
 		this.idUser = idUser;

@@ -74,7 +74,11 @@ public class DAOCampeonato implements Map<String,Campeonato>{
                     "PotenciaEletrica int NULL," +
                     "Tipo varchar(15) NOT NULL," +
                     "Piloto varchar(15) NULL,"+
-                    "FOREIGN KEY (Piloto) REFERENCES pilotos(Nome))";
+                    "Indice int NULL," +
+                    "CorridaId int NULL," +
+                    "FOREIGN KEY (Piloto) REFERENCES pilotos(Nome)," +
+                    "FOREIGN KEY (CorridaId) REFERENCES corridas(Id))";
+
             stm.executeUpdate(carro);
 
             String equipas = "CREATE TABLE IF NOT EXISTS equipas (" +
@@ -154,12 +158,26 @@ public class DAOCampeonato implements Map<String,Campeonato>{
         return this.containsKey(t.getNome());
     }
 
+    private List<Carro> getCarros(String key, Statement stm) throws SQLException{
+        List<Carro> carros = new ArrayList<>();
+        try (ResultSet rsa = stm.executeQuery("SELECT * FROM carros WHERE CorridaId='"+key+"'")) {
+            while (rsa.next()) {
+                DAOCarro c = DAOCarro.getInstance();
+                Carro carro =c.get(rsa.getString("Id"));
+                carros.add(rsa.getInt("Indice"), carro);
+            }
+        }
+        return carros;
+
+    }
+
     private List<Corrida> getCorridasCampeonato(String key, Statement stm)throws SQLException{
         List<Corrida> corridas = new ArrayList<>();
         try (ResultSet rsa = stm.executeQuery("SELECT * FROM corridas WHERE NomeCampeonato='"+key+"'")) {
             while (rsa.next()) {
                 DAOCircuito c = DAOCircuito.getInstance();
                 Circuito circuito =c.get(rsa.getString("Circuito"));
+                List <Carro> carros  = getCarros(rsa.getString("Id"),stm);
                 Corrida corrida = new Corrida(rsa.getString("Metereologia"),
                         rsa.getInt("VoltasOcorridas"),
                         rsa.getInt("PilotosInativos"),
@@ -170,16 +188,20 @@ public class DAOCampeonato implements Map<String,Campeonato>{
         return corridas;
     }
 
+    private Map<String,Equipa> getEquipasCampeonato(String key, Statement stm) throws SQLException{
+        Map<String,Equipa> equipas = new HashMap<>();
+        try (ResultSet rsa = stm.executeQuery("SELECT * FROM equipas WHERE Campeonato='"+key+"'")) {
+            while (rsa.next()) {
+
+            }
+        }
+        return equipas;
+    }
+
     @Override
     public Campeonato get(Object key) {
         Campeonato c = null;
-        /*
-        "Nome varchar(15) NOT NULL PRIMARY KEY," +
-        "CorridaAtual int NOT NULL," +
-         "Categoria varchar(15) NOT NULL)";
-         Map<String, Equipa> equipas;
-          List<Corrida> corridas;
-        * */
+
         try (Connection conn = DriverManager.getConnection(DAOConfig.URL, DAOConfig.USERNAME, DAOConfig.PASSWORD);
              Statement stm = conn.createStatement();
              ResultSet rs = stm.executeQuery("SELECT * FROM circuitos WHERE Nome='"+key+"'")) {
@@ -188,7 +210,7 @@ public class DAOCampeonato implements Map<String,Campeonato>{
                 List<Corrida> corridas = getCorridasCampeonato(key.toString(), stm);
 
                 //Reconstruir as equipas
-                Map<String,Equipa> equipas = new HashMap<>();
+                Map<String,Equipa> equipas = getEquipasCampeonato(key.toString(),stm);
 
                 c = new Campeonato(rs.getString("Nome"),
                         rs.getInt("CorridaAtual"),
