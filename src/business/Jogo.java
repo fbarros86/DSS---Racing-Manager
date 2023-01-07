@@ -92,8 +92,8 @@ public class Jogo implements IJogo {
 	}
 
 	@Override
-	public void adicionarCampeonato(String nome, String categoria, Map<String,Equipa> equipas, List<Corrida> corridas) {
-			Campeonato camp = new Campeonato(nome,categoria,equipas,corridas);
+	public void adicionarCampeonato(String nome, String categoria, List<Corrida> corridas) {
+			Campeonato camp = new Campeonato(nome,categoria,corridas);
 			campeonatos.put(nome,camp);
 	}
 
@@ -195,6 +195,15 @@ public class Jogo implements IJogo {
 		}
 		return sb.toString();
 	}
+
+	public String printNomeCircuitos(List<Circuito> circuitos){
+		StringBuilder sb = new StringBuilder();
+		for(Circuito circuito: circuitos){
+			sb.append(circuito.getNome()).append("\n");
+		}
+		return sb.toString();
+	}
+
 	public Piloto getPiloto(String nome){
 		return this.pilotos.get(nome);
 	}
@@ -202,6 +211,13 @@ public class Jogo implements IJogo {
 		return this.pilotos.containsKey(nome);
 	}
 
+	public boolean existeCampeonato(String nome){
+		return this.campeonatos.containsKey(nome);
+	}
+
+	public boolean existeUser(String nome){
+		return this.utilizadores.containsKey(nome);
+	}
 
 	public String printNomePilotos(){
 		StringBuilder sb = new StringBuilder();
@@ -209,6 +225,10 @@ public class Jogo implements IJogo {
 			sb.append(piloto.getNome()).append("\n");
 		}
 		return sb.toString();
+	}
+
+	public boolean codigoValido(String cod){
+		return codigosAdmin.contains(cod);
 	}
 
 }

@@ -62,7 +62,7 @@ public interface IJogo {
 	 * @param equipas
 	 * @param corridas
 	 */
-	void adicionarCampeonato(String nome, String categoria, Map<String,Equipa> equipas, List<Corrida> corridas);
+	void adicionarCampeonato(String nome, String categoria, List<Corrida> corridas);
 
 	public boolean existePiloto(String nome);
 
@@ -174,4 +174,13 @@ public interface IJogo {
 	List<Equipa> simulaJogo(String idCampeonato);
 
 	public String printNomeCircuitos();
+
+	public boolean existeCampeonato(String nome);
+
+	public boolean existeUser(String nome);
+
+	public String printNomeCircuitos(List<Circuito> circuitos);
+
+	public boolean codigoValido(String cod);
+
 }

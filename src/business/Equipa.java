@@ -4,26 +4,18 @@ package business;
 
 public class Equipa {
 
-	private Carro carro;
-	private Piloto piloto1;
-	private Piloto piloto2;
+	private Carro carro1;
+	private Carro carro2;
 	private String nome;
 	private int pontuacao;
 	private String idUser;
 
-	/**
-	 *  @param idUser
-	 * @param nome
-	 * @param c
-	 * @param p1
-	 * @param p2
-	 */
-	public Equipa(String idUser, String nome, Carro c, Piloto p1, Piloto p2) {
+
+	public Equipa(String idUser, String nome, Carro c1, Carro c2 ) {
 		this.nome = nome;
 		this.idUser = idUser;
-		this.carro = c;
-		this.piloto1 = p1;
-		this.piloto2 = p2;
+		this.carro1 = c1;
+		this.carro2 = c2;
 		this.pontuacao = 0;
 	}
 
@@ -48,7 +40,7 @@ public class Equipa {
 
 	public Carro getCarro() {
 		// TODO - implement Equipa.getCarro1
-		return this.carro;
+		return this.carro1;
 	}
 
 
