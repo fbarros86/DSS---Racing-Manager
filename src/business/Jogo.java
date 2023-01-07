@@ -21,6 +21,7 @@ public class Jogo implements IJogo {
 		carros = DAOCarro.getInstance();
 		utilizadores = DAOUtilizador.getInstance();
 		codigosAdmin = new ArrayList<>();
+		codigosAdmin.add("codigoSecreto");
 		rankingGlobal = new ArrayList<>();
 	}
 /*

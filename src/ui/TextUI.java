@@ -59,7 +59,10 @@ public class TextUI {
                     "Simular Campeonato",
             }, true);
             jogadorMenu.setHandler(1,this::trataSimulaCampeonato);
+            jogadorMenu.run();
         }
+        else System.out.println("Utilizador ou password inválidos");
+
     }
 
     public void menuAdmin(){
@@ -89,6 +92,7 @@ public class TextUI {
 
             adminMenu.run();
         }
+        else System.out.println("Utilizador ou password inválidos");
     }
 
     public void criaUser(){
