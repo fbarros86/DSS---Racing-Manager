@@ -135,6 +135,7 @@ public class Corrida {
     }
 
     public void calcAvaria(){
+        List<Carro> avariados = new ArrayList<>();
 
         for (Carro c : carros){
             float prob = 0;
@@ -146,14 +147,16 @@ public class Corrida {
 
             boolean randomResult = aconteceuEvento(prob);
             if(randomResult){
-                String id = c.getID();
-                removeCarro(id);
+                avariados.add(c);
 
             }
         }
+        for (Carro s: avariados) removeCarro(s);
     }
 
     public void calcDespiste(){
+        List<Carro> despistados = new ArrayList<>();
+
 
         String tempo= getMeteorologia();
         for ( Carro c : carros){
@@ -199,28 +202,17 @@ public class Corrida {
 
             boolean randomResult = aconteceuEvento(prob);
             if(randomResult){
-                String id = c.getID();
-                removeCarro(id);
-
+                despistados.add(c);
             }
         }
+        for (Carro s: despistados) removeCarro(s);
     }
 
-    /**
-     *
-     * @param idCarro
-     */
 
-    public void removeCarro(String idCarro){
-        int i =0;
-        Carro carro = null;
-        for (Carro c : carros){
-            if (c.getID().equals(idCarro)) {
-                carro= carros.remove(i);
-            }
-            i++;
-        }
-        carros.add(carro);
+
+    public void removeCarro(Carro c){
+        carros.remove(c);
+        carros.add(c);
     }
 
     public boolean aconteceuEvento(double probabilidade) {
@@ -292,11 +284,21 @@ public class Corrida {
 
     public List<Carro> simulaCorrida(){
         List<Segmento> p = circuito.getPercurso();
-        for (Segmento s : p){
-            calcUltrapassagem(s.getGDU());
-            calcAvaria();
-            calcDespiste();
+        for(voltasOcorridas = 0; voltasOcorridas < circuito.getNrVoltas(); voltasOcorridas++){
+            for (Segmento s : p) {
+                calcUltrapassagem(s.getGDU());
+                calcAvaria();
+                calcDespiste();
+            }
+            diminuiFiabilidade();
         }
         return this.carros;
     }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Corrida: ").append("\nMetereologia").append(metereologia).append("\nCircuito: ").append(circuito);
+        return sb.toString();
+    }
+
 }

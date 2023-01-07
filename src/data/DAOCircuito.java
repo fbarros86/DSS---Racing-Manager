@@ -79,7 +79,7 @@ public class DAOCircuito implements Map<String,Circuito>{
         // preencher com o conteúdo da base de dados
         try (ResultSet rsa = stm.executeQuery("SELECT * FROM segmentos WHERE NomeCircuito='"+key+"'")) {
             while (rsa.next()) {
-                Segmento seg = new Segmento(rsa.getString("Tipo"), rsa.getInt("Gdu"));
+                Segmento seg = new Segmento(rsa.getString("Tipo"), rsa.getFloat("Gdu"));
                 r.add(rsa.getInt("Indice"), seg);
             }
         }

@@ -22,6 +22,7 @@ public class Jogo implements IJogo {
 		carros = DAOCarro.getInstance();
 		utilizadores = DAOUtilizador.getInstance();
 		codigosAdmin = new ArrayList<>();
+		codigosAdmin.add("codigoSecreto");
 		rankingGlobal = new ArrayList<>();
 	}*/
 
@@ -35,6 +36,10 @@ public class Jogo implements IJogo {
 		rankingGlobal = new ArrayList<>();
 	}
 
+
+	public Utilizador getUser(String codUser){
+		return utilizadores.get(codUser);
+	}
 
 	@Override
 	public List<Utilizador> getRanking() {
@@ -71,8 +76,9 @@ public class Jogo implements IJogo {
 	}
 
 	@Override
-	public boolean validaUser(String codNome) {
-		return utilizadores.containsKey(codNome);
+	public boolean validaUser(String codNome, String pass) {
+		if(utilizadores.containsKey(codNome)) return utilizadores.get(codNome).validaPass(pass);
+		else return false;
 	}
 
 	@Override
@@ -232,7 +238,7 @@ public class Jogo implements IJogo {
 
 	public String printNomeCampeonato(){
 		StringBuilder sb = new StringBuilder();
-		campeonatos.keySet().stream().map(nome -> sb.append(nome));
+		for(String nome : campeonatos.keySet())sb.append(nome).append("\n");
 		return sb.toString();
 	}
 
@@ -240,13 +246,14 @@ public class Jogo implements IJogo {
 		return codigosAdmin.contains(cod);
 	}
 
-	public boolean existeCarro(String idCarro){
-		return carros.containsKey(idCarro);
+	public boolean existeCarro(String idCarro, String categoria){
+		if(carros.containsKey(idCarro)) return carros.get(idCarro).getTipo().equals(categoria);
+		return false;
 	}
 
-	public String printCarros(){
+	public String printCarros(String categoria){
 		StringBuilder sb = new StringBuilder();
-		carros.values().stream().map(car -> sb.append(car.toOptionalString()));
+		for(Carro car : carros.values()) sb.append(car.toOptionalString()).append("\n");
 		return sb.toString();
 	}
 }

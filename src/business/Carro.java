@@ -19,7 +19,6 @@ public class  Carro implements ICarro {
     private int cilindrada;
     private int fiabilidade;
     private int potenciaMC;
-    private int potenciaME;
     private int modoMotor;
     private int nAfinacoes;
     private float downforce;
@@ -34,7 +33,10 @@ public class  Carro implements ICarro {
         this.potenciaMC = copy.potenciaMC;
         this.downforce = copy.downforce;
     }
-    public Carro(String marca, String modelo, int cilindrada, int potenciaMC, float downforce, String categoria){
+
+
+    public Carro(String marca, String modelo, int cilindrada, int potenciaMC, float downforce, int fiabilidade,String categoria){
+
             this.id = UUID.randomUUID().toString();
             this.marca = marca;
             this.modelo = modelo;
@@ -42,9 +44,8 @@ public class  Carro implements ICarro {
             this.downforce = downforce;
             this.cilindrada = cilindrada;
             this.categoria = categoria;
+            this.fiabilidade = fiabilidade;
         }
-
-
 
 
     public Carro(String id, int cilindrada, int fiabilidade, String marca, String modelo, String penus,int potenciaMC,
@@ -104,7 +105,11 @@ public class  Carro implements ICarro {
 
         }
 
-        @Override
+    public String getTipo() {
+        return categoria;
+    }
+
+    @Override
         public void setNAfinacoes ( int aN){
             nAfinacoes = aN;
         }

@@ -31,7 +31,8 @@ public class TextUI {
      * Cria os menus e a camada de negócio.
      */
     public TextUI() {
-        this.menu = new Menu("Login pra ja",new String[]{
+
+        this.menu = new Menu("Login",new String[]{
                 "Admin",
                 "Jogador",
                 "Criar Usuario"
@@ -43,38 +44,55 @@ public class TextUI {
         scin = new Scanner(System.in);
     }
 
+    public boolean validaUser(){
+        System.out.println("Usuario: ");
+        String user = scin.next();
+        System.out.println("Password: ");
+        String pass = scin.next();
+        userAtual = jogo.getUser(user);
+        return jogo.validaUser(user,pass);
+    }
+
     public void menuJogador(){
-        Menu jogadorMenu = new Menu(new String[]{
-                "Simular Campeonato",
-        }, true);
-        jogadorMenu.setHandler(1,this::trataSimulaCampeonato);
+        if(validaUser()){
+            Menu jogadorMenu = new Menu(new String[]{
+                    "Simular Campeonato",
+            }, true);
+            jogadorMenu.setHandler(1,this::trataSimulaCampeonato);
+            jogadorMenu.run();
+        }
+        else System.out.println("Utilizador ou password inválidos");
+
     }
 
     public void menuAdmin(){
-        // Criar o menu
-        Menu adminMenu = new Menu(new String[]{
-                "Adicionar Circuito",
-                "Adicionar Carro",
-                "Adicionar Piloto",
-                "Adicionar Campeonato",
-                "Ver Circuito",
-                "Ver Piloto",
-                "Ver Campeonato",
-                "Ver Carros",
+        if(validaUser()) {
+            // Criar o menu
+            Menu adminMenu = new Menu(new String[]{
+                    "Adicionar Circuito",
+                    "Adicionar Carro",
+                    "Adicionar Piloto",
+                    "Adicionar Campeonato",
+                    "Ver Circuito",
+                    "Ver Piloto",
+                    "Ver Campeonato",
+                    "Ver Carros",
 
-        }, true);
-        adminMenu.setHandler(1, this::trataAdicionarCircuito);
-        adminMenu.setHandler(2, this::trataAdicionarCarro);
-        adminMenu.setHandler(3, this::trataAdicionarPiloto);
-        adminMenu.setHandler(4, this::trataAdicionarCampeonato);
-        adminMenu.setHandler(5, this::trataMostrarCircuito);
-        adminMenu.setHandler(6, this::trataMostrarPiloto);
-        //adminMenu.setHandler(7, this::trataMostrarCampeonato);
-        adminMenu.setHandler(8, this::trataMostrarCarro);
-        this.jogo = new Jogo();
-        scin = new Scanner(System.in);
+            }, true);
+            adminMenu.setHandler(1, this::trataAdicionarCircuito);
+            adminMenu.setHandler(2, this::trataAdicionarCarro);
+            adminMenu.setHandler(3, this::trataAdicionarPiloto);
+            adminMenu.setHandler(4, this::trataAdicionarCampeonato);
+            adminMenu.setHandler(5, this::trataMostrarCircuito);
+            adminMenu.setHandler(6, this::trataMostrarPiloto);
+            adminMenu.setHandler(7, this::trataMostrarCampeonato);
+            adminMenu.setHandler(8, this::trataMostrarCarro);
+            this.jogo = new Jogo();
+            scin = new Scanner(System.in);
 
-        adminMenu.run();
+            adminMenu.run();
+        }
+        else System.out.println("Utilizador ou password inválidos");
     }
 
     public void criaUser(){
@@ -412,62 +430,98 @@ public class TextUI {
     }
 
     public void trataSimulaCampeonato(){
-        System.out.println(jogo.printNomeCampeonato());
-        String campNome;
-        int numGuest = 1;
-        do{
-            campNome = scin.nextLine();
-        }while(campNome.isBlank() || !jogo.existeCampeonato(campNome));
-        Campeonato campeonatoJogar = jogo.getCampeonatos().get(campNome);
-        System.out.println("Quantos jogadores deseja adicionar? [1..5]");
-        int numPlayer;
-        do {
-             numPlayer = scin.nextInt();
-        }while (numPlayer<0 || numPlayer>5);
-        List<Carro> carros = new ArrayList<>();
-        for(int i=0; i<numPlayer;i++){
-            String user, nome, idCarro, piloto1, piloto2;
-            if(i == 0){
-                user = userAtual.getCodNome();
-            }else{
-                System.out.println("Se possuir conta de jogador adicione o seu ID caso contrario pressione Enter");
-                user = scin.nextLine();
-                if(user.isBlank()){
-                    user = "Guest" + numGuest;
-                    numGuest++;
+        if(!jogo.getCampeonatos().isEmpty()) {
+            System.out.println(jogo.printNomeCampeonato());
+            String campNome;
+            int numGuest = 1;
+            do {
+                campNome = scin.nextLine();
+            } while (campNome.isBlank() || !jogo.existeCampeonato(campNome));
+            Campeonato campeonatoJogar = jogo.getCampeonatos().get(campNome);
+            System.out.println("Quantos jogadores deseja adicionar? [1..5]");
+            int numPlayer;
+            do {
+                numPlayer = scin.nextInt();
+            } while (numPlayer < 0 || numPlayer > 5);
+            List<Carro> carros = new ArrayList<>();
+            for (int i = 0; i < numPlayer; i++) {
+                String user, nome, idCarro, piloto1, piloto2;
+                if (i == 0) {
+                    user = userAtual.getCodNome();
+                } else {
+                    System.out.println("Se possuir conta de jogador adicione o seu ID caso contrario pressione Enter");
+                    user = scin.next();
+                    if (user.isBlank()) {
+                        user = "Guest" + numGuest;
+                        numGuest++;
+                    }
                 }
+                System.out.println(user + " escolha o nome de sua equipa:");
+                do {
+                    nome = scin.nextLine();
+                } while (nome.isBlank());
+                System.out.println("Escolha um carro: (Escreva o ID)");
+                System.out.println(jogo.printCarros(campeonatoJogar.getCategoria()));
+                do {
+                    idCarro = scin.next();
+                } while (!jogo.existeCarro(idCarro,campeonatoJogar.getCategoria()));
+                Carro c1 = jogo.getCarros().get(idCarro);
+                Carro c2 = new Carro(c1);
+                System.out.println("Escolha seus pilotos: ");
+                System.out.println(jogo.printNomePilotos());
+                System.out.println("Piloto 1:");
+                do {
+                    piloto1 = scin.next();
+                } while (!jogo.existePiloto(piloto1));
+                Piloto p1 = jogo.getPiloto(piloto1);
+                System.out.println("Piloto 2:");
+                do {
+                    piloto2 = scin.next();
+                } while (!jogo.existePiloto(piloto2));
+                Piloto p2 = jogo.getPiloto(piloto2);
+                c1.setPiloto(p1);
+                c2.setPiloto(p2);
+                c1.setEquipa(nome);
+                c2.setEquipa(nome);
+                c1.setNAfinacoes(campeonatoJogar.getNCorridas()*2/3);
+                c2.setNAfinacoes(campeonatoJogar.getNCorridas()*2/3);
+                carros.add(c1);
+                carros.add(c2);
+                campeonatoJogar.adicionaEquipa(new Equipa(user, nome, c1, c2));
             }
-            System.out.println(user + "escolha o nome de sua equipa:");
-            do{
-                nome = scin.nextLine();
-            }while(nome.isBlank());
-            System.out.println("Escolha um carro: (Escreva o ID)");
-            System.out.println(jogo.printCarros());
-            do {
-                idCarro = scin.next();
-            }while (!jogo.existeCarro(idCarro));
-            Carro c1 = jogo.getCarros().get(idCarro);
-            Carro c2 = new Carro(c1);
-            System.out.println("Escolha seus pilotos: ");
-            System.out.println(jogo.printNomePilotos());
-            System.out.println("Piloto 1:");
-            do {
-                piloto1 = scin.next();
-            }while (!jogo.existePiloto(piloto1));
-            Piloto p1 = jogo.getPiloto(piloto1);
-            System.out.println("Piloto 2:");
-            do {
-                piloto2 = scin.next();
-            }while (!jogo.existePiloto(piloto2));
-            Piloto p2 = jogo.getPiloto(piloto2);
-            c1.setPiloto(p1);
-            c2.setPiloto(p2);
-            carros.add(c1);
-            carros.add(c2);
-            campeonatoJogar.adicionaEquipa(new Equipa(user,nome,c1,c2));
+            campeonatoJogar.setCarrosCorridas(carros);
+            campeonatoJogar.simulaCampeonato();
+        }else{
+            System.out.println("Não há campeonatos criados");
         }
-        campeonatoJogar.setCarrosCorridas(carros);
-        campeonatoJogar.simulaCampeonato();
+    }
+
+    public void trataMostrarCampeonato(){
+        try {
+            System.out.println(jogo.printNomeCampeonato());
+            System.out.println("Nome do Campeonato: ");
+            String nome = scin.next();
+            while (nome.isEmpty()) nome = scin.next();
+            if (jogo.existeCampeonato(nome)) {
+                Campeonato campeonato = jogo.getCampeonatos().get(nome);
+                System.out.println(campeonato.toString());
+            } else {
+                System.out.println("Esse nome de Campeonato não existe!");
+            }
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void trataInicio(String user, Carro c){
+            System.out.println(c.toString());
+            System.out.println(user+" Indique o inteiro correspondente ao modo do motor que deseja: [-1(Agressivo)/0(Normal)/1(Conservador)]");
+            int modoMotor = scin.nextInt();
+            while( modoMotor != -1 && modoMotor != 0 && modoMotor != 1) modoMotor = scin.nextInt();
+            System.out.println("Indique o tipo de pneu que deseja utilizar [Chuva/Duro/Macio]");
+            String pneus = scin.next();
+            while (!pneus.equals("Chuva") && !pneus.equals("Duro") && !pneus.equals("Macio")) pneus = scin.next();
+
     }
 
 }

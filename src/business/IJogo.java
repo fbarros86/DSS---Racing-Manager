@@ -1,7 +1,6 @@
 package business;
 
 
-import java.security.PublicKey;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +26,13 @@ public interface IJogo {
 	 */
 	boolean validarCodigo(String codPremium);
 
+	Utilizador getUser(String codUser);
+
 	/**
 	 * 
 	 * @param codNome
 	 */
-	boolean validaUser(String codNome);
+	boolean validaUser(String codNome, String pass);
 
 	/**
 	 * 
@@ -184,8 +185,8 @@ public interface IJogo {
 
 	public String printNomeCampeonato();
 
-	public boolean existeCarro(String idCarro);
+	public boolean existeCarro(String idCarro, String categoria);
 
-	public String printCarros();
+	public String printCarros(String categoria);
 
 }
