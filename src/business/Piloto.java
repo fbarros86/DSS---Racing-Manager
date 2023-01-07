@@ -44,8 +44,8 @@ public class Piloto{
 
     @Override
     public String toString() {
-        return "Piloto{" +
-                "nome='" + nome + '\'' +
+        return "Piloto:" +
+                "" + nome + '\'' +
                 ", sva=" + sva +
                 ", cts=" + cts +
                 '}';

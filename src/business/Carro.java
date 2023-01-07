@@ -223,6 +223,12 @@ public class  Carro implements ICarro {
             return sb.toString();
         }
 
+        public String standing(){
+            StringBuilder sb = new StringBuilder();
+            sb.append(piloto.getNome()).append("(").append(equipa).append(")\n");
+            return sb.toString();
+        }
+
         @Override
         public String toString () {
             return "Carro{" +

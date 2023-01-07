@@ -1,6 +1,8 @@
 package business;
 
 
+import ui.TextUI;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -282,7 +284,17 @@ public class Corrida {
         return prob;
     }
 
-    public List<Carro> simulaCorrida(){
+    public String imprimeStanding(){
+        StringBuilder sb = new StringBuilder();
+        int i=1;
+        sb.append("volta").append(voltasOcorridas).append("\n");
+        for(Carro car: carros){
+            sb.append(i).append(car.standing());
+        }
+        return sb.toString();
+    }
+
+    public List<Carro> simulaCorrida(TextUI ui){
         List<Segmento> p = circuito.getPercurso();
         for(voltasOcorridas = 0; voltasOcorridas < circuito.getNrVoltas(); voltasOcorridas++){
             for (Segmento s : p) {
@@ -291,6 +303,7 @@ public class Corrida {
                 calcDespiste();
             }
             diminuiFiabilidade();
+            ui.trataStanding(imprimeStanding());
         }
         return this.carros;
     }

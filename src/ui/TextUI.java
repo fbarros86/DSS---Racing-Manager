@@ -513,6 +513,11 @@ public class TextUI {
         }
     }
 
+    public void trataStanding(String standing){
+        System.out.println(standing);
+        scin.next();
+    }
+
     public void trataInicio(String user, Carro c){
             System.out.println(c.toString());
             System.out.println(user+" Indique o inteiro correspondente ao modo do motor que deseja: [-1(Agressivo)/0(Normal)/1(Conservador)]");

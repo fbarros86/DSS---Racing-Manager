@@ -120,6 +120,15 @@ public class Campeonato implements ICampeonato {
 
     }
 
+    public String imprimeStanding(List<Carro> classificacaoFinal){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Classificação final:\n");
+        int i = 1;
+        for(Carro car : classificacaoFinal){
+            sb.append(i).append(car.standing());
+        }
+        return sb.toString();
+    }
 
     // Parte do utilizador escolher
     @Override
@@ -141,7 +150,8 @@ public class Campeonato implements ICampeonato {
                     if(downforceC2 != -1) c2.setAfinacao(downforceC2);
                 }
             }
-            List<Carro> classificacaoFinal = c.simulaCorrida();
+            List<Carro> classificacaoFinal = c.simulaCorrida(ui);
+
             int i = 1, pont = 0;
             for(Carro car: classificacaoFinal){
                 pont = switch (i) {
@@ -150,7 +160,7 @@ public class Campeonato implements ICampeonato {
                     case 3 -> 15;
                     default -> 12 - (i - 4);
                 };
-                ;
+
                 this.equipas.get(car.getEquipa()).addpontuacao(pont);
                 i++;
             }
