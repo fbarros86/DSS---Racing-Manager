@@ -111,15 +111,15 @@ public class Jogo implements IJogo {
 
 
 	@Override
-	public void registarCarroC1NaoHibrido(String marca, String modelo, int potenciaMotor, float PAC) {
-		Carro c = new C1(marca,modelo, potenciaMotor,PAC);
+	public void registarCarroC1NaoHibrido(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC) {
+		Carro c = new C1(marca,modelo, cilindrada, potenciaMotor,PAC);
 		String id = c.getID();
 		carros.put(id,c);
 	}
 
 	@Override
-	public void registarCarroC1Hibrido(String marca, String modelo, int potenciaMotor, int potenciaMotorElec, float PAC) {
-		Carro c = new C1H(marca,modelo, potenciaMotor,potenciaMotorElec,PAC);
+	public void registarCarroC1Hibrido(String marca, String modelo, int cilindrada, int potenciaMotor, int potenciaMotorElec, float PAC) {
+		Carro c = new C1H(marca,modelo, cilindrada, potenciaMotor,potenciaMotorElec,PAC);
 		String id = c.getID();
 		carros.put(id,c);
 
@@ -157,8 +157,8 @@ public class Jogo implements IJogo {
 	}
 
 	@Override
-	public void registarCarroSC(String marca, String modelo, int potenciaMotor, float PAC) {
-		Carro c = new SC(marca,modelo, potenciaMotor,PAC);
+	public void registarCarroSC(String marca, String modelo, int cilindrada, int potenciaMotor, float PAC) {
+		Carro c = new SC(marca,modelo, cilindrada, potenciaMotor,PAC);
 		String id = c.getID();
 		carros.put(id,c);
 	}

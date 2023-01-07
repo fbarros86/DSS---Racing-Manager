@@ -45,21 +45,6 @@ public class Circuito {
         s.setGDU(GDU);
     }
 
-    public int calculaRetas(int nrCurvas){
-        return nrCurvas+1;
-    }
-
-    public float calculaDistanciaMin(){
-        int dist=0;
-        for(Segmento s: percurso){
-            String tipo = s.getTipo();
-            if(tipo.equals("Curva")) dist+=0.2;
-            if(tipo.equals("Reta")) dist+=0.5;
-            if(tipo.equals("Chicane")) dist+=0.2;
-        }
-        return dist;
-    }
-
     public void setNome(String nome) {
         this.nome = nome;
     }

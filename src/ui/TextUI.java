@@ -48,15 +48,18 @@ public class TextUI {
         Menu adminMenu = new Menu(new String[]{
                 "Adicionar Circuito",
                 //  "Adicionar Campeonato",
-                //  "Adicionar Carro",
                 "Adicionar Piloto",
                 "Ver Pilotos",
                 "Ver Circuito",
+                "Adicionar Carro",
+                "Ver Carros",
         }, true);
         adminMenu.setHandler(1, this::trataAdicionarCircuito);
         adminMenu.setHandler(2, this::trataAdicionarPiloto);
         adminMenu.setHandler(3, this::trataMostrarPiloto);
         adminMenu.setHandler(4, this::trataMostrarCircuito);
+        adminMenu.setHandler(5, this::trataAdicionarCarro);
+        adminMenu.setHandler(6, this::trataMostrarCarro);
         this.jogo = new Jogo();
         scin = new Scanner(System.in);
         adminMenu.run();
@@ -77,21 +80,46 @@ public class TextUI {
             System.out.println("Nome do novo circuito: ");
             String nome = scin.nextLine();
             if (!this.jogo.existeCircuito(nome)) {
-                System.out.println("Distancia: ");
-                Float dist = scin.nextFloat();
-                System.out.println("Número de voltas: ");
-                int voltas = scin.nextInt();
-                System.out.println("Número de segmentos: ");
+                System.out.println("Indique o número de curvas: ");
+                int curvas = scin.nextInt();
+                System.out.println("Indique o número de chicanes ");
+                int chicanes = scin.nextInt();
+                int retas = curvas+chicanes+1;
+                float distmin = (float) (curvas*0.2 + chicanes*0.2 + retas*0.5);
+                System.out.printf("O circuito irá ter %d retas e uma distância mínima de %.2f. \n", retas, distmin);
+                System.out.println("Indique os kilómetros do circuito tendo em conta a distância mínima: ");
+                float dist = scin.nextInt();
+                while (dist < distmin){
+                    System.out.println("Distância inválida:");
+                    dist = scin.nextFloat();
+                }
+
                 List<Segmento> segmentos = new ArrayList<>();
-                int nsegmentos = scin.nextInt();
-                for (int i = 0; i < nsegmentos; i++) {
-                    System.out.println("Tipo de segmento: [Reta/Curva/Chicane] ");
-                    String tipo = scin.next();
-                    System.out.println("Dificuldade: ");
+
+                for (int i = 1; i <= curvas; i++) {
+                    System.out.printf("Dificuldade Curva%d: ", i);
+                    String tipo = "curva";
                     int dificuldade = scin.nextInt();
                     Segmento s = new Segmento(tipo, dificuldade);
                     segmentos.add(s);
                 }
+                for (int i = 1; i <= chicanes; i++) {
+                    System.out.printf("Dificuldade Chicane%d: ", i);
+                    String tipo = "chicane";
+                    int dificuldade = scin.nextInt();
+                    Segmento s = new Segmento(tipo, dificuldade);
+                    segmentos.add(s);
+                }
+                for (int i = 1; i <= retas; i++) {
+                    System.out.printf("Dificuldade Reta%d: ", i);
+                    String tipo = "reta";
+                    int dificuldade = scin.nextInt();
+                    Segmento s = new Segmento(tipo, dificuldade);
+                    segmentos.add(s);
+                }
+
+                System.out.println("Número de voltas: ");
+                int voltas = scin.nextInt();
                 jogo.adicionarCircuito(nome, dist, voltas, segmentos);
                 System.out.println("Circuito adicionado");
             } else {
@@ -158,6 +186,126 @@ public class TextUI {
                 System.out.println(p.toString());
             } else {
                 System.out.println("Esse nome de Piloto não existe!");
+            }
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void trataAdicionarCarro(){
+        try {
+            int potenciaElec=0;
+            Boolean hibrido = false;
+            int cilindrada=0;
+            System.out.println("Escolha uma das categorias (C1,C2,GT,SC): ");
+            String categoria = scin.next();
+            if ( categoria != "SC") {
+                System.out.println("Deseja que o carro seja híbrido? [True ou False]: ");
+                hibrido = scin.nextBoolean();
+                if( hibrido ){
+                    System.out.println("Insira a potência do motor elétrico: ");
+                    potenciaElec = scin.nextInt();
+                }
+            }
+            if (categoria.equals("C2") || categoria.equals("GT")) {
+                System.out.println("Insira a cilindrada: ");
+                cilindrada = scin.nextInt();
+            }
+            System.out.println("Insira a marca: ");
+            String marca = scin.next();
+            System.out.println("Insira o modelo:");
+            String modelo = scin.next();
+            System.out.println("Insira a potência do motor: ");
+            int potenciaMotor = scin.nextInt();
+            System.out.println("Insira o downforce (0-1): ");
+            int downforce = scin.nextInt();
+
+            List<Carro> carros = new ArrayList<>(jogo.getCarros().values());
+
+            Boolean flag = true;
+
+            for(Carro c: carros){
+                if (categoria.equals("C1") && (hibrido)){
+                    if( (c instanceof C1H) && (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMotor==c.getPotenciaMC()) && (downforce==c.getDownforce())){
+                        System.out.println("Esse carro já existe!");
+                        flag = false;
+                        break;
+                    }
+                }
+                else if (categoria.equals("C1") && (!hibrido)){
+                    if( (c instanceof C1) && !(c instanceof C1H) && (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMotor==c.getPotenciaMC()) && (downforce==c.getDownforce())){
+                        System.out.println("Esse carro já existe!");
+                        flag = false;
+                        break;
+                    }
+                }
+                else if (categoria.equals("C2") && (hibrido)){
+                    if( (c instanceof C2H) && (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMotor==c.getPotenciaMC()) && (downforce==c.getDownforce())){
+                        flag = false;
+                        break;
+                    }
+                }
+                else if (categoria.equals("C2") && (!hibrido)){
+                    if( (c instanceof C2) && !(c instanceof C2H) && (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMotor==c.getPotenciaMC()) && (downforce==c.getDownforce())){
+                        flag = false;
+                        break;
+                    }
+                }
+                else if (categoria.equals("GT") && (hibrido)){
+                    if( (c instanceof GTH)  &&  (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMotor==c.getPotenciaMC()) && (downforce==c.getDownforce())){
+                        flag = false;
+                        break;
+                    }
+                }
+                else if (categoria.equals("GT") && (!hibrido)){
+                    if( (c instanceof GT) && !(c instanceof GTH) && (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMotor==c.getPotenciaMC()) && (downforce==c.getDownforce())){
+                        flag = false;
+                        break;
+                    }
+                }
+                else if (categoria.equals("SC")){
+                    if( (c instanceof SC) && (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMotor==c.getPotenciaMC()) && (downforce==c.getDownforce())){
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+
+            if (!flag) System.out.println("Esse carro já existe!");
+            else if( categoria.equals("C1") && !hibrido){
+                jogo.registarCarroC1NaoHibrido(marca,modelo,6000,potenciaMotor,downforce);
+            }
+            else if( categoria.equals("C1") && hibrido){
+                jogo.registarCarroC1Hibrido(marca,modelo,6000,potenciaMotor, potenciaElec ,downforce);
+            }
+            else if( categoria.equals("C2") && !hibrido){
+                jogo.registarCarroC2NaoHibrido(marca,modelo,cilindrada, potenciaMotor,downforce);
+            }
+            else if( categoria.equals("C2") && hibrido){
+                jogo.registarCarroC2Hibrido(marca,modelo, cilindrada, potenciaMotor, potenciaElec,downforce);
+            }
+            else if( categoria.equals("GT") && !hibrido){
+                jogo.registarCarroGTNaoHibrido(marca,modelo,cilindrada,potenciaMotor,downforce);
+            }
+            else if( categoria.equals("GT") && hibrido){
+                jogo.registarCarroGTHibrido(marca,modelo,cilindrada, potenciaMotor, potenciaElec, downforce);
+            }
+            else if( categoria.equals("SC")){
+                jogo.registarCarroC1NaoHibrido(marca,modelo,2500,potenciaMotor,downforce);
+            }
+
+
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void trataMostrarCarro() {
+        try {
+            List<Carro> carros = new ArrayList<>(jogo.getCarros().values());
+
+            for(Carro c: carros) {
+                System.out.println(c.toString());
             }
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());

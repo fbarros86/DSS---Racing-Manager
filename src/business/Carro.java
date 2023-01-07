@@ -23,7 +23,7 @@ public class  Carro implements ICarro{
     private Piloto piloto;
     private int nAfinacoes;
 
-    public Carro(String marca, String modelo, int potenciaMC,float downforce){
+    public Carro(String marca, String modelo, int cilindrada, int potenciaMC,float downforce){
 
         this.id = UUID.randomUUID().toString();
         this.marca = marca;
@@ -199,5 +199,51 @@ public class  Carro implements ICarro{
 
     public void setnAfinacoes(int nAfinacoes) {
         this.nAfinacoes = nAfinacoes;
+    }
+
+
+    public Boolean equals (Carro c) {
+        Boolean r = false;
+        if ((this instanceof SC) && (c instanceof SC) && (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMC == c.getPotenciaMC()) && (downforce == c.getDownforce())) {
+            r= true;
+        }
+        else if ((this instanceof C1) && (c instanceof C1) && (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMC == c.getPotenciaMC()) && (downforce == c.getDownforce())){
+            r= true;
+        }
+        else if ((this instanceof C1H) && (c instanceof C1H) && (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMC == c.getPotenciaMC()) && (downforce == c.getDownforce())){
+            r= true;
+        }
+        else if ((this instanceof C2) && (c instanceof C2) && (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMC == c.getPotenciaMC()) && (downforce == c.getDownforce())){
+            r= true;
+        }
+        else if ((this instanceof C2H) && (c instanceof C2H) && (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMC == c.getPotenciaMC()) && (downforce == c.getDownforce())){
+            r= true;
+        }
+        else if ((this instanceof GT) && (c instanceof GT) && (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMC == c.getPotenciaMC()) && (downforce == c.getDownforce())){
+            r= true;
+        }
+        else if ((this instanceof GTH) && (c instanceof GTH) && (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMC == c.getPotenciaMC()) && (downforce == c.getDownforce())){
+            r= true;
+        }
+        return r;
+    }
+
+    @Override
+    public String toString() {
+        return "Carro{" +
+                ", modoMotor=" + modoMotor +
+                ", cilindrada=" + cilindrada +
+                ", pneus='" + pneus + '\'' +
+                ", fiabilidade=" + fiabilidade +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", potenciaMC=" + potenciaMC +
+                ", equipa='" + equipa + '\'' +
+                ", modoMotor=" + modoMotor +
+                ", id='" + id + '\'' +
+                ", downforce=" + downforce +
+                ", piloto=" + piloto +
+                ", nAfinacoes=" + nAfinacoes +
+                '}';
     }
 }
