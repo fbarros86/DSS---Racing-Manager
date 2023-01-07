@@ -247,7 +247,8 @@ public class DAOCarro implements Map<String,Carro>{
                             potenciaEletrica+",' "+
                             tipo+"', '"+
                             nomePiloto +
-                            "') " +
+
+                            "',NULL,NULL) " +
                             "ON DUPLICATE KEY UPDATE Cilindrada=Values(Cilindrada), " +
                             "Fiabilidade=Values(Fiabilidade)," +
                             "Marca=Values(Marca)," +

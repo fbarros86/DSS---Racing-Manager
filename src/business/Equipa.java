@@ -22,7 +22,7 @@ public class Equipa {
 		this.nome = nome;
 		this.idUser = idUser;
 		this.carro = c;
-		this.piloto2 = p1;
+		this.piloto1 = p1;
 		this.piloto2 = p2;
 		this.pontuacao = 0;
 	}
