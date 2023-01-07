@@ -71,7 +71,7 @@ public class Corrida {
         }
     }
 
-    public void calcUltrapassagem(int gdu){
+    public void calcUltrapassagem(float gdu){
         int ncarros = carros.size();
         Carro c1 = carros.get(0);
         int posC1 = 0;

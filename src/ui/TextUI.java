@@ -142,25 +142,29 @@ public class TextUI {
 
                 List<Segmento> segmentos = new ArrayList<>();
 
+
                 for (int i = 1; i <= curvas; i++) {
-                    System.out.printf("Dificuldade Curva%d: ", i);
-                    String tipo = "curva";
-                    int dificuldade = scin.nextInt();
-                    Segmento s = new Segmento(tipo, dificuldade);
+                    float dificuldade=1;
+                    System.out.printf("Insira o número da dificuldade Curva%d (possível, díficil, imposível): ", i);
+                    String dificuldadeString = scin.next();
+                    if (dificuldadeString.equals("possível"))  {dificuldade= 1.0F;}
+                    else if (dificuldadeString.equals("difícil")) {dificuldade = 0.5F;}
+                    else if (dificuldadeString.equals("impossível")) {dificuldade = 0F;}
+                    Segmento s = new Segmento("curva", dificuldade);
                     segmentos.add(s);
                 }
                 for (int i = 1; i <= chicanes; i++) {
-                    System.out.printf("Dificuldade Chicane%d: ", i);
-                    String tipo = "chicane";
-                    int dificuldade = scin.nextInt();
-                    Segmento s = new Segmento(tipo, dificuldade);
+                    Segmento s = new Segmento("Chicane", 0.5F);
                     segmentos.add(s);
                 }
                 for (int i = 1; i <= retas; i++) {
-                    System.out.printf("Dificuldade Reta%d: ", i);
-                    String tipo = "reta";
-                    int dificuldade = scin.nextInt();
-                    Segmento s = new Segmento(tipo, dificuldade);
+                    float dificuldade=1;
+                    System.out.printf("Insira o número da dificuldade Curva%d (possível, díficil, imposível): ", i);
+                    String dificuldadeString = scin.next();
+                    if (dificuldadeString.equals("possível"))  {dificuldade= 1.0F;}
+                    else if (dificuldadeString.equals("difícil")) {dificuldade = 0.5F;}
+                    else if (dificuldadeString.equals("impossível")) {dificuldade = 0F;}
+                    Segmento s = new Segmento("reta", dificuldade);
                     segmentos.add(s);
                 }
 
@@ -280,7 +284,6 @@ public class TextUI {
             for(Carro c: carros){
                 if (categoria.equals("C1") && (hibrido)){
                     if( (c instanceof C1H) && (marca.equals(c.getMarca())) && modelo.equals(c.getModelo()) && (potenciaMotor==c.getPotenciaMC()) && (downforce==c.getDownforce())){
-                        System.out.println("Esse carro já existe!");
                         flag = false;
                         break;
                     }

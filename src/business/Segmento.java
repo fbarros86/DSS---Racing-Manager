@@ -7,9 +7,9 @@ public class Segmento {
 	//final int DIFICL = 0.5;
 	//final int IMPOSSIVEL = 0;
 	private String tipo;
-	private int GDU;
+	private float GDU;
 
-	public Segmento(String tipo, int GDU){
+	public Segmento(String tipo, float GDU){
 		this.tipo = tipo;
 		this.GDU = GDU;
 	}
@@ -18,7 +18,7 @@ public class Segmento {
 	 * 
 	 * @param GDU
 	 */
-	public void setGDU(int GDU) {
+	public void setGDU(float GDU) {
 		// TODO - implement Segmento.setGDU
 		this.GDU=GDU;
 	}
@@ -31,7 +31,7 @@ public class Segmento {
 		this.tipo = tipo;
 	}
 
-	public int getGDU() {
+	public float getGDU() {
 		// TODO - implement Segmento.getGDU
 		return this.GDU;
 	}
