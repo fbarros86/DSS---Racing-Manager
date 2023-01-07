@@ -26,6 +26,8 @@ public class TextUI {
     // Scanner para leitura
     private Scanner scin;
 
+    private Utilizador userAtual;
+
     /**
      * Construtor.
      *
@@ -46,25 +48,29 @@ public class TextUI {
 
     public void menuJogador(){
         Menu jogadorMenu = new Menu(new String[]{
-                "Jogar Campeonato",
+                "Simular Campeonato",
         }, true);
+        jogadorMenu.setHandler(1,this::trataSimulaCampeonato);
     }
 
     public void menuAdmin(){
         // Criar o menu
         Menu adminMenu = new Menu(new String[]{
                 "Adicionar Circuito",
-                // "Adicionar Carro",
+                "Adicionar Carro",
                 "Adicionar Piloto",
                 "Adicionar Campeonato",
                 "Ver Pilotos",
                 "Ver Circuito",
+               // "Ver Carro",
+                // "Ver Campeonato"
         }, true);
         adminMenu.setHandler(1, this::trataAdicionarCircuito);
-        adminMenu.setHandler(2, this::trataAdicionarPiloto);
-        adminMenu.setHandler(3, this::trataAdicionarCampeonato);
-        adminMenu.setHandler(4, this::trataMostrarPiloto);
-        adminMenu.setHandler(5, this::trataMostrarCircuito);
+        adminMenu.setHandler(2,this::trataAdicionarCarro);
+        adminMenu.setHandler(3, this::trataAdicionarPiloto);
+        adminMenu.setHandler(4, this::trataAdicionarCampeonato);
+        adminMenu.setHandler(5, this::trataMostrarPiloto);
+        adminMenu.setHandler(6, this::trataMostrarCircuito);
         adminMenu.run();
     }
 
@@ -259,6 +265,44 @@ public class TextUI {
             List<Corrida> corridas = circuitos.stream().map(circ -> new Corrida(circ)).toList();
             jogo.adicionarCampeonato(nome,categoria,corridas);
         }else System.out.println("Campeonato ja existente");
+    }
+
+    public void trataSimulaCampeonato(){
+        System.out.println(jogo.printNomeCampeonato());
+        String campNome;
+        int numGuest = 1;
+        do{
+            campNome = scin.nextLine();
+        }while(campNome.isBlank() || !jogo.existeCampeonato(campNome));
+        System.out.println("Quantos jogadores deseja adicionar? [1..5]");
+        int numPlayer;
+        do {
+             numPlayer = scin.nextInt();
+        }while (numPlayer<0 || numPlayer>5);
+        for(int i=0; i<numPlayer;i++){
+            String user, nome, idCarro;
+            if(i == 0){
+                user = userAtual.getCodNome();
+            }else{
+                System.out.println("Se possuir conta de jogador adicione o seu ID caso contrario pressione Enter");
+                user = scin.nextLine();
+                if(user.isBlank()){
+                    user = "Guest" + numGuest;
+                    numGuest++;
+                }
+            }
+            System.out.println(user + "escolha o nome de sua equipa:");
+            do{
+                nome = scin.nextLine();
+            }while(nome.isBlank());
+            System.out.println("Escolha um carro: (Escreva o ID)");
+            System.out.println(jogo.printCarros());
+            do {
+                idCarro = scin.next();
+            }while (!jogo.existeCarro(idCarro));
+
+
+        }
     }
 
 }

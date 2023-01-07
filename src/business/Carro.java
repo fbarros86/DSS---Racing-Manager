@@ -5,10 +5,6 @@ import java.util.UUID;
 
 public class  Carro implements ICarro{
 
-    final int AGRESIVO = -1;
-    final int NORMAL = 0;
-    final int CONSERVADOR = 1;
-
     //@TODO TA TUDO MALLLLLLLLLLLLL
     private String id;
     private String pneus;

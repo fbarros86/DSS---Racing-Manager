@@ -227,8 +227,18 @@ public class Jogo implements IJogo {
 		return sb.toString();
 	}
 
+	public String printNomeCampeonato(){
+		StringBuilder sb = new StringBuilder();
+		campeonatos.keySet().stream().map(nome -> sb.append(nome));
+		return sb.toString();
+	}
+
 	public boolean codigoValido(String cod){
 		return codigosAdmin.contains(cod);
+	}
+
+	public boolean existeCarro(String idCarro){
+		return carros.containsKey(idCarro);
 	}
 
 }
