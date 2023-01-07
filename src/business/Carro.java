@@ -208,5 +208,5 @@ public abstract class  Carro implements ICarro{
         this.nAfinacoes = nAfinacoes;
     }
 
-    public abstract boolean equals(Object o);
+    //public abstract boolean equals(Object o);
 }
