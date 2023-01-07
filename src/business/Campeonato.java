@@ -19,6 +19,14 @@ public class Campeonato implements ICampeonato {
         this.corridas = corridas;
     }
 
+    public Campeonato(String nome, int corridaAtual, String categoria, Map<String, Equipa> equipas, List<Corrida> corridas) {
+        this.nome = nome;
+        this.categoria = categoria;
+        this.corridaAtual = corridaAtual;
+        this.equipas = equipas;
+        this.corridas = corridas;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -129,4 +137,27 @@ public class Campeonato implements ICampeonato {
     }
 
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCorridaAtual(int corridaAtual) {
+        this.corridaAtual = corridaAtual;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public void setEquipas(Map<String, Equipa> equipas) {
+        this.equipas = equipas;
+    }
+
+    public void setCorridas(List<Corrida> corridas) {
+        this.corridas = corridas;
+    }
 }

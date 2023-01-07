@@ -33,7 +33,8 @@ public class TextUI {
         // Criar o menu
         this.menu = new Menu(new String[]{
                 "Adicionar Circuito",
-                "Ver Circuito"
+                "Ver Circuito",
+                "Outro Menu"
         });
         this.menu.setHandler(1, this::trataAdicionarCircuito);
         this.menu.setHandler(2, this::trataMostrarCircuito);

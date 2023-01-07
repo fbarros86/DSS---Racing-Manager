@@ -11,7 +11,15 @@ public class Corrida {
     private int nPilotosInativos;
 
     private Circuito circuito;
-    List<Carro> carros;
+    private List<Carro> carros;
+
+    public Corrida(String metereologia, int voltasOcorridas, int nPilotosInativos, Circuito c, List<Carro> carros){
+        this.carros = carros;
+        this.circuito  = c;
+        this.nPilotosInativos = nPilotosInativos;
+        this.metereologia = metereologia;
+        this.voltasOcorridas = voltasOcorridas;
+    }
 
     public int getVoltasOcorridas(){
         return this.voltasOcorridas;
