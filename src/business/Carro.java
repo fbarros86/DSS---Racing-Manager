@@ -115,6 +115,7 @@ public class  Carro implements ICarro {
         public void setPiloto (Piloto aP){
 
             piloto = aP;
+            if (this instanceof SC) setFiabilidade((int) (75*(1- aP.getSva()) + cilindrada/100));
 
         }
 
