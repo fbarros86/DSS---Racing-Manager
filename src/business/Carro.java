@@ -43,6 +43,17 @@ public class  Carro implements ICarro {
             this.cilindrada = cilindrada;
         }
 
+    public Carro(String id, int cilindrada, int fiabilidade, String marca, String modelo , int potenciaMC,
+              float downforce){
+        this.id = id;
+        this.cilindrada = cilindrada;
+        this.fiabilidade = fiabilidade;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.potenciaMC = potenciaMC;
+        this.downforce = downforce;
+    }
+
 
 
 
