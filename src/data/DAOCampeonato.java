@@ -225,11 +225,30 @@ public class DAOCampeonato implements Map<String,Campeonato>{
         return c;
     }
 
-    private void putCorrida(Corrida c, int index, Statement stm){
+    private void putCorrida(String key,Corrida c, int index, Statement stm) throws SQLException{
+        List <Carro> carros = c.getClassificacao();
+        Circuito circuito  = c.getCircuito();
+        stm.executeUpdate("INSERT INTO corridas (Indice,NomeCampeonato,Metereologia,VoltasOcorridas,PilotosInativos,Circuito) " +
+                "VALUES ("+ index+ ", '"+
+                key+"', '"+
+                c.getMeteorologia()+"', "+
+                c.getVoltasOcorridas()+", "+
+                c.getNPilotosInativos()+", '"+
+                circuito.getNome()+
+                "') " +
+                "ON DUPLICATE KEY UPDATE Indice=Values(Indice), " +
+                " NomeCampeonato=Values(NomeCampeonato), " +
+                " Metereologia=Values(Metereologia), " +
+                " VoltasOcorridas=Values(VoltasOcorridas), " +
+                " PilotosInativos=Values(PilotosInativos), " +
+                " Circuito=Values(Circuito)");
+        DAOCircuito circ = DAOCircuito.getInstance();
+        circ.put(circuito.getNome(),circuito);
+        DAOCarro carro = DAOCarro.getInstance();
 
     }
 
-    private void putEquipa(Equipa e, Statement stm){
+    private void putEquipa(String key,Equipa e, Statement stm){
 
     }
 
@@ -267,11 +286,11 @@ public class DAOCampeonato implements Map<String,Campeonato>{
 
             //atualizar corridas
             for (int i=0;i<corridas.size();i++)
-                putCorrida(corridas.get(i),i,stm);
+                putCorrida(key,corridas.get(i),i,stm);
 
             //atualizar equipas
             for (Equipa equipa: equipas.values())
-                putEquipa(equipa,stm);
+                putEquipa(key,equipa,stm);
 
             res = get(key);
 
