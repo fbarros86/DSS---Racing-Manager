@@ -10,10 +10,7 @@ package ui;
 import business.*;
 
 import java.nio.file.attribute.GroupPrincipal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TextUI {
@@ -417,13 +414,15 @@ public class TextUI {
         do{
             campNome = scin.nextLine();
         }while(campNome.isBlank() || !jogo.existeCampeonato(campNome));
+        Campeonato campeonatoJogar = jogo.getCampeonatos().get(campNome);
         System.out.println("Quantos jogadores deseja adicionar? [1..5]");
         int numPlayer;
         do {
              numPlayer = scin.nextInt();
         }while (numPlayer<0 || numPlayer>5);
+        List<Carro> carros = new ArrayList<>();
         for(int i=0; i<numPlayer;i++){
-            String user, nome, idCarro;
+            String user, nome, idCarro, piloto1, piloto2;
             if(i == 0){
                 user = userAtual.getCodNome();
             }else{
@@ -443,9 +442,28 @@ public class TextUI {
             do {
                 idCarro = scin.next();
             }while (!jogo.existeCarro(idCarro));
-
-
+            Carro c1 = jogo.getCarros().get(idCarro);
+            Carro c2 = new Carro(c1);
+            System.out.println("Escolha seus pilotos: ");
+            System.out.println(jogo.printNomePilotos());
+            System.out.println("Piloto 1:");
+            do {
+                piloto1 = scin.next();
+            }while (!jogo.existePiloto(piloto1));
+            Piloto p1 = jogo.getPiloto(piloto1);
+            System.out.println("Piloto 2:");
+            do {
+                piloto2 = scin.next();
+            }while (!jogo.existePiloto(piloto2));
+            Piloto p2 = jogo.getPiloto(piloto2);
+            c1.setPiloto(p1);
+            c2.setPiloto(p2);
+            carros.add(c1);
+            carros.add(c2);
+            campeonatoJogar.adicionaEquipa(new Equipa(user,nome,c1,c2));
         }
+        campeonatoJogar.setCarrosCorridas(carros);
+        campeonatoJogar.simulaCampeonato();
     }
 
 }
