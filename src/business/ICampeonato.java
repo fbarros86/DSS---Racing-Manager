@@ -36,5 +36,5 @@ public interface ICampeonato {
 	void adicionaEquipa(String idUser, String nome, Carro c, Piloto p1, Piloto p2, int ncorridas);
 
 
-	List<Equipa> simulaCampeonato(String idCampeonato);
+	List<Equipa> simulaCampeonato();
 }
