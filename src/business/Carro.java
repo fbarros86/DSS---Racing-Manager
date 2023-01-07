@@ -10,7 +10,7 @@ public class  Carro implements ICarro{
 
     //@TODO TA TUDO MALLLLLLLLLLLLL
 
-    float cilindrada;
+    private int cilindrada;
     private String pneus;
     private int fiabilidade;
     private String marca;
@@ -42,6 +42,23 @@ public class  Carro implements ICarro{
     }
 
 
+
+    public Carro(String id, int cilindrada, int fiabilidade, String marca, String modelo, String penus, int potenciaMC,
+                 String equipa, int modoMotor, float downforce, int afinacoes, Piloto piloto){
+        this.id=id;
+        this.cilindrada=cilindrada;
+        this.fiabilidade= fiabilidade;
+        this.marca= marca;
+        this.modelo= modelo;
+        this.pneus= penus;
+        this.potenciaMC = potenciaMC;
+        this.equipa=equipa;
+        this.modoMotor=modoMotor;
+        this.downforce= downforce;
+        this.nAfinacoes = afinacoes;
+        this.piloto= piloto;
+    }
+
     public String getId() {
         return id;
     }
@@ -67,12 +84,12 @@ public class  Carro implements ICarro{
     }
 
     @Override
-    public void setCilindrada(float c) {
+    public void setCilindrada(int c) {
         cilindrada=c;
     }
 
     @Override
-    public float getCilindrada() {
+    public int getCilindrada() {
         return cilindrada;
     }
 
@@ -140,4 +157,47 @@ public class  Carro implements ICarro{
         this.downforce = aDownforce;
     }
 
+    public void setFiabilidade(int fiabilidade) {
+        this.fiabilidade = fiabilidade;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public int getPotenciaMC() {
+        return potenciaMC;
+    }
+
+    public void setPotenciaMC(int potenciaMC) {
+        this.potenciaMC = potenciaMC;
+    }
+
+    public int getModoMotor() {
+        return modoMotor;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getnAfinacoes() {
+        return nAfinacoes;
+    }
+
+    public void setnAfinacoes(int nAfinacoes) {
+        this.nAfinacoes = nAfinacoes;
+    }
 }
