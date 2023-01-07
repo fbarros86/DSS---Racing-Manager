@@ -126,7 +126,8 @@ public class Campeonato implements ICampeonato {
         sb.append("Classificação final:\n");
         int i = 1;
         for(Carro car : classificacaoFinal){
-            sb.append(i).append(car.standing());
+            sb.append(i).append(" ").append(car.standing());
+            i++;
         }
         return sb.toString();
     }
@@ -140,8 +141,8 @@ public class Campeonato implements ICampeonato {
                 Carro c1 = e.getCarro1();
                 Carro c2 = e.getCarro2();
                 String user = e.getidUser();
-                ui.trataInicio(user,c1);
-                ui.trataInicio(user,c2);
+                ui.trataInicio(user,c1,c);
+                ui.trataInicio(user,c2,c);
                 if (c1.verificarAfinacao()){
                     int downforceC1 = ui.trataAfinacoes();
                     if(downforceC1 != -1) c1.setAfinacao(downforceC1);
@@ -152,7 +153,7 @@ public class Campeonato implements ICampeonato {
                 }
             }
             List<Carro> classificacaoFinal = c.simulaCorrida(ui);
-
+            ui.trataStanding(imprimeStanding(classificacaoFinal));
             int i = 1, pont = 0;
             for(Carro car: classificacaoFinal){
                 pont = switch (i) {

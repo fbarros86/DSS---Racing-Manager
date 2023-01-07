@@ -518,9 +518,9 @@ public class TextUI {
         scin.next();
     }
 
-    public void trataInicio(String user, Carro c){
+    public void trataInicio(String user, Carro c, Corrida cor){
             System.out.println(c.toString());
-            System.out.println(user+" Indique o inteiro correspondente ao modo do motor que deseja: [-1(Agressivo)/0(Normal)/1(Conservador)]");
+            System.out.println(user+" Indique o inteiro correspondente ao modo do motor que deseja (Corrida esta:"+ cor.getMeteorologia() +", com a distancia: "+ cor.getCircuito().getDist() + "): [-1(Agressivo)/0(Normal)/1(Conservador)]");
             int modoMotor = scin.nextInt();
             while( modoMotor != -1 && modoMotor != 0 && modoMotor != 1) modoMotor = scin.nextInt();
             System.out.println("Indique o tipo de pneu que deseja utilizar [Chuva/Duro/Macio]");
