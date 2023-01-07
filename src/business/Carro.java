@@ -1,36 +1,38 @@
 package business;
+import java.util.Objects;
 import java.util.UUID;
 
 
-public class  Carro implements ICarro{
+public abstract class  Carro implements ICarro{
 
     final int AGRESIVO = -1;
     final int NORMAL = 0;
     final int CONSERVADOR = 1;
 
     //@TODO TA TUDO MALLLLLLLLLLLLL
-
-    private int cilindrada;
+    private String id;
     private String pneus;
-    private int fiabilidade;
     private String marca;
     private String modelo;
-    private int potenciaMC;
+    private String tipo;
     private String equipa;
+    private int cilindrada;
+    private int fiabilidade;
+    private int potenciaMC;
+    private int potenciaME;
     private int modoMotor;
-    private String id;
-    float downforce;
-    private Piloto piloto;
     private int nAfinacoes;
+    private float downforce;
+    private Piloto piloto;
 
-    public Carro(String marca, String modelo, int potenciaMC,float downforce){
 
+    public Carro(String marca, String modelo, int potenciaMC,float downforce, int cilindrada){
         this.id = UUID.randomUUID().toString();
         this.marca = marca;
         this.modelo = modelo;
         this.potenciaMC = potenciaMC;
         this.downforce = downforce;
-
+        this.cilindrada = cilindrada;
     }
 
     public Carro(Carro copy){
@@ -152,6 +154,11 @@ public class  Carro implements ICarro{
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(cilindrada, marca, modelo, potenciaMC);
+    }
+
+    @Override
     public void setAfinacao(float aDownforce) {
         nAfinacoes--;
         this.downforce = aDownforce;
@@ -200,4 +207,6 @@ public class  Carro implements ICarro{
     public void setnAfinacoes(int nAfinacoes) {
         this.nAfinacoes = nAfinacoes;
     }
+
+    public abstract boolean equals(Object o);
 }

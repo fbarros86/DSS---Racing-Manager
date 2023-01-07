@@ -3,7 +3,7 @@ package business;
 
 public class SC extends Carro {
     public SC(String marca, String modelo, int potenciaMC,float downforce) {
-        super(marca, modelo,potenciaMC, downforce);
+        super(marca, modelo,potenciaMC, downforce,2500);
     }
     public SC(String id, int cilindrada, int fiabilidade, String marca, String modelo, String pneus, int potenciaMC,
               String equipa, int modoMotor, float downforce, int afinacoes, Piloto piloto) {

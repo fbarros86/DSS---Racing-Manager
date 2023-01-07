@@ -174,4 +174,7 @@ public interface IJogo {
 	List<Equipa> simulaJogo(String idCampeonato);
 
 	public String printNomeCircuitos();
+
+	public boolean existeCampeonato(String nome);
+
 }

@@ -201,6 +201,9 @@ public class Jogo implements IJogo {
 		return this.pilotos.containsKey(nome);
 	}
 
+	public boolean existeCampeonato(String nome){
+		return this.campeonatos.containsKey(nome);
+	}
 
 	public String printNomePilotos(){
 		StringBuilder sb = new StringBuilder();

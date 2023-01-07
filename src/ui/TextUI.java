@@ -10,6 +10,7 @@ package ui;
 import business.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -37,18 +38,22 @@ public class TextUI {
         });
         this.menu.setHandler(1, this::menuAdmin);
         this.menu.setHandler(2, this::menuJogador);
+        this.jogo = new Jogo();
+        scin = new Scanner(System.in);
     }
 
     public void menuJogador(){
-       // Menu jogadorMenu = new Menu()
+        Menu jogadorMenu = new Menu(new String[]{
+                "Jogar Campeonato",
+        }, true);
+        jogadorMenu.setHandler(1, this::trataJogarCampeonato);
     }
 
     public void menuAdmin(){
         // Criar o menu
         Menu adminMenu = new Menu(new String[]{
                 "Adicionar Circuito",
-                //  "Adicionar Campeonato",
-                //  "Adicionar Carro",
+                // "Adicionar Carro",
                 "Adicionar Piloto",
                 "Ver Pilotos",
                 "Ver Circuito",
@@ -57,8 +62,6 @@ public class TextUI {
         adminMenu.setHandler(2, this::trataAdicionarPiloto);
         adminMenu.setHandler(3, this::trataMostrarPiloto);
         adminMenu.setHandler(4, this::trataMostrarCircuito);
-        this.jogo = new Jogo();
-        scin = new Scanner(System.in);
         adminMenu.run();
     }
 
@@ -130,21 +133,27 @@ public class TextUI {
     }
 
     public void trataAdicionarPiloto(){
-        System.out.println("Nome do novo piloto: ");
+        System.out.println("Indique nome do novo piloto: ");
         String nome = scin.nextLine();
-        System.out.println("Indique a Segurança (bom com valor 0) vs Agressividade (bom com valor 1) (SVA) [0..1]: ");
-        float sva = scin.nextFloat();
-        while (sva < 0 || sva > 1){
-            System.out.println("SVA invalido, por favor adicione um valor entre 0 e 1:");
-            sva = scin.nextFloat();
+        while (nome.isBlank()) {
+            if (nome.isBlank()) System.out.println("Nome invalido insira outro nome por favor");
+            nome = scin.nextLine();
         }
-        System.out.println("Indique a habilidade em tempo Chuvoso (bom com valor 0) vs Seco (bom com valor 1) (CTS) [0..1]");
-        float cts = scin.nextFloat();
-        while (cts < 0 || cts > 1){
-            System.out.println("CTS invalido, por favor adicione um valor entre 0 e 1:");
-            cts = scin.nextFloat();
-        }
-        jogo.adicionarPiloto(nome,cts,sva);
+        if(!jogo.existePiloto(nome)) {
+            System.out.println("Indique a Segurança (bom com valor 0) vs Agressividade (bom com valor 1) (SVA) [0..1]: ");
+            float sva = scin.nextFloat();
+            while (sva < 0 || sva > 1) {
+                System.out.println("SVA invalido, por favor adicione um valor entre 0 e 1:");
+                sva = scin.nextFloat();
+            }
+            System.out.println("Indique a habilidade em tempo Chuvoso (bom com valor 0) vs Seco (bom com valor 1) (CTS) [0..1]");
+            float cts = scin.nextFloat();
+            while (cts < 0 || cts > 1) {
+                System.out.println("CTS invalido, por favor adicione um valor entre 0 e 1:");
+                cts = scin.nextFloat();
+            }
+            jogo.adicionarPiloto(nome, cts, sva);
+        }else System.out.println("Piloto ja existente");
     }
 
     public void trataMostrarPiloto() {
@@ -162,6 +171,32 @@ public class TextUI {
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void trataAdicionarCarro(){
+        System.out.println("Indique a Marca do novo carro:");
+        String marca = scin.nextLine();
+        while(marca.isBlank()){
+            System.out.println("Nome invalido insira outro nome por favor");
+            scin.nextLine();
+        }
+
+    }
+
+    public void trataJogarCampeonato(){
+            String[] categorias = new String[]{
+                    "C1",
+                    "C2",
+                    "GT",
+                    "SC"
+            };
+            System.out.println("Indique a categoria do campeonato [C1/C2/GT/SC]");
+            String categoria = scin.nextLine();
+            while(!Arrays.asList(categorias).contains(categoria)){
+                System.out.println("Categoria invalida");
+                categoria = scin.nextLine();
+            }
+            System.out.println(jogo.prin);
     }
 
 }

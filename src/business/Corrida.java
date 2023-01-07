@@ -9,9 +9,10 @@ public class Corrida {
     private int voltasOcorridas;
     private String metereologia;
     private int nPilotosInativos;
-
     private Circuito circuito;
     List<Carro> carros;
+
+
 
     public int getVoltasOcorridas(){
         return this.voltasOcorridas;
@@ -50,7 +51,6 @@ public class Corrida {
     }
 
     public void calcUltrapassagem(int gdu){
-
         int ncarros = carros.size();
         Carro c1 = carros.get(0);
         int posC1 = 0;

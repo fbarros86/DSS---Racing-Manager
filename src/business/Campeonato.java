@@ -133,6 +133,7 @@ public class Campeonato implements ICampeonato {
                 i++;
             }
         }
+
         List<Equipa> ret = (List<Equipa>) this.equipas.values();
         sortTeams(ret);
         return ret;
