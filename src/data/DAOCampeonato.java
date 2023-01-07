@@ -32,7 +32,7 @@ public class DAOCampeonato implements Map<String,Campeonato>{
                     "Indice int NOT NULL," +
                     "NomeCircuito varchar(15) NOT NULL," +
                     "Tipo varchar(15) NOT NULL," +
-                    "Gdu int NOT NULL,"+
+                    "Gdu float(8) NOT NULL,"+
                     "FOREIGN KEY (NomeCircuito) references circuitos(Nome))";
             stm.executeUpdate(segmento);
             String corridas = "CREATE TABLE IF NOT EXISTS corridas (" +

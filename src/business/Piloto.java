@@ -3,7 +3,7 @@ package business;
 
 import java.util.Objects;
 
-public class Piloto {
+public class Piloto{
         private String nome;
         private float sva;
         private float cts;
