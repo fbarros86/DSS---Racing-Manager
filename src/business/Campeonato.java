@@ -1,7 +1,8 @@
 package business;
 
-import java.util.*;
+import ui.TextUI;
 
+import java.util.*;
 
 
 public class Campeonato implements ICampeonato {
@@ -104,28 +105,37 @@ public class Campeonato implements ICampeonato {
     // Parte do utilizador escolher
     @Override
     public List<Equipa> simulaCampeonato() {
-        int downforce = 1;
+        TextUI ui = new TextUI();
         for (Corrida c: this.corridas){
             for(Equipa e : this.equipas.values()){
                 Carro c1 = e.getCarro();
                 Carro c2 = e.getCarro();
-                if (c1.verificarAfinação()) c1.setAfinação(downforce);
-                if (c2.verificarAfinação()) c2.setAfinação(downforce);
+                if (c1.verificarAfinacao()){
+                    int downforceC1 = ui.trataAfinacoes();
+                    if(downforceC1 != -1) c1.setAfinacao(downforceC1);
+                }
+                if (c2.verificarAfinacao()){
+                    int downforceC2 = ui.trataAfinacoes();
+                    if(downforceC2 != -1) c2.setAfinacao(downforceC2);
+                }
             }
             List<Carro> classificacaoFinal = c.simulaCorrida();
-            int i = 1;
+            int i = 1, pont = 0;
             for(Carro car: classificacaoFinal){
-                int pont = switch (i) {
+                pont = switch (i) {
                     case 1 -> 25;
                     case 2 -> 18;
                     case 3 -> 15;
                     default -> 12 - (i - 4);
                 };
+                ;
                 this.equipas.get(car.getEquipa()).addpontuacao(pont);
                 i++;
             }
         }
-        return (List<Equipa>) equipas;
+        List<Equipa> ret = (List<Equipa>) this.equipas.values();
+        sortTeams(ret);
+        return ret;
     }
 
 

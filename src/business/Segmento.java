@@ -3,7 +3,7 @@ package business;
 
 public class Segmento {
 
-	//final int POSSÍVEL = 1;
+	//final int POSSIVEL = 1;
 	//final int DIFICL = 0.5;
 	//final int IMPOSSIVEL = 0;
 	private String tipo;

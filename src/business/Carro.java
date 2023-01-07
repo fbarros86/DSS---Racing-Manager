@@ -33,6 +33,15 @@ public class  Carro implements ICarro{
 
     }
 
+    public Carro(Carro copy){
+        this.id = copy.id;
+        this.marca = copy.marca;
+        this.modelo = copy.modelo;
+        this.potenciaMC = copy.potenciaMC;
+        this.downforce = copy.downforce;
+    }
+
+
     public String getId() {
         return id;
     }
@@ -120,13 +129,13 @@ public class  Carro implements ICarro{
     }
 
     @Override
-    public boolean verificarAfinação(){
+    public boolean verificarAfinacao(){
         if ( this instanceof C1 || this instanceof C2) return nAfinacoes > 0;
         else return false;
     }
 
     @Override
-    public void setAfinação(float aDownforce) {
+    public void setAfinacao(float aDownforce) {
         nAfinacoes--;
         this.downforce = aDownforce;
     }

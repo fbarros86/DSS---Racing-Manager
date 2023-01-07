@@ -35,6 +35,7 @@ public class Menu {
     private List<String> opcoes;            // Lista de opções
     private List<PreCondition> disponivel;  // Lista de pré-condições
     private List<Handler> handlers;         // Lista de handlers
+    private boolean subMenu;
 
     // Construtor
 
@@ -59,7 +60,7 @@ public class Menu {
      * @param titulo O titulo do menu
      * @param opcoes Uma lista de Strings com as opções do menu.
      */
-    public Menu(String titulo, List<String> opcoes) {
+    public Menu(String titulo, List<String> opcoes, boolean subMenu) {
         this.titulo = titulo;
         this.opcoes = new ArrayList<>(opcoes);
         this.disponivel = new ArrayList<>();
@@ -68,6 +69,7 @@ public class Menu {
             this.disponivel.add(()->true);
             this.handlers.add(()->System.out.println("\nATENÇÃO: Opção não implementada!"));
         });
+        this.subMenu = subMenu;
     }
 
     /**
@@ -79,8 +81,8 @@ public class Menu {
      *
      * @param opcoes Uma lista de Strings com as opções do menu.
      */
-    public Menu(List<String> opcoes) { this("Menu", opcoes); }
-
+    public Menu(List<String> opcoes) { this("Menu", opcoes, false); }
+    public Menu(List<String> opcoes, boolean subMenu) { this("Menu", opcoes, subMenu); }
     /**
      * Constructor para objectos da classe Menu.
      *
@@ -97,9 +99,12 @@ public class Menu {
      * @param opcoes Um array de Strings com as opções do menu.
      */
     public Menu(String titulo, String[] opcoes) {
-        this(titulo, Arrays.asList(opcoes));
+        this(titulo, Arrays.asList(opcoes),false);
     }
 
+    public Menu(String titulo, String[] opcoes, boolean subMenu) {
+        this(titulo, Arrays.asList(opcoes), subMenu);
+    }
     /**
      * Constructor para objectos da classe Menu.
      *
@@ -118,6 +123,9 @@ public class Menu {
         this(Arrays.asList(opcoes));
     }
 
+    public Menu(String[] opcoes, boolean subMenu) {
+        this(Arrays.asList(opcoes), subMenu);
+    }
     // Métodos de instância
 
     /**
@@ -199,7 +207,8 @@ public class Menu {
             System.out.print(" - ");
             System.out.println(this.disponivel.get(i).validate()?this.opcoes.get(i):"---");
         }
-        System.out.println("0 - Sair");
+        if(subMenu) System.out.println("0 - Voltar");
+        else System.out.println("0 - Sair");
     }
 
     /** Ler uma opção válida */

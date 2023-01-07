@@ -37,7 +37,7 @@ public interface ICarro {
 
     public String getID();
 
-    public boolean verificarAfinação();
+    public boolean verificarAfinacao();
 
-    void setAfinação(float aDownforce);
+    void setAfinacao(float aDownforce);
 }
