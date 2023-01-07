@@ -483,6 +483,8 @@ public class TextUI {
                 c2.setPiloto(p2);
                 c1.setEquipa(nome);
                 c2.setEquipa(nome);
+                c1.setNAfinacoes(campeonatoJogar.getNCorridas()*2/3);
+                c2.setNAfinacoes(campeonatoJogar.getNCorridas()*2/3);
                 carros.add(c1);
                 carros.add(c2);
                 campeonatoJogar.adicionaEquipa(new Equipa(user, nome, c1, c2));

@@ -19,7 +19,6 @@ public class  Carro implements ICarro {
     private int cilindrada;
     private int fiabilidade;
     private int potenciaMC;
-    private int potenciaME;
     private int modoMotor;
     private int nAfinacoes;
     private float downforce;
