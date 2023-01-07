@@ -10,10 +10,7 @@ package ui;
 import business.*;
 
 import java.nio.file.attribute.GroupPrincipal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TextUI {
@@ -25,6 +22,8 @@ public class TextUI {
 
     // Scanner para leitura
     private Scanner scin;
+
+    private Utilizador userAtual;
 
     /**
      * Construtor.
@@ -46,17 +45,18 @@ public class TextUI {
 
     public void menuJogador(){
         Menu jogadorMenu = new Menu(new String[]{
-                "Jogar Campeonato",
+                "Simular Campeonato",
         }, true);
+        jogadorMenu.setHandler(1,this::trataSimulaCampeonato);
     }
 
     public void menuAdmin(){
         // Criar o menu
         Menu adminMenu = new Menu(new String[]{
                 "Adicionar Circuito",
+                "Adicionar Carro",
                 "Adicionar Piloto",
                 "Adicionar Campeonato",
-                "Adicionar Carro",
                 "Ver Circuito",
                 "Ver Piloto",
                 "Ver Campeonato",
@@ -64,9 +64,9 @@ public class TextUI {
 
         }, true);
         adminMenu.setHandler(1, this::trataAdicionarCircuito);
-        adminMenu.setHandler(2, this::trataAdicionarPiloto);
-        adminMenu.setHandler(3, this::trataAdicionarCampeonato);
-        adminMenu.setHandler(4, this::trataAdicionarCarro);
+        adminMenu.setHandler(2, this::trataAdicionarCarro);
+        adminMenu.setHandler(3, this::trataAdicionarPiloto);
+        adminMenu.setHandler(4, this::trataAdicionarCampeonato);
         adminMenu.setHandler(5, this::trataMostrarCircuito);
         adminMenu.setHandler(6, this::trataMostrarPiloto);
         //adminMenu.setHandler(7, this::trataMostrarCampeonato);
@@ -406,6 +406,65 @@ public class TextUI {
             List<Corrida> corridas = circuitosCampeonato.stream().map(circ -> new Corrida(circ)).toList();
             jogo.adicionarCampeonato(nome,categoria,corridas);
         }else System.out.println("Campeonato ja existente");
+    }
+
+    public void trataSimulaCampeonato(){
+        System.out.println(jogo.printNomeCampeonato());
+        String campNome;
+        int numGuest = 1;
+        do{
+            campNome = scin.nextLine();
+        }while(campNome.isBlank() || !jogo.existeCampeonato(campNome));
+        Campeonato campeonatoJogar = jogo.getCampeonatos().get(campNome);
+        System.out.println("Quantos jogadores deseja adicionar? [1..5]");
+        int numPlayer;
+        do {
+             numPlayer = scin.nextInt();
+        }while (numPlayer<0 || numPlayer>5);
+        List<Carro> carros = new ArrayList<>();
+        for(int i=0; i<numPlayer;i++){
+            String user, nome, idCarro, piloto1, piloto2;
+            if(i == 0){
+                user = userAtual.getCodNome();
+            }else{
+                System.out.println("Se possuir conta de jogador adicione o seu ID caso contrario pressione Enter");
+                user = scin.nextLine();
+                if(user.isBlank()){
+                    user = "Guest" + numGuest;
+                    numGuest++;
+                }
+            }
+            System.out.println(user + "escolha o nome de sua equipa:");
+            do{
+                nome = scin.nextLine();
+            }while(nome.isBlank());
+            System.out.println("Escolha um carro: (Escreva o ID)");
+            System.out.println(jogo.printCarros());
+            do {
+                idCarro = scin.next();
+            }while (!jogo.existeCarro(idCarro));
+            Carro c1 = jogo.getCarros().get(idCarro);
+            Carro c2 = new Carro(c1);
+            System.out.println("Escolha seus pilotos: ");
+            System.out.println(jogo.printNomePilotos());
+            System.out.println("Piloto 1:");
+            do {
+                piloto1 = scin.next();
+            }while (!jogo.existePiloto(piloto1));
+            Piloto p1 = jogo.getPiloto(piloto1);
+            System.out.println("Piloto 2:");
+            do {
+                piloto2 = scin.next();
+            }while (!jogo.existePiloto(piloto2));
+            Piloto p2 = jogo.getPiloto(piloto2);
+            c1.setPiloto(p1);
+            c2.setPiloto(p2);
+            carros.add(c1);
+            carros.add(c2);
+            campeonatoJogar.adicionaEquipa(new Equipa(user,nome,c1,c2));
+        }
+        campeonatoJogar.setCarrosCorridas(carros);
+        campeonatoJogar.simulaCampeonato();
     }
 
 }

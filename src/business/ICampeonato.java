@@ -25,16 +25,9 @@ public interface ICampeonato {
 	void calculaClassificacao(List<Carro> classificacaoCorrida);
 
 	/**
-	 * 
-	 * @param idUser
-	 * @param nome
-	 * @param c
-	 * @param p1
-	 * @param p2
-	 * @param ncorridas
+	 * @param equipa
 	 */
-	void adicionaEquipa(String idUser, String nome, Carro c, Piloto p1, Piloto p2, int ncorridas);
+    void adicionaEquipa(Equipa equipa);
 
-
-	List<Equipa> simulaCampeonato();
+    List<Equipa> simulaCampeonato();
 }
