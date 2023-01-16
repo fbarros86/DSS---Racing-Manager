@@ -50,5 +50,10 @@ public class Equipa {
 		return this.carro1;
 	}
 
+	public String standing(){
+		StringBuilder sb = new StringBuilder();
+		sb.append(nome).append("(").append(idUser).append(")\n");
+		return sb.toString();
+	}
 
 }

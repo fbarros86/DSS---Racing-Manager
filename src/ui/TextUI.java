@@ -515,7 +515,7 @@ public class TextUI {
 
     public void trataStanding(String standing){
         System.out.println(standing);
-        scin.nextLine();
+        scin.next();
     }
 
     public void trataInicio(String user, Carro c, Corrida cor){

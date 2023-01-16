@@ -132,6 +132,17 @@ public class Campeonato implements ICampeonato {
         return sb.toString();
     }
 
+    public String imprimeStandingFinal(List<Equipa> classificacaoFinal){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Classificação final:\n");
+        int i = 1;
+        for(Equipa car : classificacaoFinal){
+            sb.append(i).append(" ").append(car.standing());
+            i++;
+        }
+        return sb.toString();
+    }
+
     // Parte do utilizador escolher
     @Override
     public List<Equipa> simulaCampeonato() {
@@ -167,9 +178,9 @@ public class Campeonato implements ICampeonato {
                 i++;
             }
         }
-
         List<Equipa> ret = this.equipas.values().stream().collect(Collectors.toList());
         sortTeams(ret);
+        ui.trataStanding(imprimeStandingFinal(ret));
         return ret;
     }
 
